@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/home-page/home";
-import LogIn from "./pages/login/login";
-import SignUp from "./pages/signup/signup";
+import LogIn from "./pages/login-page/login";
+import SignUp from "./pages/signup-page/signup";
 import NavBar from "./Components/navbar/navbar";
 import Settings from "./pages/settings/Settings";
 import Articles from "./pages/article/view-owner/articles";
