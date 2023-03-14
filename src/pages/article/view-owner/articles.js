@@ -8,10 +8,10 @@ import { useArticleContext } from "../../../hooks/context/useArticleContext";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import Article from "./article";
-import Paginate from "./Paginate";
+import Paginate from "../components/paginate/Paginate";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import TagSelect from "../components/tagSelect";
-import ShareModal from "../components/shareModal";
+import TagSelect from "../components/tag/tagSelect";
+import ShareModal from "../components/modal/shareModal";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();

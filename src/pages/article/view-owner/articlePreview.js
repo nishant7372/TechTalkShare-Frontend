@@ -1,9 +1,10 @@
 import styles from "./articlePreview.module.css";
 
 import MarkdownPreview from "@uiw/react-markdown-preview";
+
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
-import Tag from "./tag";
+import Tag from "../components/tag/tag";
 
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -11,7 +12,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
-
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 export default function ArticlePreview() {

@@ -5,7 +5,7 @@ import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import Tag from "../components/tag";
+import Tag from "../components/tag/tag";
 
 export default function Article({ article, updated, handleShare }) {
   const { timeSince } = useFormatDate();

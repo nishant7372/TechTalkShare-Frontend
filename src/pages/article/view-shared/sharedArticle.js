@@ -1,10 +1,10 @@
-import styles from "./../view/article.module.css";
+import styles from "./../view-owner/article.module.css";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import Tag from "../components/tag";
+import Tag from "../components/tag/tag";
 
 export default function SharedArticle({ articleObj, updated, handleShare }) {
   const { article, sharedBy } = articleObj;

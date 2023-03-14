@@ -6,15 +6,15 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Home from "./pages/home/Home";
-import LogIn from "./pages/login/LogIn";
-import SignUp from "./pages/signup/SignUp";
+import Home from "./pages/home/home";
+import LogIn from "./pages/login/login";
+import SignUp from "./pages/signup/signup";
 import NavBar from "./Components/navbar/navbar";
 import Settings from "./pages/settings/Settings";
-import Articles from "./pages/article/view/articles";
+import Articles from "./pages/article/view-owner/articles";
 import CreateArticle from "./pages/article/create/createArticle";
 import UpdateArticle from "./pages/article/update/updateArticle";
-import ArticlePreview from "./pages/article/components/articlePreview";
+import ArticlePreview from "./pages/article/view-owner/articlePreview";
 import MessageContainer from "./Components/messages/messageContainer";
 import SharedArticles from "./pages/article/view-shared/sharedArticles";
 import SharedPreview from "./pages/article/view-shared/sharedPreview";

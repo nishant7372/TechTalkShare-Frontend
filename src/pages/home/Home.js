@@ -1,9 +1,9 @@
-import "./Home.css";
+import styles from "./home.module.css";
 
 export default function Home() {
   return (
-    <div className="home">
-      <div className="center">Home Page</div>
+    <div className={styles["home"]}>
+      <div className={styles["center"]}>Home Page</div>
     </div>
   );
 }

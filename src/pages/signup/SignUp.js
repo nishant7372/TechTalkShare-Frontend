@@ -1,8 +1,8 @@
-import styles from "./SignUp.module.css";
+import styles from "./signup.module.css";
 
 import { useState } from "react";
 
-import { useSignup } from "../../hooks//user/useSignup";
+import { useSignup } from "../../hooks/user/useSignup";
 
 import Spinner from "../../Components/loading-spinners/spinner/spinner";
 import Error from "../../Components/messages/error";

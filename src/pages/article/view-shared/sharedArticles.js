@@ -1,4 +1,4 @@
-import styles from "./../view/articles.module.css";
+import styles from "./../view-owner/articles.module.css";
 
 import { useEffect, useState } from "react";
 
@@ -7,10 +7,10 @@ import { useSharingContext } from "../../../hooks/context/useSharingContext";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import SharedArticle from "./sharedArticle";
-import Paginate from "../view/Paginate";
+import Paginate from "../components/paginate/Paginate";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import TagSelect from "../components/tagSelect";
-import ShareModal from "../components/shareModal";
+import TagSelect from "../components/tag/tagSelect";
+import ShareModal from "../components/modal/shareModal";
 
 export default function SharedArticles() {
   const { getSharedArticles, isPending } = useGetSharedArticles();
