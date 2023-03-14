@@ -13,7 +13,10 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await shareArticle({ articleID: articleShare, userName });
+    const res = await shareArticle({
+      articleID: articleShare,
+      userName: userName.toLowerCase(),
+    });
     if (res.ok) {
       dispatch({ type: "SUCCESS", payload: res.ok });
       setOpenShareModal(false);
