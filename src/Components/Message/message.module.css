@@ -1,0 +1,25 @@
+.error,
+.successful {
+  border-radius: 4px;
+  font-size: 1.5rem;
+  padding: 0.2rem 0.4rem;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+  color: white;
+}
+
+.error {
+  background-color: var(--error-msg);
+}
+
+.successful {
+  background-color: var(--success-msg);
+}
+
+.blue {
+  background-color: blue;
+}
+
+.skyblue {
+  background-color: rgb(9, 141, 193);
+}

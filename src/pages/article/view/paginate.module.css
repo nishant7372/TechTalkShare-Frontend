@@ -1,0 +1,41 @@
+.react-paginate {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.react-paginate li {
+  display: inline-block;
+  font-size: 1.8rem;
+}
+
+.react-paginate li:first-child {
+  font-size: 1.4rem;
+}
+
+.react-paginate li:last-child {
+  font-size: 1.4rem;
+}
+
+.react-paginate li a {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  text-align: center;
+  background-color: #e0e0e0;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  background-color: orange;
+}
+
+.react-paginate li a:hover {
+  background-color: orangered;
+}
+
+.react-paginate li.active-page a {
+  background-color: orangered;
+}

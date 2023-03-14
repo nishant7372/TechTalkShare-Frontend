@@ -1,0 +1,83 @@
+.loading-spinner {
+  text-align: center;
+  display: flex;
+}
+
+.read {
+  margin-top: calc(50vh - 50px);
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.mainRead {
+  position: absolute;
+  margin-top: calc(50vh - 50px);
+  margin: auto;
+  height: calc(100% - 50px);
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  z-index: 8;
+}
+
+.delete,
+.post {
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mainRead > div,
+.read > div {
+  width: 2rem;
+  height: 2rem;
+}
+
+.delete > div,
+.post > div {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.loading-spinner > div {
+  background: linear-gradient(to right, #fff 0%, #ffd700 100%);
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.2s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.2s infinite ease-in-out both;
+}
+
+.loading-spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.loading-spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}

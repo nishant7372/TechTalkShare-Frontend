@@ -1,0 +1,27 @@
+.mainContainer {
+  position: relative;
+  width: 100%;
+}
+
+.messageContainer {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+  margin-top: 4rem;
+  z-index: 11;
+  animation: moveInBottom 0.2s ease-in-out;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,40 @@
+.code-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  height: 1rem;
+  padding: 1rem 2rem;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.copyButton {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.copyButton:hover {
+  color: white;
+}
+
+.syntax-highlighter {
+  overflow: auto;
+  height: 40rem;
+  font-size: 1.5rem;
+}
+
+.code-box {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid red; */
+  gap: 0px;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+}
+
+.syntax-highlighter-main {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+}

@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { AuthContextProvider } from "../src/context/AuthContext";
+import { ArticleContextProvider } from "./context/ArticleContext";
+import { MessageContextProvider } from "./context/MessageContext";
+import { SharedContextProvider } from "./context/SharedContext";
+import "react-tooltip/dist/react-tooltip.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <MessageContextProvider>
+      <ArticleContextProvider>
+        <SharedContextProvider>
+          <AuthContextProvider>
+            <App />
+          </AuthContextProvider>
+        </SharedContextProvider>
+      </ArticleContextProvider>
+    </MessageContextProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

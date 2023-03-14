@@ -1,0 +1,56 @@
+.confirm-message {
+  margin: auto;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: rgb(13, 13, 13, 0.95);
+  padding: 3rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.overlay {
+  position: fixed; /* Positioning and size */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.15); /* color */
+}
+
+.confirm-message button {
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.yes:hover {
+  background-color: red;
+}
+
+.yes {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.no {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.no:hover {
+  background-color: red;
+}
+.buttonContainer {
+  display: flex;
+  gap: 2rem;
+}

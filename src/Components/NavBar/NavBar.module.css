@@ -1,0 +1,109 @@
+.nav-container {
+  box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.6);
+  background-color: rgba(25, 25, 25, 255);
+  height: 50px;
+  transition: all 1s ease-in-out;
+  z-index: 5;
+  font-size: 1.8rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  margin: auto;
+  max-width: 1400px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 2.3rem;
+  padding-left: 4rem;
+}
+
+/* .leftSection img {
+  width: 4rem;
+  height: 4rem;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+} */
+
+.nav-middle {
+  font-size: 1.6rem;
+  padding-left: 1.5rem;
+  padding-top: 0.3rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-right-auth,
+.nav-right-noauth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.nav-right-auth {
+  gap: 3rem;
+  padding-right: 4rem;
+}
+.nav-right-noauth {
+  gap: 4rem;
+  padding-right: 4rem;
+}
+
+.nav-middle a,
+.log-btn {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.nav-right-auth a {
+  height: 3rem;
+}
+
+.nav-container a {
+  text-decoration: none;
+}
+
+.nav-middle a:hover,
+.log-btn:hover {
+  color: white;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap");
+
+.app-name {
+  width: 100%;
+  font-weight: 400;
+  font-size: 3rem;
+  font-family: "Oleo Script", cursive;
+  letter-spacing: 1px;
+  color: white;
+}

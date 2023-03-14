@@ -1,0 +1,13 @@
+.cm-editor {
+  height: fit-content !important;
+}
+
+.md-editor {
+  height: 99.9%;
+}
+
+.md-editor-preview {
+  overflow: hidden !important;
+  height: fit-content !important;
+  min-height: 100% !important;
+}
