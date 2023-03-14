@@ -2,6 +2,7 @@ import styles from "./shareModal.module.css";
 import { useState } from "react";
 import { useShareArticle } from "../../../../hooks/sharing/useShareArticle";
 import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+import Loading from "../../../../Components/loading-spinners/loading/loading";
 
 export default function ShareModal({ articleShare, setOpenShareModal }) {
   const [userName, setUserName] = useState("");
@@ -36,7 +37,8 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
           className={styles["shareInput"]}
           required
         />
-        <button className={styles["shareButton"]}>Share</button>
+        {!isPending && <button className={styles["shareButton"]}>Share</button>}
+        {isPending && <Loading action={"post"} />}
       </form>
     </div>
   );
