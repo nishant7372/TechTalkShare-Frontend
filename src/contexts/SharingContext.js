@@ -1,8 +1,8 @@
 import { createContext, useReducer } from "react";
 
-export const SharedContext = createContext();
+export const SharingContext = createContext();
 
-export const sharedReducer = (state, action) => {
+export const sharingReducer = (state, action) => {
   switch (action.type) {
     case "SHARED_ARTICLES":
       return {
@@ -25,8 +25,8 @@ export const sharedReducer = (state, action) => {
   }
 };
 
-export const SharedContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(sharedReducer, {
+export const SharingContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(sharingReducer, {
     articles: null,
     articleCount: 0,
     currPageNo: 0,
@@ -34,8 +34,8 @@ export const SharedContextProvider = ({ children }) => {
   });
 
   return (
-    <SharedContext.Provider value={{ ...state, dispatch }}>
+    <SharingContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </SharedContext.Provider>
+    </SharingContext.Provider>
   );
 };

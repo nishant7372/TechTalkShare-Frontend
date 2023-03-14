@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axiosInstance from "../axiosInstance";
-import { useSharedContext } from "../context/useSharedContext";
+import { useSharingContext } from "../context/useSharingContext";
 
 export const useGetSharedArticles = () => {
-  const { dispatch } = useSharedContext();
+  const { dispatch } = useSharingContext();
   const [isPending, setIsPending] = useState(false);
 
   const getSharedArticles = async (params) => {

@@ -1,10 +1,9 @@
 import styles from "./../view/articles.module.css";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { useGetSharedArticles } from "../../../hooks/sharing/useGetSharedArticles";
-import { useSharedContext } from "../../../hooks/context/useSharedContext";
+import { useSharingContext } from "../../../hooks/context/useSharingContext";
 import { useMessageContext } from "../../../hooks/useMessageContext";
 
 import SharedArticle from "./sharedArticle";
@@ -19,8 +18,8 @@ export default function SharedArticles() {
     articles,
     currPageNo,
     activeFilter,
-    dispatch: sharedDispatch,
-  } = useSharedContext();
+    dispatch: sharingDispatch,
+  } = useSharingContext();
 
   const { dispatch: messageDispatch } = useMessageContext();
   const [search, setSearch] = useState("");
@@ -46,13 +45,13 @@ export default function SharedArticles() {
   }, [currPageNo, activeFilter, search, tags]);
 
   const handlePageChange = (page) => {
-    sharedDispatch({ type: "PAGE_CHANGED", payload: page.selected });
+    sharingDispatch({ type: "PAGE_CHANGED", payload: page.selected });
   };
 
   const handleFilterClick = async (option) => {
     if (activeFilter !== option) {
-      sharedDispatch({ type: "PAGE_CHANGED", payload: 0 });
-      sharedDispatch({ type: "FILTER", payload: option });
+      sharingDispatch({ type: "PAGE_CHANGED", payload: 0 });
+      sharingDispatch({ type: "FILTER", payload: option });
     }
   };
 

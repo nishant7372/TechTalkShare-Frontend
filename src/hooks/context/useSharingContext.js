@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { SharedContext } from "../../context/SharedContext";
+import { SharingContext } from "../../contexts/SharingContext";
 
-export const useSharedContext = () => {
-  const context = useContext(SharedContext);
+export const useSharingContext = () => {
+  const context = useContext(SharingContext);
 
   if (context === undefined) {
     throw new Error(
