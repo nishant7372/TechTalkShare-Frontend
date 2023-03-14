@@ -1,5 +1,4 @@
 import styles from "./basicInfo.module.css";
-import "../common.css";
 
 import { useState } from "react";
 

@@ -1,4 +1,3 @@
-import "./../../settings/components/common.css";
 import styles from "./createArticle.module.css";
 
 import { useState } from "react";

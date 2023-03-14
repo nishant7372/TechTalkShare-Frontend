@@ -1,5 +1,4 @@
 import styles from "./session.module.css";
-import "../common.css";
 
 import { useState } from "react";
 

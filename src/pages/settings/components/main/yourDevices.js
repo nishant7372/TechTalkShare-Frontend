@@ -1,5 +1,5 @@
 import styles from "./yourDevices.module.css";
-import "../common.css";
+
 import { useEffect, useState, useMemo } from "react";
 
 import { useAuthContext } from "../../../../hooks/context/useAuthContext";

@@ -1,5 +1,4 @@
 import styles from "./avatar.module.css";
-import "../common.css";
 
 import { useState } from "react";
 import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";

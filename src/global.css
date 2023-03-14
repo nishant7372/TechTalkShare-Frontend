@@ -84,6 +84,7 @@
   background-color: var(--danger-bt);
   align-self: flex-start;
 }
+
 .removeButton {
   background-color: var(--warning-bt);
 }

@@ -1,5 +1,4 @@
 import styles from "./security.module.css";
-import "../common.css";
 
 import { useState } from "react";
 

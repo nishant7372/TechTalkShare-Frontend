@@ -1,4 +1,3 @@
-import "./../../settings/components/common.css";
 import styles from "./updateArticle.module.css";
 
 import { useEffect, useState } from "react";
