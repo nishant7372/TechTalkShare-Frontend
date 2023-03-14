@@ -8,7 +8,7 @@ import { useGetCurrentSession } from "../../../../hooks/user/useGetCurrentSessio
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
-import Session from "../session/session";
+import Session from "../sessions/session";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";
 

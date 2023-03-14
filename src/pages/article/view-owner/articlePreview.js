@@ -4,7 +4,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
-import Tag from "../components/tag/tag";
+import Tag from "../components/tags/tag";
 
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";

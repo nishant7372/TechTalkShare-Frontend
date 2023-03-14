@@ -7,9 +7,9 @@ import { useSharingContext } from "../../../hooks/context/useSharingContext";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import SharedArticle from "./sharedArticle";
-import Paginate from "../components/paginate/Paginate";
+import Paginate from "../components/pagination/paginate";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import TagSelect from "../components/tag/tagSelect";
+import TagSelect from "../components/tags/tagSelect";
 import ShareModal from "../components/modal/shareModal";
 
 export default function SharedArticles() {

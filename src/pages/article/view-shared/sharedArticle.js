@@ -4,7 +4,7 @@ import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import Tag from "../components/tag/tag";
+import Tag from "../components/tags/tag";
 
 export default function SharedArticle({ articleObj, updated, handleShare }) {
   const { article, sharedBy } = articleObj;

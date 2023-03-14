@@ -2,8 +2,8 @@ import styles from "./Settings.module.css";
 
 import { useEffect, useState } from "react";
 
-import Option from "./components/option/option";
-import Setting from "./components/setting/setting";
+import Option from "./components/optionNames/option";
+import Setting from "./components/settingNames/setting";
 
 import BasicInfo from "./components/main/basicInfo";
 import Avatar from "./components/main/avatar";

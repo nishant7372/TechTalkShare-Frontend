@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
-import Editor from "../components/editor/editor";
-import TagSelect from "../components/tag/tagSelect";
+import Editor from "../components/editors/editor";
+import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 
 export default function CreateArticle() {

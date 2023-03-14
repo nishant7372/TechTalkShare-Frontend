@@ -7,8 +7,8 @@ import { useUpdateArticle } from "../../../hooks/article/useUpdateArticle";
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
-import Editor from "../components/editor/editor";
-import TagSelect from "../components/tag/tagSelect";
+import Editor from "../components/editors/editor";
+import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
 
