@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 import { useSharingContext } from "../context/useSharingContext";
 
 export const useGetSharedArticles = () => {
@@ -9,13 +9,13 @@ export const useGetSharedArticles = () => {
   const getSharedArticles = async (params) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.get("/shared", {
         params,
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });

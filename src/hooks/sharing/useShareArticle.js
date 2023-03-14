@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useShareArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,12 +7,12 @@ export const useShareArticle = () => {
   const shareArticle = async (data) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.post("/articles/share", data, {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });

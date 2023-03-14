@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useReadArticles } from "../../../hooks/article/useReadArticles";
-import { useArticleContext } from "../../../hooks/useArticleContext";
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useArticleContext } from "../../../hooks/context/useArticleContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import Article from "./article";
 import Paginate from "./Paginate";

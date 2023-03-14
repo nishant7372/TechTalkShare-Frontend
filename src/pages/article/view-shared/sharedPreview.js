@@ -6,12 +6,12 @@ import NotFound from "../../error/notFound";
 import Tag from "../components/tag";
 
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 export default function SharedPreview() {
   const { id } = useParams();

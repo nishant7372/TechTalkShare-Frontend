@@ -3,7 +3,7 @@ import "../common.css";
 
 import { useState } from "react";
 
-import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 

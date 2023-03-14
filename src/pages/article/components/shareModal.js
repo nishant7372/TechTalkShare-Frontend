@@ -1,7 +1,7 @@
 import styles from "./shareModal.module.css";
 import { useState } from "react";
 import { useShareArticle } from "./../../../hooks/sharing/useShareArticle";
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 export default function ShareModal({ articleShare, setOpenShareModal }) {
   const [userName, setUserName] = useState("");

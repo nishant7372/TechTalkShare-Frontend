@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useDeleteAvatar = () => {
   const [error, setError] = useState(null);
@@ -8,12 +8,12 @@ export const useDeleteAvatar = () => {
   const deleteAvatar = async () => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.delete("/users/me/avatar", {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

@@ -4,8 +4,8 @@ import "./navbar.css";
 import { NavLink, Link } from "react-router-dom";
 
 import { useLogout } from "../../hooks/user/useLogout";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useMessageContext } from "../../hooks/useMessageContext";
+import { useAuthContext } from "../../hooks/context/useAuthContext";
+import { useMessageContext } from "../../hooks/context/useMessageContext";
 
 export default function NavBar() {
   const { logout, isPending } = useLogout();

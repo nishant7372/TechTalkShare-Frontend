@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useGetAvatar = () => {
   const [error, setError] = useState(null);
@@ -8,12 +8,12 @@ export const useGetAvatar = () => {
   const getAvatar = async (id) => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.get(`/users/${id}/avatar`, {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

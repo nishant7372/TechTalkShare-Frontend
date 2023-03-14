@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import { useAuthContext } from "./../useAuthContext";
-import axiosInstance from "./../axiosInstance";
+import { useAuthContext } from "./../context/useAuthContext";
+import axiosInstance from "../axios/axiosInstance";
 
 const bowser = require("bowser");
 

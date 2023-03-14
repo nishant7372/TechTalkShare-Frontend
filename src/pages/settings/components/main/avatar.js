@@ -2,11 +2,11 @@ import styles from "./avatar.module.css";
 import "../common.css";
 
 import { useState } from "react";
-
 import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useDeleteAvatar } from "../../../../hooks/avatar/useDeleteAvatar";
+
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";

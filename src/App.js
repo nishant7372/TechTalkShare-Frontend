@@ -9,19 +9,19 @@ import {
 import Home from "./pages/home/Home";
 import LogIn from "./pages/login/LogIn";
 import SignUp from "./pages/signup/SignUp";
+import NavBar from "./Components/navbar/navbar";
 import Settings from "./pages/settings/Settings";
 import Articles from "./pages/article/view/articles";
-import ArticlePreview from "./pages/article/components/articlePreview";
 import CreateArticle from "./pages/article/create/createArticle";
 import UpdateArticle from "./pages/article/update/updateArticle";
-import NotFound from "./pages/error/notFound";
-import ServerError from "./pages/error/serverError";
-
-import { useAuthContext } from "./hooks/useAuthContext";
-import NavBar from "./Components/navbar/navbar";
+import ArticlePreview from "./pages/article/components/articlePreview";
 import MessageContainer from "./Components/messages/messageContainer";
 import SharedArticles from "./pages/article/view-shared/sharedArticles";
 import SharedPreview from "./pages/article/view-shared/sharedPreview";
+import NotFound from "./pages/error/notFound";
+import ServerError from "./pages/error/serverError";
+
+import { useAuthContext } from "./hooks/context/useAuthContext";
 
 function App() {
   const { user, authIsReady, serverError } = useAuthContext();

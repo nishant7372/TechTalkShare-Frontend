@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useUpdateUser = () => {
   const [error, setError] = useState(null);
@@ -8,13 +8,13 @@ export const useUpdateUser = () => {
   const updateUser = async (updates) => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.patch("/users/me", updates, {
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

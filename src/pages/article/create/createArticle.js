@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import Editor from "../components/editor";
 import TagSelect from "../components/tagSelect";

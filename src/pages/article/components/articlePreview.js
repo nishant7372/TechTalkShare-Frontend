@@ -12,7 +12,7 @@ import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 export default function ArticlePreview() {
   const { id } = useParams();

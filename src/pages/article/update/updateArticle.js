@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useUpdateArticle } from "../../../hooks/article/useUpdateArticle";
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import Editor from "../components/editor";
 import TagSelect from "../components/tagSelect";

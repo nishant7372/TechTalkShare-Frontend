@@ -2,7 +2,7 @@ import styles from "./yourDevices.module.css";
 import "../common.css";
 import { useEffect, useState, useMemo } from "react";
 
-import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
 import { useGetCurrentSession } from "../../../../hooks/user/useGetCurrentSession";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";

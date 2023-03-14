@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useUploadAvatar = () => {
   const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ export const useUploadAvatar = () => {
   const uploadAvatar = async (avatarImage) => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const formData = new FormData();
@@ -17,7 +17,7 @@ export const useUploadAvatar = () => {
       const res = await axiosInstance.post("/users/me/avatar", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

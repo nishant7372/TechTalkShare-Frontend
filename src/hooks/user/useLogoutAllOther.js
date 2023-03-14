@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../axiosInstance";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useLogoutAllOther = () => {
   const [error, setError] = useState(null);
@@ -8,7 +8,7 @@ export const useLogoutAllOther = () => {
   const logoutAllOther = async () => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       //user all other session log out
@@ -19,7 +19,7 @@ export const useLogoutAllOther = () => {
         {
           headers: {
             "Content-type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${header}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

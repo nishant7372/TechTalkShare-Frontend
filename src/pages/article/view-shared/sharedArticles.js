@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useGetSharedArticles } from "../../../hooks/sharing/useGetSharedArticles";
 import { useSharingContext } from "../../../hooks/context/useSharingContext";
-import { useMessageContext } from "../../../hooks/useMessageContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
 import SharedArticle from "./sharedArticle";
 import Paginate from "../view/Paginate";

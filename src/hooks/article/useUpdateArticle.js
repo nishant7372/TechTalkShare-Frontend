@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "./../axiosInstance";
+import axiosInstance from "./../axios/axiosInstance";
 
 export const useUpdateArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,12 +7,12 @@ export const useUpdateArticle = () => {
   const updateArticle = async (id, updates) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.patch(`/articles/${id}`, updates, {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });

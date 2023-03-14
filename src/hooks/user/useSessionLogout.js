@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useAuthContext } from "./../useAuthContext";
-import axiosInstance from "../axiosInstance";
+import { useAuthContext } from "./../context/useAuthContext";
+import axiosInstance from "../axios/axiosInstance";
 
 export const useSessionLogout = () => {
   const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ export const useSessionLogout = () => {
   const sessionLogout = async (id, active) => {
     setError(null);
     setIsPending(true);
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       //session logout out by id
@@ -21,7 +21,7 @@ export const useSessionLogout = () => {
         {
           headers: {
             "Content-type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${header}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

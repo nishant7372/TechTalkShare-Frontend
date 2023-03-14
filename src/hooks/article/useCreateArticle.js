@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "./../axiosInstance";
+import axiosInstance from "./../axios/axiosInstance";
 
 export const useCreateArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,12 +7,12 @@ export const useCreateArticle = () => {
   const createArticle = async (data) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.post("/articles", data, {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });

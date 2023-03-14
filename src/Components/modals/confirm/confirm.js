@@ -1,18 +1,18 @@
-import Styles from "./confirm.module.css";
+import styles from "./confirm.module.css";
 
 export default function Confirm({ message, deleteItem }) {
   return (
-    <div className={Styles["overlay"]}>
-      <div className={Styles["confirm-message"]}>
+    <div className={styles["overlay"]}>
+      <div className={styles["confirm-message"]}>
         <div>
           {message} <br />
           Are you sure?
         </div>
-        <div className={Styles.buttonContainer}>
-          <button className={Styles.yes} onClick={() => deleteItem(true)}>
+        <div className={styles["buttonContainer"]}>
+          <button className={styles["yes"]} onClick={() => deleteItem(true)}>
             yes
           </button>
-          <button className={Styles.no} onClick={() => deleteItem(false)}>
+          <button className={styles["no"]} onClick={() => deleteItem(false)}>
             no
           </button>
         </div>

@@ -1,7 +1,7 @@
 import styles from "./paginate.module.css";
 
 import ReactPaginate from "react-paginate";
-import { useArticleContext } from "../../../hooks/useArticleContext";
+import { useArticleContext } from "../../../hooks/context/useArticleContext";
 
 export default function Paginate({ handlePageChange }) {
   const { articleCount, currPageNo } = useArticleContext();

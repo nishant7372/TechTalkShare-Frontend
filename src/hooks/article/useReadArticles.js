@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useArticleContext } from "../useArticleContext";
-import axiosInstance from "../axiosInstance";
+import { useArticleContext } from "../context/useArticleContext";
+import axiosInstance from "./../axios/axiosInstance";
 
 export const useReadArticles = () => {
   const { dispatch } = useArticleContext();
@@ -9,13 +9,13 @@ export const useReadArticles = () => {
   const readArticles = async (params) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.get(`/articles`, {
         params,
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });

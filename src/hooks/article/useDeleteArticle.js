@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "./../axiosInstance";
+import axiosInstance from "./../axios/axiosInstance";
 
 export const useDeleteArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,12 +7,12 @@ export const useDeleteArticle = () => {
   const deleteArticle = async (id) => {
     setIsPending(true);
 
-    const header = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axiosInstance.delete(`/articles/${id}`, {
         headers: {
-          Authorization: `Bearer ${header}`,
+          Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
         },
       });
