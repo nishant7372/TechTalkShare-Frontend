@@ -62,6 +62,14 @@ input:-webkit-autofill:active {
   transition: all 5000s ease-in-out 0s;
 }
 
+input,
+button,
+input::placeholder {
+  font-family: "Baloo Bhai 2", cursive, sans-serif;
+}
+
+/* Scrollbar Styles --------------------------------------------------*/
+
 body::-webkit-scrollbar {
   height: 1em;
   width: 1em;
@@ -89,10 +97,4 @@ div::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
   border-radius: 6px;
-}
-
-input,
-button,
-input::placeholder {
-  font-family: "Baloo Bhai 2", cursive, sans-serif;
 }
