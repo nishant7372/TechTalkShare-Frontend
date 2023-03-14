@@ -43,6 +43,7 @@ export default function Articles() {
     };
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
     if (activeFilter === "Newest to Oldest") fetch("createdAt:desc");
+    // eslint-disable-next-line
   }, [currPageNo, activeFilter, search, tags]);
 
   const handlePageChange = (page) => {

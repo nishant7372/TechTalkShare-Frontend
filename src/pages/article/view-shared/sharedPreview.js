@@ -40,6 +40,7 @@ export default function SharedPreview() {
       }
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
   const goBack = () => {

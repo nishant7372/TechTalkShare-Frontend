@@ -42,6 +42,7 @@ export default function ArticlePreview() {
       }
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
   const goBack = () => {

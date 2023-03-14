@@ -50,6 +50,7 @@ export default function UpdateArticle() {
       }
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
   // Updating Article

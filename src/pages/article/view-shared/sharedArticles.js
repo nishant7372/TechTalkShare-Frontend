@@ -42,6 +42,7 @@ export default function SharedArticles() {
     };
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
     if (activeFilter === "Recently Shared") fetch("createdAt:desc");
+    // eslint-disable-next-line
   }, [currPageNo, activeFilter, search, tags]);
 
   const handlePageChange = (page) => {
