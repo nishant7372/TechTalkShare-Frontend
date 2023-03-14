@@ -7,9 +7,9 @@ import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
 import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 
-import Successful from "../../../../Components/Message/successful";
-import Error from "../../../../Components/Message/error";
-import Spinner from "../../../../Components/Spinner/Spinner";
+import Successful from "../../../../Components/messages/successful";
+import Error from "../../../../Components/messages/error";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 
 export default function Session({ session, active }) {
   const [renderMsg, setRenderMsg] = useState(false);

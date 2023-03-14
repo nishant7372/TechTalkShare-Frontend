@@ -1,10 +1,10 @@
-import "./Spinner.css";
+import styles from "./spinner.module.css";
 
 export default function Spinner() {
   return (
-    <div id="container">
+    <div>
       <svg
-        id="svg-spinner"
+        className={styles["svg-spinner"]}
         xmlns="http://www.w3.org/2000/svg"
         width="48"
         height="48"

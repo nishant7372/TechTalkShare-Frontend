@@ -9,7 +9,7 @@ import { useMessageContext } from "../../../hooks/useMessageContext";
 
 import SharedArticle from "./sharedArticle";
 import Paginate from "../view/Paginate";
-import Loading from "../../../Components/loading/loading";
+import Loading from "../../../Components/loading-spinners/loading/loading";
 import TagSelect from "../components/tagSelect";
 import ShareModal from "../components/shareModal";
 

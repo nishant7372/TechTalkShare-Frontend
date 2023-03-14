@@ -5,9 +5,9 @@ import { useState } from "react";
 
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
 
-import Spinner from "../../../../Components/Spinner/Spinner";
-import Error from "../../../../Components/Message/error";
-import Successful from "../../../../Components/Message/successful";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import Error from "../../../../Components/messages/error";
+import Successful from "../../../../Components/messages/successful";
 
 export default function Security() {
   const [newPassword, setNewPassword] = useState("");

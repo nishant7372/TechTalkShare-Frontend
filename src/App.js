@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import NavBar from "./Components/NavBar/NavBar";
+import NavBar from "./Components/navbar/navbar";
 import Home from "./pages/home/Home";
 import LogIn from "./pages/login/LogIn";
 import SignUp from "./pages/signup/SignUp";
@@ -19,7 +19,7 @@ import NotFound from "./pages/error/notFound";
 import ServerError from "./pages/error/serverError";
 
 import { useAuthContext } from "./hooks/useAuthContext";
-import MessageContainer from "./Components/MessageContainer/messageContainer";
+import MessageContainer from "./Components/messages/messageContainer";
 import SharedArticles from "./pages/article/view-shared/sharedArticles";
 import SharedPreview from "./pages/article/view-shared/sharedPreview";
 

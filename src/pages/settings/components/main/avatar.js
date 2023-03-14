@@ -7,9 +7,9 @@ import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useDeleteAvatar } from "../../../../hooks/avatar/useDeleteAvatar";
-import Spinner from "../../../../Components/Spinner/Spinner";
-import Error from "../../../../Components/Message/error";
-import Successful from "../../../../Components/Message/successful";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import Error from "../../../../Components/messages/error";
+import Successful from "../../../../Components/messages/successful";
 
 export default function Avatar() {
   const {

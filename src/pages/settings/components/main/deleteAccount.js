@@ -5,9 +5,9 @@ import { useState } from "react";
 
 import { useDeleteAccount } from "../../../../hooks/user/useDeleteAccount";
 
-import Confirm from "../../../../Components/Confirm/Confirm";
-import Error from "../../../../Components/Message/error";
-import Spinner from "../../../../Components/Spinner/Spinner";
+import Confirm from "../../../../Components/modals/confirm/confirm";
+import Error from "../../../../Components/messages/error";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 
 export default function DeleteAccount() {
   const [showConfirm, setShowConfirm] = useState(false);

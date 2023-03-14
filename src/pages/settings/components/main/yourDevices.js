@@ -7,10 +7,10 @@ import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
 import { useGetCurrentSession } from "../../../../hooks/user/useGetCurrentSession";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 
-import Spinner from "../../../../Components/Spinner/Spinner";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Session from "../session/session";
-import Error from "../../../../Components/Message/error";
-import Successful from "../../../../Components/Message/successful";
+import Error from "../../../../Components/messages/error";
+import Successful from "../../../../Components/messages/successful";
 
 export default function CurrentSessions() {
   const { user, currentSessionID } = useAuthContext();

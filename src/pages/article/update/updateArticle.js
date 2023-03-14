@@ -10,7 +10,7 @@ import { useMessageContext } from "../../../hooks/useMessageContext";
 
 import Editor from "../components/editor";
 import TagSelect from "../components/tagSelect";
-import Loading from "../../../Components/loading/loading";
+import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
 
 export default function UpdateArticle() {

@@ -1,7 +1,7 @@
 import styles from "./../components/articlePreview.module.css";
 
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import Loading from "../../../Components/loading/loading";
+import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
 import Tag from "../components/tag";
 

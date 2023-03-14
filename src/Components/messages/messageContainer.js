@@ -3,8 +3,8 @@ import styles from "./messageContainer.module.css";
 import { useState, useEffect } from "react";
 import { useMessageContext } from "../../hooks/useMessageContext";
 
-import Successful from "../Message/successful";
-import Error from "../Message/error";
+import Successful from "./successful";
+import Error from "./error";
 
 export default function MessageContainer() {
   const { error, success, dispatch } = useMessageContext();

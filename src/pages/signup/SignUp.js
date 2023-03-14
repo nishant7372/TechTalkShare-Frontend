@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { useSignup } from "../../hooks//user/useSignup";
 
-import Spinner from "../../Components/Spinner/Spinner";
-import Error from "../../Components/Message/error";
+import Spinner from "../../Components/loading-spinners/spinner/spinner";
+import Error from "../../Components/messages/error";
 
 export default function SignUp() {
   const [passwordType, setPasswordType] = useState("password");

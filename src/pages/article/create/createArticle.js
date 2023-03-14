@@ -9,7 +9,7 @@ import { useMessageContext } from "../../../hooks/useMessageContext";
 
 import Editor from "../components/editor";
 import TagSelect from "../components/tagSelect";
-import Loading from "../../../Components/loading/loading";
+import Loading from "../../../Components/loading-spinners/loading/loading";
 
 export default function CreateArticle() {
   const { createArticle, isPending } = useCreateArticle();
