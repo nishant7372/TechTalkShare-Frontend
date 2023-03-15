@@ -19,7 +19,7 @@ export default function LogIn() {
 
   const parseError = (error) => {
     return error.includes("Unable to login")
-      ? "Incorrect userName or Password!"
+      ? "Incorrect Username or Password!"
       : error;
   };
 
