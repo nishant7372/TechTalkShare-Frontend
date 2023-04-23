@@ -22,6 +22,7 @@ import NotFound from "./pages/error/notFound";
 import ServerError from "./pages/error/serverError";
 
 import { useAuthContext } from "./hooks/context/useAuthContext";
+import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 
 function App() {
   const { user, authIsReady, serverError } = useAuthContext();
@@ -71,6 +72,12 @@ function App() {
             <Route
               path="/articles/update/:id"
               element={!user ? <Navigate to="/login" /> : <UpdateArticle />}
+            />
+            <Route
+              path="/shared/update/:id"
+              element={
+                !user ? <Navigate to="/login" /> : <UpdateSharedArticle />
+              }
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

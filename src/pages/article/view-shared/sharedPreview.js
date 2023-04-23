@@ -6,7 +6,7 @@ import NotFound from "../../error/notFound";
 import Tag from "../components/tags/tag";
 
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
@@ -57,6 +57,14 @@ export default function SharedPreview() {
                 <i className="fa-solid fa-arrow-left"></i>
               </div>
               <div className={styles["topic"]}>{article.topic}</div>
+            </div>
+            <div className={styles["container-right"]}>
+              <Link
+                to={`/shared/update/${id}`}
+                className={styles["editButton"]}
+              >
+                <i className="fa-regular fa-pen-to-square"></i> &nbsp;Edit
+              </Link>
             </div>
           </div>
           <div className={styles["date-container"]}>
