@@ -20,6 +20,7 @@ export default function SharedPreview() {
   const { getSharedArticle, isPending: readPending } = useGetSharedArticle();
 
   const [article, setArticle] = useState(null);
+  const [sharing, setSharing] = useState(null);
   const [showNotFound, setShowNotFound] = useState(false);
 
   const navigate = useNavigate();
@@ -31,9 +32,9 @@ export default function SharedPreview() {
   useEffect(() => {
     const fetch = async () => {
       const res = await getSharedArticle(id);
-
       if (res.ok) {
-        setArticle(res.data);
+        setArticle(res.data.article);
+        setSharing(res.data.sharing);
       } else if (res.error) {
         dispatch({ type: "ERROR", payload: res.error });
         if (res.error === "An error occurred.") setShowNotFound(true);
@@ -58,23 +59,38 @@ export default function SharedPreview() {
               </div>
               <div className={styles["topic"]}>{article.topic}</div>
             </div>
-            <div className={styles["container-right"]}>
-              <Link
-                to={`/shared/update/${id}`}
-                className={styles["editButton"]}
-              >
-                <i className="fa-regular fa-pen-to-square"></i> &nbsp;Edit
-              </Link>
-            </div>
+            {sharing.writePermission && (
+              <div className={styles["container-right"]}>
+                <Link
+                  to={`/shared/update/${id}`}
+                  className={styles["editButton"]}
+                >
+                  <i className="fa-regular fa-pen-to-square"></i> &nbsp;Edit
+                </Link>
+              </div>
+            )}
           </div>
           <div className={styles["date-container"]}>
             <div className={styles["h4"]}>
-              Created At: {formatDate(article.createdAt)}
+              Shared On: {formatDate(sharing.createdAt)}
             </div>
-
             <div className={styles["h4"]}>
               Updated At: {formatDate(article.updatedAt)}
             </div>
+          </div>
+          <div className={styles["permission-container"]}>
+            Write Permission:
+            <span
+              className={styles[`${sharing.writePermission ? "yes" : "no"}`]}
+            >
+              {sharing.writePermission ? "Yes" : "No"}
+            </span>
+            Share Permission:
+            <span
+              className={styles[`${sharing.sharePermission ? "yes" : "no"}`]}
+            >
+              {sharing.sharePermission ? "Yes" : "No"}
+            </span>
           </div>
           <div className={styles["tag-container"]}>
             {article.tags.length > 0 && (
