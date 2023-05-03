@@ -35,7 +35,6 @@ export default function SharedArticles() {
         ...(search !== "" && { search }),
         ...(tags.length !== 0 && { tag: tags[0] }),
       });
-
       if (res.error) {
         messageDispatch({ type: "ERROR", payload: res.error });
       }
