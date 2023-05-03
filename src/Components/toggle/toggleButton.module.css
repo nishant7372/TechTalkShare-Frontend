@@ -1,0 +1,39 @@
+.btn {
+  background-color: rgb(121, 120, 120);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  height: 2.5rem;
+  position: relative;
+  width: 5rem;
+}
+
+.btn:hover {
+  background-color: rgb(121, 120, 120);
+}
+.btn:focus,
+.btn:active {
+  outline: none;
+}
+.btn::-moz-focus-inner {
+  border: 0;
+}
+
+.pin {
+  background-color: white;
+  border-radius: 50%;
+  height: 2rem;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 2rem;
+  transition: left ease 0.5s;
+}
+
+.btn.on {
+  background-color: green;
+}
+
+.btn.on .pin {
+  left: calc(3rem - 3px);
+}
