@@ -22,12 +22,20 @@
   z-index: 8;
 }
 
+.users-loading {
+  margin-top: 50%;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
 .delete,
 .post {
   gap: 0.5rem;
   margin-top: 1rem;
 }
 
+.users-loading > div,
 .mainRead > div,
 .read > div {
   width: 2rem;

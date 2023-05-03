@@ -132,3 +132,30 @@
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.6rem;
 }
+
+.permission-container {
+  color: white;
+  font-size: 1.8rem;
+  display: flex;
+  padding-top: 1rem;
+  gap: 2rem;
+  padding-left: 5%;
+  width: calc(100% - 5%);
+  align-items: center;
+}
+
+.yes {
+  border-radius: 2px;
+  font-size: 1.4rem;
+  background-color: green;
+  padding: 0.1rem 0.5rem;
+  margin-left: -0.8rem;
+}
+
+.no {
+  border-radius: 2px;
+  font-size: 1.4rem;
+  background-color: rgb(202, 5, 5);
+  padding: 0.1rem 0.5rem;
+  margin-left: -0.8rem;
+}
