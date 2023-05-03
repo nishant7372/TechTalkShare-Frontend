@@ -59,11 +59,13 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
       setUsers(res.data);
     };
     fetchUsers();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const results = filterResults(userName);
     setSharedWith(results);
+    // eslint-disable-next-line
   }, [userName, users]);
 
   return (
@@ -126,7 +128,7 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
               <Error error={usersError} />
             </div>
           )}
-          {sharedWith && sharedWith.length == 0 && (
+          {sharedWith && sharedWith.length === 0 && (
             <div className={styles["not-found"]}>No UserName found</div>
           )}
         </div>

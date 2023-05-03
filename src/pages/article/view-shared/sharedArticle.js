@@ -7,7 +7,7 @@ import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import Tag from "../components/tags/tag";
 
 export default function SharedArticle({ articleObj, updated, handleShare }) {
-  const { article, sharedBy, writePermission, sharePermission } = articleObj;
+  const { article, sharedBy, sharePermission } = articleObj;
   const { timeSince } = useFormatDate();
 
   const color = ["skyblue", "magenta", "green", "orange"].sort(
