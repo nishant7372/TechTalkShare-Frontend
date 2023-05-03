@@ -39,15 +39,16 @@ export default function UpdateSharedArticle() {
   useEffect(() => {
     const fetch = async () => {
       const res = await getSharedArticle(id);
-
-      if (res.ok) {
-        setArticle(res.data);
-        setTopic(res.data.topic);
-        setContent(res.data.content);
-        setTags(res.data.tags);
+      if (res.ok && res.data.sharing.writePermission) {
+        setArticle(res.data.article);
+        setTopic(res.data.article.topic);
+        setContent(res.data.article.content);
+        setTags(res.data.article.tags);
       } else if (res.error) {
         dispatch({ type: "ERROR", payload: res.error });
         if (res.error === "An error occurred.") setShowNotFound(true);
+      } else if (!res.data.sharing.writePermission) {
+        setShowNotFound(true);
       }
     };
     fetch();
