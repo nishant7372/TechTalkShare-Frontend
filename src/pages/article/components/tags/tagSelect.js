@@ -1,19 +1,11 @@
 import styles from "./tagSelect.module.css";
 
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
+import options from "./options";
 
 export default function TagSelect({ tags, setTags, search }) {
   const animatedComponents = makeAnimated();
-  const options = [
-    { value: "java", label: "Java" },
-    { value: "cpp", label: "Cpp" },
-    { value: "javascript", label: "Javascript" },
-    { value: "c", label: "C" },
-    { value: "python", label: "Python" },
-    { value: "jsx", label: "JSX" },
-    { value: "ruby", label: "Ruby" },
-  ];
 
   const customStyles = {
     control: (provided, state) => ({
@@ -67,7 +59,7 @@ export default function TagSelect({ tags, setTags, search }) {
   };
 
   return (
-    <Select
+    <CreatableSelect
       closeMenuOnSelect={false}
       components={animatedComponents}
       maxMenuHeight={"20rem"}
