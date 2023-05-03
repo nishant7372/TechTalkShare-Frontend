@@ -7,7 +7,7 @@ import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import Tag from "../components/tags/tag";
 
 export default function SharedArticle({ articleObj, updated, handleShare }) {
-  const { article, sharedBy, writePermission } = articleObj;
+  const { article, sharedBy, writePermission, sharePermission } = articleObj;
   const { timeSince } = useFormatDate();
 
   const color = ["skyblue", "magenta", "green", "orange"].sort(
@@ -70,16 +70,18 @@ export default function SharedArticle({ articleObj, updated, handleShare }) {
         )}
       </div>
 
-      <div
-        className={styles["shareButton"]}
-        onClick={() => handleShare(article._id)}
-        data-tooltip-id="my-tooltip"
-        data-tooltip-content="Share"
-        data-tooltip-place="top"
-        data-tooltip-variant="info"
-      >
-        <i className="fa-solid fa-share"></i>
-      </div>
+      {sharePermission && (
+        <div
+          className={styles["shareButton"]}
+          onClick={() => handleShare(article._id)}
+          data-tooltip-id="my-tooltip"
+          data-tooltip-content="Share"
+          data-tooltip-place="top"
+          data-tooltip-variant="info"
+        >
+          <i className="fa-solid fa-share"></i>
+        </div>
+      )}
       <Tooltip id="my-tooltip" />
     </div>
   );
