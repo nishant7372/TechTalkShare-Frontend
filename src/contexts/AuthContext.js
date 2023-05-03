@@ -40,8 +40,13 @@ const readProfile = async (token, dispatch) => {
   } catch (err) {
     // when unauthorize delete token from localstorage
     if (err?.response?.status === 401) {
-      localStorage.setItem("token", null); //delete token from localStorage
-      alert("You have been logged out!");
+      if (
+        localStorage.getItem("token") !== null &&
+        localStorage.getItem("token") !== "null"
+      ) {
+        localStorage.setItem("token", null); //delete token from localStorage
+        alert("You have been logged out!");
+      }
       dispatch({ type: "AUTH_IS_READY", payload: null });
     } else {
       dispatch({ type: "SERVER_ERROR" });
