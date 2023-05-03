@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://prostore-backend.onrender.com",
+  baseURL: process.env.REACT_APP_PROD_SERVER_URL,
   timeout: 8000,
 });
 
