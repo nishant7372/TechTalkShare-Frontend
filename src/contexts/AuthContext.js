@@ -26,11 +26,11 @@ export const authReducer = (state, action) => {
   }
 };
 
-// only on refresh
+// on each refresh
 const readProfile = async (token, dispatch) => {
   try {
     const res = await axiosInstance.get("/users/me", {
-      timeout: 50000,
+      timeout: 60000, // 1 min wait
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${token}`,

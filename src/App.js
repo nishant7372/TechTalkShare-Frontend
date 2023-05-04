@@ -20,6 +20,7 @@ import SharedArticles from "./pages/article/view-shared/sharedArticles";
 import SharedPreview from "./pages/article/view-shared/sharedPreview";
 import NotFound from "./pages/error/notFound";
 import ServerError from "./pages/error/serverError";
+import Loading from "./Components/loading-spinners/loading/loading";
 
 import { useAuthContext } from "./hooks/context/useAuthContext";
 import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
@@ -28,7 +29,7 @@ function App() {
   const { user, authIsReady, serverError, authPending } = useAuthContext();
   return (
     <div className="App">
-      {authPending && <div className="main-loading">Loading...</div>}
+      {authPending && <Loading action="mainRead" />}
       {authIsReady && (
         <Router>
           <NavBar />
@@ -84,7 +85,7 @@ function App() {
           </Routes>
         </Router>
       )}
-      {serverError && <ServerError />}
+      {!authPending && serverError && <ServerError />}
     </div>
   );
 }
