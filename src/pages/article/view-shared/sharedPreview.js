@@ -1,17 +1,16 @@
 import styles from "./../view-owner/articlePreview.module.css";
 
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
+import { useFormatDate } from "../../../hooks/utils/useFormatDate";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
+
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
 import Tag from "../components/tags/tag";
-
-import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-
-import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
-
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import AnimatedButton from "../../../Components/button/animatedButton";
 
 export default function SharedPreview() {
   const { id } = useParams();
@@ -61,12 +60,16 @@ export default function SharedPreview() {
             </div>
             {sharing.writePermission && (
               <div className={styles["container-right"]}>
-                <Link
-                  to={`/shared/update/${id}`}
-                  className={styles["editButton"]}
-                >
-                  <i className="fa-regular fa-pen-to-square"></i> &nbsp;Edit
-                </Link>
+                <AnimatedButton
+                  icon={<i className="fa-regular fa-pen-to-square"></i>}
+                  link={`/shared/update/${id}`}
+                  content=" &nbsp;Edit"
+                  buttonStyle={{
+                    fontSize: "1.8rem",
+                    padding: "0.3rem 0.8rem",
+                  }}
+                  type="editBt"
+                />
               </div>
             )}
           </div>

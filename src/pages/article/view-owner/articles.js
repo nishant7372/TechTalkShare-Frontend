@@ -12,6 +12,7 @@ import Paginate from "../components/pagination/paginate";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import TagSelect from "../components/tags/tagSelect";
 import ShareModal from "../components/modal/shareModal";
+import AnimatedButton from "../../../Components/button/animatedButton";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();
@@ -132,9 +133,16 @@ export default function Articles() {
                 <TagSelect tags={tags} setTags={setTags} search={true} />
               </div>
             )}
-            <Link to={`/articles/create`} className={styles["createButton"]}>
-              + Create
-            </Link>
+            <AnimatedButton
+              link={`/articles/create`}
+              content="+ Create"
+              buttonStyle={{
+                fontSize: "1.6rem",
+                height: "calc(3rem - 0.3rem - 2px)",
+                padding: "0.15rem 0.8rem",
+              }}
+              type="createBt"
+            />
           </div>
         </div>
         {articles &&

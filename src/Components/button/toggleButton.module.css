@@ -11,10 +11,12 @@
 .btn:hover {
   background-color: rgb(121, 120, 120);
 }
+
 .btn:focus,
 .btn:active {
   outline: none;
 }
+
 .btn::-moz-focus-inner {
   border: 0;
 }

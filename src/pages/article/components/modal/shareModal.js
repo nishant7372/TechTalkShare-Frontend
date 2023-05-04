@@ -1,14 +1,15 @@
 import styles from "./shareModal.module.css";
 
 import { useState } from "react";
+import { useEffect } from "react";
+
 import { useShareArticle } from "../../../../hooks/sharing/useShareArticle";
 import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 import { useGetUsers } from "../../../../hooks/user/useGetUsers";
 import { useAuthContext } from "../../../../hooks/context/useAuthContext";
-import Loading from "../../../../Components/loading-spinners/loading/loading";
-import ToggleButton from "../../../../Components/toggle/toggleButton";
 
-import { useEffect } from "react";
+import Loading from "../../../../Components/loading-spinners/loading/loading";
+import ToggleButton from "../../../../Components/button/toggleButton";
 import Error from "../../../../Components/messages/error";
 
 export default function ShareModal({ articleShare, setOpenShareModal }) {
@@ -16,8 +17,8 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
   const [users, setUsers] = useState(null);
   const [writeOn, setWriteOn] = useState(false);
   const [shareOn, setShareOn] = useState(false);
-
   const [sharedWith, setSharedWith] = useState([]);
+
   const { shareArticle, isPending } = useShareArticle();
   const { user: me } = useAuthContext();
   const {

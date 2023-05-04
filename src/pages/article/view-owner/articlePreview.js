@@ -5,6 +5,7 @@ import MarkdownPreview from "@uiw/react-markdown-preview";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
 import Tag from "../components/tags/tag";
+import AnimatedButton from "../../../Components/button/animatedButton";
 
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -71,16 +72,27 @@ export default function ArticlePreview() {
               <div className={styles["topic"]}>{article.topic}</div>
             </div>
             <div className={styles["container-right"]}>
-              <Link
-                to={`/articles/update/${id}`}
-                className={styles["editButton"]}
-              >
-                <i className="fa-regular fa-pen-to-square"></i> &nbsp;Edit
-              </Link>
+              <AnimatedButton
+                icon={<i className="fa-regular fa-pen-to-square"></i>}
+                link={`/articles/update/${id}`}
+                content=" &nbsp;Edit"
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.3rem 0.8rem",
+                }}
+                type="editBt"
+              />
               {!deletePending && (
-                <div className={styles["deleteButton"]} onClick={handleDelete}>
-                  <i className="fa-solid fa-trash"></i> &nbsp;Delete
-                </div>
+                <AnimatedButton
+                  icon={<i className="fa-solid fa-trash"></i>}
+                  content=" &nbsp;Delete"
+                  buttonStyle={{
+                    fontSize: "1.8rem",
+                    padding: "0.3rem 0.8rem",
+                  }}
+                  type="deleteBt"
+                  action={handleDelete}
+                />
               )}
               {deletePending && <Loading action={"delete"} />}
             </div>

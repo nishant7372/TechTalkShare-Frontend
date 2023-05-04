@@ -57,41 +57,6 @@
   gap: 1rem;
 }
 
-.deleteButton {
-  color: rgb(233, 42, 42);
-  border: 1px solid rgb(233, 42, 42);
-  background: linear-gradient(
-    to right,
-    rgb(233, 42, 42) 50%,
-    rgba(0, 0, 0, 0) 50%
-  );
-}
-
-.editButton {
-  color: magenta;
-  border: 1px solid magenta;
-  background: linear-gradient(to right, magenta 50%, rgba(0, 0, 0, 0) 50%);
-}
-
-.editButton,
-.deleteButton {
-  font-size: 1.8rem;
-  text-decoration: none;
-  border-radius: 4px;
-  padding: 0.3rem 0.8rem;
-  background-size: 200% 100%;
-  background-position: right top;
-  transition: all 0.4s ease;
-  cursor: pointer;
-}
-
-.editButton:hover,
-.deleteButton:hover {
-  color: white;
-  background-position: left top;
-  text-decoration: none;
-}
-
 .tag-container {
   display: flex;
   padding-top: 2rem;

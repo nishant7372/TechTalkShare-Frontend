@@ -100,31 +100,6 @@
   font-size: 1.4rem;
 }
 
-.createButton {
-  height: calc(3rem - 0.3rem - 2px);
-  font-size: 1.6rem;
-  color: rgb(17, 210, 17);
-  text-decoration: none;
-  border: 1px solid rgb(17, 210, 17);
-  border-radius: 4px;
-  padding: 0.15rem 0.8rem;
-  background: linear-gradient(
-    to right,
-    rgb(17, 210, 17) 50%,
-    rgba(0, 0, 0, 0) 50%
-  );
-  background-size: 200% 100%;
-  background-position: right top;
-  transition: all 0.4s ease;
-  cursor: pointer;
-}
-
-.createButton:hover {
-  color: white;
-  background-position: left top;
-  text-decoration: none;
-}
-
 .no-article-found {
   color: white;
   padding: 2rem;
