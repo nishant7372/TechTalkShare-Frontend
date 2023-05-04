@@ -9,20 +9,43 @@ import { useMessageContext } from "../../../hooks/context/useMessageContext";
 import Editor from "../components/editors/editor";
 import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
+import SimpleButton from "../../../Components/button/simpleButton";
+import { useEffect } from "react";
 
 export default function CreateArticle() {
   const { createArticle, isPending } = useCreateArticle();
   const { dispatch } = useMessageContext();
 
-  const [topic, setTopic] = useState("");
-  const [tags, setTags] = useState([]);
-  const [content, setContent] = useState("");
+  let tp = JSON.parse(localStorage.getItem("topic"));
+  let tg = JSON.parse(localStorage.getItem("tags"));
+  let ct = JSON.parse(localStorage.getItem("content"));
+
+  const [topic, setTopic] = useState(tp ? tp : "");
+  const [tags, setTags] = useState(tg ? tg : []);
+  const [content, setContent] = useState(ct ? ct : "");
 
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
+    clearLocalStorage();
   };
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem("topic");
+    localStorage.removeItem("tags");
+    localStorage.removeItem("content");
+  };
+
+  const addtoLocalStorage = () => {
+    localStorage.setItem("topic", JSON.stringify(topic));
+    localStorage.setItem("tags", JSON.stringify(tags));
+    localStorage.setItem("content", JSON.stringify(content));
+  };
+
+  useEffect(() => {
+    addtoLocalStorage();
+  }, [topic, tags, content]);
 
   // Posting new Article
   const handleSubmit = async (e) => {
@@ -45,7 +68,7 @@ export default function CreateArticle() {
             <input
               className={styles["s1-left"]}
               type="text"
-              placeholder="Enter your Title"
+              placeholder="Enter Title"
               onChange={(e) => setTopic(e.target.value)}
               value={topic}
               maxLength={100}
@@ -53,22 +76,29 @@ export default function CreateArticle() {
               autoFocus
             />
             <div className={styles["s1-right"]}>
-              <div
-                className={`cancelButton ${styles["postbtn"]}`}
-                onClick={goBack}
-              >
-                <i className="fa-solid fa-circle-xmark"></i>
-                <span className={styles["btnName"]}> Cancel</span>
-              </div>
+              <SimpleButton
+                icon={<i className="fa-solid fa-circle-xmark"></i>}
+                content={<span className={styles["btnName"]}> Cancel</span>}
+                buttonStyle={{
+                  fontSize: "1.6rem",
+                  padding: "0.15rem 0.8rem",
+                }}
+                type="cancelButton"
+                action={goBack}
+                formAction="reset"
+              />
 
               {!isPending && (
-                <button
-                  className={`saveButton ${styles["postbtn"]}`}
-                  type="submit"
-                >
-                  <i className={`fa-solid fa-paper-plane`}></i>
-                  <span className={styles["btnName"]}> Post</span>
-                </button>
+                <SimpleButton
+                  icon={<i className={`fa-solid fa-paper-plane`}></i>}
+                  content={<span className={styles["btnName"]}> Post</span>}
+                  buttonStyle={{
+                    fontSize: "1.6rem",
+                    padding: "0.15rem 0.8rem",
+                  }}
+                  type="saveButton"
+                  formAction="submit"
+                />
               )}
               {isPending && <Loading action="post" />}
             </div>

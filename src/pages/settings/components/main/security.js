@@ -7,6 +7,7 @@ import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Security() {
   const [newPassword, setNewPassword] = useState("");
@@ -47,7 +48,7 @@ export default function Security() {
   return (
     <div className={styles["security-box"]}>
       <div className={"heading"}>Change Password</div>
-      <form onSubmit={handleUpdate} className={styles["change-password"]}>
+      <form className={styles["change-password"]} onSubmit={handleUpdate}>
         <div className={"flex-col"}>
           <label htmlFor="newPassword" className={styles["label"]}>
             New password:
@@ -97,9 +98,16 @@ export default function Security() {
             </div>
           )}
           {!isPending && (
-            <button className={"updateButton"} type="submit">
-              Update
-            </button>
+            <SimpleButton
+              icon={<i className="fa-regular fa-pen-to-square"></i>}
+              content=" Update"
+              buttonStyle={{
+                fontSize: "1.8rem",
+                padding: "0.3rem 0.8rem",
+              }}
+              type="updateButton"
+              formAction="submit"
+            />
           )}
 
           {renderMsg && !localError && error && <Error error={error} />}

@@ -49,10 +49,6 @@
   gap: 1rem;
 }
 
-.logOutButton {
-  align-self: flex-end;
-}
-
 @media screen and (max-width: 450px) {
   .session {
     flex-direction: column;

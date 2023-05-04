@@ -9,6 +9,7 @@ import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function BasicInfo() {
   const { user } = useAuthContext();
@@ -63,9 +64,16 @@ export default function BasicInfo() {
           </div>
         )}
         {!isPending && (
-          <div className={"saveButton"} onClick={handleSave}>
-            Save changes
-          </div>
+          <SimpleButton
+            icon={<i className="fa-regular fa-floppy-disk"></i>}
+            content=" &nbsp;Save Changes"
+            buttonStyle={{
+              fontSize: "1.8rem",
+              padding: "0.3rem 0.8rem",
+            }}
+            type="saveButton"
+            action={handleSave}
+          />
         )}
         {renderMsg && error && <Error error={error} />}
 

@@ -11,6 +11,7 @@ import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import Loading from "../../../../Components/loading-spinners/loading/loading";
 import ToggleButton from "../../../../Components/button/toggleButton";
 import Error from "../../../../Components/messages/error";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function ShareModal({ articleShare, setOpenShareModal }) {
   const [userName, setUserName] = useState("");
@@ -89,7 +90,15 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
               required
             />
             {!isPending && (
-              <button className={styles["shareButton"]}>Share</button>
+              <SimpleButton
+                content={"Share"}
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.4rem 0.8rem",
+                }}
+                type="saveButton"
+                formAction="submit"
+              />
             )}
             {isPending && <Loading action={"post"} />}
           </div>

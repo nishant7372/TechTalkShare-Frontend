@@ -9,6 +9,7 @@ import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import Successful from "../../../../Components/messages/successful";
 import Error from "../../../../Components/messages/error";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Session({ session, active }) {
   const [renderMsg, setRenderMsg] = useState(false);
@@ -70,12 +71,17 @@ export default function Session({ session, active }) {
       <div className={styles["container2"]}>
         {isPending && <Spinner />}
         {!isPending && (
-          <div
-            className={`logOutButton ${styles["logOutButton"]}`}
-            onClick={handleClick}
-          >
-            Logout
-          </div>
+          <SimpleButton
+            icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
+            content=" &nbsp;Logout"
+            buttonStyle={{
+              fontSize: "1.7rem",
+              padding: "0.3rem 0.8rem",
+              alignSelf: "flex-end",
+            }}
+            type="logOutButton"
+            action={handleClick}
+          />
         )}
         <div>
           {renderMsg && error && <Error error={error} />}

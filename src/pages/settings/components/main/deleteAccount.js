@@ -7,6 +7,7 @@ import { useDeleteAccount } from "../../../../hooks/user/useDeleteAccount";
 import Confirm from "../../../../Components/modals/confirm/confirm";
 import Error from "../../../../Components/messages/error";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function DeleteAccount() {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -43,9 +44,16 @@ export default function DeleteAccount() {
       </div>
 
       {!isPending && (
-        <div className={"deleteButton"} onClick={handleClick}>
-          Delete Account
-        </div>
+        <SimpleButton
+          icon={<i className="fa-solid fa-trash"></i>}
+          content=" &nbsp;Delete Account"
+          buttonStyle={{
+            fontSize: "1.8rem",
+            padding: "0.3rem 0.8rem",
+          }}
+          type="deleteButton"
+          action={handleClick}
+        />
       )}
       {isPending && (
         <>

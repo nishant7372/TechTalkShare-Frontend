@@ -11,6 +11,7 @@ import Editor from "../components/editors/editor";
 import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import NotFound from "../../error/notFound";
+import SimpleButton from "../../../Components/button/simpleButton";
 
 export default function UpdateSharedArticle() {
   const { id } = useParams();
@@ -95,22 +96,31 @@ export default function UpdateSharedArticle() {
                   autoFocus
                 />
                 <div className={styles["s1-right"]}>
-                  <div
-                    className={`cancelButton ${styles["postbtn"]}`}
-                    onClick={goBack}
-                  >
-                    <i className="fa-solid fa-circle-xmark"></i>
-                    <span className={styles["btnName"]}> Cancel</span>
-                  </div>
+                  <SimpleButton
+                    icon={<i className={`fa-solid fa-paper-plane`}></i>}
+                    content={<span className={styles["btnName"]}> Cancel</span>}
+                    buttonStyle={{
+                      fontSize: "1.6rem",
+                      padding: "0.15rem 0.8rem",
+                    }}
+                    type="cancelButton"
+                    formAction="reset"
+                    action={goBack}
+                  />
 
                   {!updatePending && (
-                    <button
-                      className={`saveButton ${styles["postbtn"]}`}
-                      type="submit"
-                    >
-                      <i className={`fa-solid fa-paper-plane`}></i>
-                      <span className={styles["btnName"]}> Update</span>
-                    </button>
+                    <SimpleButton
+                      icon={<i className={`fa-solid fa-paper-plane`}></i>}
+                      content={
+                        <span className={styles["btnName"]}> Update</span>
+                      }
+                      buttonStyle={{
+                        fontSize: "1.6rem",
+                        padding: "0.15rem 0.8rem",
+                      }}
+                      type="saveButton"
+                      formAction="submit"
+                    />
                   )}
                   {updatePending && <Loading action="post" />}
                 </div>

@@ -11,6 +11,7 @@ import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Session from "../sessions/session";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";
+import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function CurrentSessions() {
   const { user, currentSessionID } = useAuthContext();
@@ -81,12 +82,16 @@ export default function CurrentSessions() {
               </div>
             )}
             {!isPending && (
-              <div
-                className={"logOutButton"}
-                onClick={() => handleLogOutAllOther()}
-              >
-                Logout All Other Sessions
-              </div>
+              <SimpleButton
+                icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
+                content=" &nbsp;Logout All Other Sessions"
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.3rem 0.8rem",
+                }}
+                type="logOutButton"
+                action={handleLogOutAllOther}
+              />
             )}
             <div style={{ alignSelf: "flex-start" }}>
               {renderMsg && error && <Error error={error} />}

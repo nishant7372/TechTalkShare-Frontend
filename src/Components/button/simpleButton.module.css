@@ -1,0 +1,74 @@
+* {
+  --success-bt: rgba(4, 161, 4, 0.8);
+  --danger-bt: rgba(252, 21, 21, 0.8);
+  --warning-bt: rgba(4, 77, 161, 0.8);
+  --success-bt-hover: rgba(3, 125, 3, 0.8);
+  --danger-bt-hover: rgba(255, 0, 0, 0.95);
+  --warning-bt-hover: rgba(1, 53, 112, 0.8);
+}
+
+.simpleButton {
+  all: unset;
+}
+
+.uploadButton,
+.removeButton,
+.saveButton,
+.updateButton,
+.deleteButton,
+.logOutButton,
+.cancelButton {
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: inline-block;
+  color: white;
+}
+
+.saveButton,
+.uploadButton,
+.updateButton {
+  background-color: var(--success-bt);
+}
+
+.updateButton {
+  align-self: flex-start;
+}
+
+.deleteButton,
+.logOutButton,
+.cancelButton {
+  background-color: var(--danger-bt);
+  align-self: flex-start;
+}
+
+.removeButton {
+  background-color: var(--warning-bt);
+}
+
+.saveButton:hover,
+.updateButton:hover,
+.deleteButton:hover,
+.removeButton:hover,
+.logOutButton:hover,
+.uploadButton:hover,
+.cancelButton:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.saveButton:hover,
+.updateButton:hover,
+.uploadButton:hover {
+  background-color: var(--success-bt-hover);
+}
+
+.deleteButton:hover,
+.logOutButton:hover,
+.cancelButton:hover {
+  background-color: var(--danger-bt-hover);
+}
+
+.removeButton:hover {
+  background-color: var(--warning-bt-hover);
+}
