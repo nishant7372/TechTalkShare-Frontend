@@ -1,3 +1,9 @@
 .App {
   height: 100%;
 }
+
+.main-loading {
+  color: white;
+  font-size: 10rem;
+  margin: auto;
+}

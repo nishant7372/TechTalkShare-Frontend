@@ -15,6 +15,7 @@ export const authReducer = (state, action) => {
         user: action.payload,
         authIsReady: true,
         serverError: false,
+        authPending: false,
       };
     case "SERVER_ERROR":
       return { ...state, serverError: true, user: null, authIsReady: false };
@@ -35,7 +36,6 @@ const readProfile = async (token, dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     // dispatch auth_is_ready
     dispatch({ type: "AUTH_IS_READY", payload: res.data });
   } catch (err) {
@@ -60,6 +60,7 @@ export const AuthContextProvider = ({ children }) => {
     user: null,
     authIsReady: false,
     currentSessionID: null,
+    authPending: true,
   });
 
   useEffect(() => {

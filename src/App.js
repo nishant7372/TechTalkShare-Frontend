@@ -25,9 +25,10 @@ import { useAuthContext } from "./hooks/context/useAuthContext";
 import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 
 function App() {
-  const { user, authIsReady, serverError } = useAuthContext();
+  const { user, authIsReady, serverError, authPending } = useAuthContext();
   return (
     <div className="App">
+      {authPending && <div className="main-loading">Loading...</div>}
       {authIsReady && (
         <Router>
           <NavBar />
