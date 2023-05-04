@@ -29,6 +29,7 @@ export const authReducer = (state, action) => {
 const readProfile = async (token, dispatch) => {
   try {
     const res = await axiosInstance.get("/users/me", {
+      timeout: 50000,
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: `Bearer ${token}`,
