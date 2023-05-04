@@ -47,10 +47,10 @@
 
 .nav-right-auth,
 .nav-right-noauth {
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
 }
 .nav-right-auth {
   gap: 3rem;
