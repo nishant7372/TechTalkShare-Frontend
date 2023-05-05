@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // type ->  className
 // action -> function to be performed
 // formAction -> when button is a form button, type is reset or submit
-
+// divType -> container is div or not
 export default function SimpleButton({
   icon,
   link,
@@ -18,10 +18,11 @@ export default function SimpleButton({
   type,
   action,
   formAction,
+  divType,
 }) {
   return (
     <>
-      {!link && (
+      {!divType && !link && (
         <button
           className={`${styles["simpleButton"]} ${styles[type]}`}
           style={buttonStyle}
@@ -32,7 +33,7 @@ export default function SimpleButton({
           {content}
         </button>
       )}
-      {link && (
+      {!divType && link && (
         <Link
           className={`${styles["simpleButton"]} ${styles[type]}`}
           style={buttonStyle}
@@ -43,6 +44,17 @@ export default function SimpleButton({
           {icon ? icon : ""}
           {content}
         </Link>
+      )}
+      {divType && (
+        <div
+          className={`${styles["simpleButton"]} ${styles[type]}`}
+          style={buttonStyle}
+          onClick={action}
+          type={formAction}
+        >
+          {icon ? icon : ""}
+          {content}
+        </div>
       )}
     </>
   );

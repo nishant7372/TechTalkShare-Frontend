@@ -128,6 +128,7 @@ export default function Avatar() {
                   padding: "0.3rem 0.8rem",
                 }}
                 type="uploadButton"
+                divType={true}
               />
             </label>
           )}

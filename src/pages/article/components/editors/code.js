@@ -51,6 +51,8 @@ export default function Code() {
       </div>
       <div className={styles["syntax-highlighter"]}>
         <SyntaxHighlighter
+          showLineNumbers={true}
+          showInlineLineNumbers={true}
           language="java"
           style={nightOwl}
           customStyle={{

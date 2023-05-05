@@ -12,7 +12,6 @@ import Loading from "../../../Components/loading-spinners/loading/loading";
 import TagSelect from "../components/tags/tagSelect";
 import ShareModal from "../components/modal/shareModal";
 import AnimatedButton from "../../../Components/button/animatedButton";
-
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();
   const {

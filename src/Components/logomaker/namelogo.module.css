@@ -1,0 +1,41 @@
+.userNameLogo {
+  font-weight: 500;
+  color: white;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.skyblue {
+  background-color: rgb(6, 129, 178);
+}
+
+.magenta {
+  background-color: rgb(249, 22, 249);
+}
+
+.orange {
+  background-color: rgb(255, 115, 0);
+}
+
+.orangered {
+  background-color: orangered;
+}
+
+.voilet {
+  background-color: rgb(183, 18, 183);
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: rgb(233, 49, 49);
+}
+
+.blue {
+  background-color: rgb(65, 65, 215);
+}

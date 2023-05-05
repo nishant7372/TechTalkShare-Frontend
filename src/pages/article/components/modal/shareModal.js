@@ -12,6 +12,7 @@ import Loading from "../../../../Components/loading-spinners/loading/loading";
 import ToggleButton from "../../../../Components/button/toggleButton";
 import Error from "../../../../Components/messages/error";
 import SimpleButton from "../../../../Components/button/simpleButton";
+import NameLogo from "../../../../Components/logomaker/namelogo";
 
 export default function ShareModal({ articleShare, setOpenShareModal }) {
   const [userName, setUserName] = useState("");
@@ -89,7 +90,10 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
               className={styles["shareInput"]}
               required
             />
-            {!isPending && (
+
+            {isPending ? (
+              <Loading action={"post"} />
+            ) : (
               <SimpleButton
                 content={"Share"}
                 buttonStyle={{
@@ -100,7 +104,6 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
                 formAction="submit"
               />
             )}
-            {isPending && <Loading action={"post"} />}
           </div>
           <div className={styles["toggle"]}>
             <div>Write:</div> <ToggleButton on={writeOn} setOn={setWriteOn} />
@@ -116,16 +119,22 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
                 className={styles["sharedWithUser"]}
                 onClick={() => setUserName(user.userName)}
               >
-                {/* <input type="checkbox" /> */}
-                <img
-                  src={
-                    !user.avatar
-                      ? process.env.PUBLIC_URL + "/img/avatar.png"
-                      : `data:image/jpeg;base64, ${user.avatar}`
-                  }
-                  alt="user-avatar"
-                  className={styles["user-avatar"]}
-                />
+                {user.avatar ? (
+                  <img
+                    src={`data:image/jpeg;base64, ${user.avatar}`}
+                    alt="user-avatar"
+                    className={styles["user-avatar"]}
+                  />
+                ) : (
+                  <NameLogo
+                    logoStyle={{
+                      width: "1.7rem",
+                      height: "2.6rem",
+                      fontSize: "1.6rem",
+                    }}
+                    name={user.name}
+                  />
+                )}
                 <div>
                   <div>{user.userName} </div>{" "}
                   <div className={styles["name"]}>{user.name} </div>
