@@ -33,6 +33,7 @@
 
 .input:focus {
   color: white;
+  box-shadow: 0 0 0 1px #2684ff;
 }
 
 .input[type="number"] {
