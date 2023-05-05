@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./animatedButton.module.css";
 
+// icon -> font Awesome icon
+// link -> route link
+// content -> Button content or an html element
+// buttonStyle -> apply your own styles to button (fontSize, padding, etc.)
+// type ->  className
+// action -> function to be performed
+
 export default function AnimatedButton({
   icon,
   link,

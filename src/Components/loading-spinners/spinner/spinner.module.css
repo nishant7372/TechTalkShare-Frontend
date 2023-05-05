@@ -1,5 +1,5 @@
 .svg-spinner {
-  width: max(3rem, 25.5px);
+  width: 3rem;
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: 1s;
   transition-duration: 1s;
