@@ -1,7 +1,6 @@
 import styles from "./articles.module.css";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { useReadArticles } from "../../../hooks/article/useReadArticles";
 import { useArticleContext } from "../../../hooks/context/useArticleContext";
@@ -25,8 +24,7 @@ export default function Articles() {
 
   const { dispatch: messageDispatch } = useMessageContext();
   const [search, setSearch] = useState("");
-  const [searchBy, setSearchBy] = useState("topic");
-  const [tags, setTags] = useState([]);
+  const [tag, setTag] = useState(null);
 
   useEffect(() => {
     const fetch = async (sortBy) => {
@@ -35,7 +33,7 @@ export default function Articles() {
         skip: currPageNo * 10,
         sortBy,
         ...(search !== "" && { search }),
-        ...(tags.length !== 0 && { tag: tags[0] }),
+        ...(tag && { tag }),
       });
 
       if (res.error) {
@@ -45,7 +43,7 @@ export default function Articles() {
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
     if (activeFilter === "Newest to Oldest") fetch("createdAt:desc");
     // eslint-disable-next-line
-  }, [currPageNo, activeFilter, search, tags]);
+  }, [currPageNo, activeFilter, search, tag]);
 
   const handlePageChange = (page) => {
     articleDispatch({ type: "PAGE_CHANGED", payload: page.selected });
@@ -56,14 +54,6 @@ export default function Articles() {
       articleDispatch({ type: "PAGE_CHANGED", payload: 0 });
       articleDispatch({ type: "FILTER", payload: option });
     }
-  };
-
-  const handleSearchTypeChange = (e) => {
-    const res = e.target.checked;
-    if (res) setSearchBy("tag");
-    else setSearchBy("topic");
-    if (tags.length !== 0) setTags([]);
-    if (search !== "") setSearch("");
   };
 
   const [openShareModal, setOpenShareModal] = useState(false);
@@ -98,41 +88,31 @@ export default function Articles() {
             </div>
           </div>
           <div className="flex-row">
-            <div
-              className={`${styles["searchSelect"]} ${
-                styles[searchBy === "tag" ? "active" : ""]
-              }`}
-            >
+            <div className={styles["searchBar"]}>
               <input
-                type="checkbox"
-                vlaue={searchBy}
-                onChange={handleSearchTypeChange}
+                type="search"
+                placeholder="🔍 Search..."
+                onChange={(e) => setSearch(e.target.value)}
+                value={search}
+                required
+                maxLength={50}
               />
-              <span>Tag Search</span>
             </div>
-            {searchBy === "topic" && (
-              <div className={styles["searchBar"]}>
-                <input
-                  type="text"
-                  placeholder="🔍 Search..."
-                  onChange={(e) => setSearch(e.target.value)}
-                  value={search}
-                  required
-                  maxLength={100}
-                />
-                <div className={styles["img"]}>
-                  <i
-                    className="fa-solid fa-xmark"
-                    onClick={() => setSearch("")}
-                  ></i>
-                </div>
+            <div className={styles["tagSearch"]}>
+              <TagSelect
+                tags={tag}
+                setTags={setTag}
+                search={true}
+                small={true}
+              />
+              <div className={styles["img"]}>
+                <i
+                  className="fa-solid fa-xmark"
+                  onClick={() => setTag(null)}
+                ></i>
               </div>
-            )}
-            {searchBy === "tag" && (
-              <div className={styles["tagSearch"]}>
-                <TagSelect tags={tags} setTags={setTags} search={true} />
-              </div>
-            )}
+            </div>
+
             <AnimatedButton
               link={`/articles/create`}
               content="+ Create"

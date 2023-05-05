@@ -1,4 +1,9 @@
-.react-select-container {
+.react-select-container-lg {
   background-color: rgba(255, 255, 255, 0);
   font-size: 1.7rem;
+}
+
+.react-select-container-sm {
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1.4rem;
 }

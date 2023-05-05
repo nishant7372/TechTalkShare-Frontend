@@ -8,7 +8,7 @@ import Tag from "../components/tags/tag";
 import AnimatedButton from "../../../Components/button/animatedButton";
 
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
