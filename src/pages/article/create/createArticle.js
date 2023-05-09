@@ -45,6 +45,7 @@ export default function CreateArticle() {
 
   useEffect(() => {
     addtoLocalStorage();
+    // eslint-disable-next-line
   }, [topic, tags, content]);
 
   // Posting new Article

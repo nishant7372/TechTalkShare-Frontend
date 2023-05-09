@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const MessageContext = createContext();
 
-export const messageReducer = (state, action) => {
+const messageReducer = (state, action) => {
   switch (action.type) {
     case "ERROR":
       return {

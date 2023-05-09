@@ -11,9 +11,10 @@ export default function MessageContainer() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    let timeoutId;
     if (error || success) {
       setMounted(true);
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setMounted(false);
       }, 2000);
     }
@@ -21,6 +22,7 @@ export default function MessageContainer() {
     return () => {
       if (mounted) {
         dispatch({ type: "RESET" });
+        clearInterval(timeoutId);
       }
     };
   }, [error, success, mounted, dispatch]);

@@ -29,6 +29,10 @@
   justify-content: center;
 }
 
+.session-loading {
+  margin: 20rem auto;
+}
+
 .delete,
 .post {
   gap: 0.5rem;
@@ -37,7 +41,8 @@
 
 .users-loading > div,
 .mainRead > div,
-.read > div {
+.read > div,
+.session-loading > div {
   width: 2rem;
   height: 2rem;
 }

@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const ArticleContext = createContext();
 
-export const articleReducer = (state, action) => {
+const articleReducer = (state, action) => {
   switch (action.type) {
     case "ARTICLES":
       return {

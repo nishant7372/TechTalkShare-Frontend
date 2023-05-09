@@ -12,6 +12,7 @@ import Session from "../sessions/session";
 import Error from "../../../../Components/messages/error";
 import Successful from "../../../../Components/messages/successful";
 import SimpleButton from "../../../../Components/button/simpleButton";
+import Loading from "../../../../Components/loading-spinners/loading/loading";
 
 export default function CurrentSessions() {
   const { user, currentSessionID } = useAuthContext();
@@ -56,7 +57,7 @@ export default function CurrentSessions() {
 
   return (
     <div className={styles["session-Box"]}>
-      {activeSession && sessions && (
+      {activeSession && sessions ? (
         <>
           <div className={"heading"}>Your Devices</div>
           <p className={"description"}>
@@ -105,6 +106,8 @@ export default function CurrentSessions() {
             </p>
           </div>
         </>
+      ) : (
+        <Loading action="session-loading" />
       )}
     </div>
   );

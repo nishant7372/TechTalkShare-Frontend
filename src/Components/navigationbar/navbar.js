@@ -27,7 +27,10 @@ export default function NavBar() {
       <div className={styles["navbar"]}>
         <div className={styles["nav-left"]}>
           <Link to="/" className={styles["app-name"]}>
-            ProStore
+            <img
+              src={process.env.PUBLIC_URL + "/img/devstore-logo.png"}
+              alt="logo"
+            ></img>
           </Link>
         </div>
 

@@ -30,12 +30,11 @@
   padding-left: 4rem;
 }
 
-/* .leftSection img {
-  width: 4rem;
-  height: 4rem;
-  -webkit-filter: invert(1);
-  filter: invert(1);
-} */
+.nav-left a,
+.nav-left img {
+  height: 3.5rem;
+  width: 11rem;
+}
 
 .nav-middle {
   font-size: 1.6rem;

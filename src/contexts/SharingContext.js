@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const SharingContext = createContext();
 
-export const sharingReducer = (state, action) => {
+const sharingReducer = (state, action) => {
   switch (action.type) {
     case "SHARED_ARTICLES":
       return {
