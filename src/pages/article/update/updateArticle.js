@@ -95,7 +95,7 @@ export default function UpdateArticle() {
                 />
                 <div className={styles["s1-right"]}>
                   <SimpleButton
-                    icon={<i className={`fa-solid fa-paper-plane`}></i>}
+                    icon={<i className={`fa-solid fa-circle-xmark`}></i>}
                     content={<span className={styles["btnName"]}> Cancel</span>}
                     buttonStyle={{
                       fontSize: "1.6rem",

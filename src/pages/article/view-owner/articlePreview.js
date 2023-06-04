@@ -14,6 +14,7 @@ import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import Confirm from "../../../Components/modals/confirm/confirm";
 
 export default function ArticlePreview() {
   const { id } = useParams();
@@ -24,6 +25,7 @@ export default function ArticlePreview() {
 
   const [article, setArticle] = useState(null);
   const [showNotFound, setShowNotFound] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,7 +52,11 @@ export default function ArticlePreview() {
     navigate(-1);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (response) => {
+    if (!response) {
+      setShowConfirm(false);
+      return;
+    }
     const res = await deleteArticle(id);
     if (res.ok) {
       dispatch({ type: "SUCCESS", payload: res.ok });
@@ -58,6 +64,7 @@ export default function ArticlePreview() {
     } else if (res.error) {
       dispatch({ type: "ERROR", payload: res.error });
     }
+    setShowConfirm(false);
   };
 
   return (
@@ -91,7 +98,7 @@ export default function ArticlePreview() {
                     padding: "0.3rem 0.8rem",
                   }}
                   type="deleteBt"
-                  action={handleDelete}
+                  action={() => setShowConfirm(true)}
                 />
               )}
               {deletePending && <Loading action={"delete"} />}
@@ -121,6 +128,13 @@ export default function ArticlePreview() {
             />
           </div>
         </div>
+      )}
+      {showConfirm && (
+        <Confirm
+          icon="⚠️ "
+          message={" You are about to delete an Article"}
+          deleteItem={handleDelete}
+        />
       )}
       {readPending && <Loading action={"read"} />}
       {showNotFound && <NotFound />}
