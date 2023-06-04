@@ -3,18 +3,20 @@
   position: fixed;
   left: 50%;
   top: 50%;
+  min-width: 40rem;
   transform: translate(-50%, -50%);
-  width: 30rem;
   font-size: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background-color: rgb(13, 13, 13, 0.95);
+  background-color: #111;
   padding: 3rem;
   border-radius: 8px;
   color: white;
+  text-align: center;
+  z-index: 20;
 }
 
 .overlay {
@@ -24,14 +26,15 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.15); /* color */
+  z-index: 20;
 }
 
 .confirm-message button {
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
   color: white;
-  font-size: 2rem;
-  border-radius: 4px;
+  font-size: 1.8rem;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -44,13 +47,22 @@
 }
 
 .no {
-  background-color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .no:hover {
-  background-color: red;
+  background-color: green;
 }
+
 .buttonContainer {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.icon {
+  font-size: 3rem;
 }
