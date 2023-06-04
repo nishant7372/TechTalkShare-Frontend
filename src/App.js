@@ -23,17 +23,19 @@ import ServerError from "./pages/error/serverError";
 import Loading from "./Components/loading-spinners/loading/loading";
 
 import { useAuthContext } from "./hooks/context/useAuthContext";
+import { useMessageContext } from "./hooks/context/useMessageContext";
 import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 
 function App() {
   const { user, authIsReady, serverError, authPending } = useAuthContext();
+  const { success, error } = useMessageContext();
   return (
     <div className="App">
+      {(success || error) && <MessageContainer />}
       {authPending && <Loading action="mainRead" />}
       {authIsReady && (
         <Router>
           <NavBar />
-          <MessageContainer />
           <Routes>
             <Route
               path="/"
