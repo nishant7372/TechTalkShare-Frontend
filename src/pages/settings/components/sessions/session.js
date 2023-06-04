@@ -60,7 +60,10 @@ export default function Session({ session, active }) {
               <Successful
                 className={styles["active-now"]}
                 successful={"Active Now"}
-                color={"skyblue"}
+                style={{
+                  backgroundColor: "rgb(9, 141, 193)",
+                  padding: "0.1rem 0.8rem",
+                }}
               />
             )}
           </div>
