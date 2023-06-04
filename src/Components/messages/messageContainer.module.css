@@ -1,18 +1,15 @@
-.mainContainer {
-  position: relative;
-  width: 100%;
-}
-
 .messageContainer {
   position: fixed;
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
-  height: 10%;
-  margin-top: 4rem;
-  z-index: 11;
+  margin-top: 8rem;
   animation: moveInBottom 0.2s ease-in-out;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 15;
 }
 
 @keyframes moveInBottom {
@@ -24,4 +21,8 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.icon {
+  font-size: 2rem;
 }

@@ -21,18 +21,16 @@ export default function MessageContainer() {
 
     return () => {
       if (mounted) {
-        dispatch({ type: "RESET" });
         clearInterval(timeoutId);
+        dispatch({ type: "RESET" });
       }
     };
   }, [error, success, mounted, dispatch]);
 
   return mounted ? (
-    <div className={styles["mainContainer"]}>
-      <div className={`${styles["messageContainer"]} ${styles["overlay"]}`}>
-        {error && <Error error={error} />}
-        {success && <Successful successful={success} />}
-      </div>
+    <div className={`${styles["messageContainer"]}`}>
+      {error && <Error error={error} />}
+      {success && <Successful successful={success} />}
     </div>
   ) : null;
 }
