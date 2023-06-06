@@ -1,4 +1,5 @@
 import styles from "./navbar.module.css";
+
 import "./navbar.css";
 
 import { NavLink, Link } from "react-router-dom";
@@ -42,6 +43,9 @@ export default function NavBar() {
               </NavLink>
               <NavLink to="/shared">
                 <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
+              </NavLink>
+              <NavLink to="/downloads">
+                <i className="fa-solid fa-bars"></i> &nbsp;Downloads
               </NavLink>
             </div>
             <div className={styles["nav-right-auth"]}>

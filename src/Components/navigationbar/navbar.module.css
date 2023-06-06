@@ -42,6 +42,7 @@
   padding-top: 0.3rem;
   display: flex;
   gap: 2rem;
+  text-align: center;
 }
 
 .nav-right-auth,
@@ -105,4 +106,11 @@
   font-family: "Oleo Script", cursive;
   letter-spacing: 1px;
   color: white;
+}
+
+@media print {
+  .nav-container,
+  .nav-container * {
+    display: none;
+  }
 }
