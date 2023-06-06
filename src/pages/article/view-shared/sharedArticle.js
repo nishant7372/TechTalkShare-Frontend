@@ -22,6 +22,14 @@ export default function SharedArticle({ articleObj, updated, handleShare }) {
           alt="note"
           className={styles["icon-img"]}
         />
+
+        <i
+          className={`fa-solid fa-reply ${styles["d-icon"]}`}
+          style={{
+            right: "-0.6rem",
+            bottom: "0.7rem",
+          }}
+        ></i>
       </div>
       <div className={styles["main-container"]}>
         <div className={styles["top-container"]}>

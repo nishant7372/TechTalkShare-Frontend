@@ -22,6 +22,23 @@ export default function Article({ article, updated, handleShare }) {
           alt="note"
           className={styles["icon-img"]}
         />
+        {article.downloaded && (
+          <>
+            <div
+              style={{
+                backgroundColor: "white",
+                padding: "0.7rem",
+                borderRadius: "50%",
+                position: "absolute",
+                bottom: "0.6rem",
+                right: "0rem",
+              }}
+            ></div>
+            <i
+              className={`fa-solid fa-cloud-arrow-down ${styles["d-icon"]}`}
+            ></i>
+          </>
+        )}
       </div>
       <div className={styles["main-container"]}>
         <div className={styles["top-container"]}>
@@ -64,7 +81,14 @@ export default function Article({ article, updated, handleShare }) {
       >
         <i className="fa-solid fa-share"></i>
       </div>
-      <Tooltip id="my-tooltip" />
+      <Tooltip
+        id="my-tooltip"
+        style={{
+          fontSize: "1.6rem",
+          backgroundColor: "#007FFF",
+          padding: "0.4rem 0.8rem",
+        }}
+      />
     </div>
   );
 }
