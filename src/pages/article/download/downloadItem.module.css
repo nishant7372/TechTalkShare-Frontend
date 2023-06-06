@@ -1,0 +1,108 @@
+.download {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.5rem;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.h4 {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.icon {
+  width: 3.5rem;
+  font-size: 3.5rem;
+  color: rgb(253, 253, 98);
+}
+
+.icon-img {
+  width: 3.5rem;
+}
+
+.top-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.download-topic {
+  /* text-decoration: none;
+  cursor: pointer; */
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.8rem;
+  max-width: 100%; /*previous - 70%*/
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* .download-topic:hover {
+  color: white;
+} */
+
+.main-container {
+  width: calc(100% - 4rem - 10rem);
+}
+
+.downloadStatus {
+  font-size: 2.4rem;
+}
+
+.h2 {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes downloadAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate {
+  animation: downloadAnimation 1s infinite;
+}
+
+@keyframes colorAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.downloading {
+  background-image: linear-gradient(
+    to bottom,
+    white,
+    blue
+  ); /* Replace with your desired gradient colors */
+  background-size: 100% 200%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorAnimation 2s linear infinite;
+}
