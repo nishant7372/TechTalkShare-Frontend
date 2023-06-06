@@ -2,6 +2,7 @@
   --success-anim-bt: rgb(17, 210, 17);
   --danger-anim-bt: rgb(233, 42, 42);
   --operation-anim-bt: rgb(253, 5, 253);
+  --download-anim-bt: orange;
 }
 
 .createBt {
@@ -34,6 +35,15 @@
   );
 }
 
+.downloadBt {
+  color: var(--download-anim-bt);
+  border: 1px solid var(--download-anim-bt);
+  background: linear-gradient(
+    to right,
+    var(--download-anim-bt) 50%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
 .animatedButton {
   height: 100%;
   text-decoration: none;
