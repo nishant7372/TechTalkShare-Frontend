@@ -58,8 +58,20 @@ export default function SharedPreview() {
               </div>
               <div className={styles["topic"]}>{article.topic}</div>
             </div>
-            {sharing.writePermission && (
-              <div className={styles["container-right"]}>
+
+            <div className={styles["container-right"]}>
+              <AnimatedButton
+                icon={<i className="fa-solid fa-print"></i>}
+                content=" &nbsp;Print"
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.3rem 0.8rem",
+                  textAlign: "center",
+                }}
+                type="downloadBt"
+                action={() => window.print()}
+              />
+              {sharing.writePermission && (
                 <AnimatedButton
                   icon={<i className="fa-regular fa-pen-to-square"></i>}
                   link={`/shared/update/${id}`}
@@ -70,8 +82,8 @@ export default function SharedPreview() {
                   }}
                   type="editBt"
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
           <div className={styles["date-container"]}>
             <div className={styles["h4"]}>

@@ -43,12 +43,15 @@
 
 .topic {
   color: white;
+  overflow-wrap: break-word;
+  width: 95%;
 }
 
 .container-left {
   padding: 1rem 0.5rem 1rem 2rem;
   display: flex;
   gap: 3rem;
+  width: calc(100% - 35rem);
 }
 
 .container-right {
@@ -73,6 +76,9 @@
   }
   .article-preview-box {
     width: 100%;
+  }
+  .container-left {
+    width: calc(100% - 10rem);
   }
 }
 
@@ -123,4 +129,19 @@
   background-color: rgb(202, 5, 5);
   padding: 0.1rem 0.5rem;
   margin-left: -0.8rem;
+}
+
+@media print {
+  body * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .preview-container {
+    width: 90%;
+  }
+
+  .article-preview-box {
+    width: 100%;
+  }
 }

@@ -67,6 +67,10 @@ export default function ArticlePreview() {
     setShowConfirm(false);
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
     <>
       {article && (
@@ -80,12 +84,24 @@ export default function ArticlePreview() {
             </div>
             <div className={styles["container-right"]}>
               <AnimatedButton
+                icon={<i className="fa-solid fa-print"></i>}
+                content=" &nbsp;Print"
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.3rem 0.8rem",
+                  textAlign: "center",
+                }}
+                type="downloadBt"
+                action={handlePrint}
+              />
+              <AnimatedButton
                 icon={<i className="fa-regular fa-pen-to-square"></i>}
                 link={`/articles/update/${id}`}
                 content=" &nbsp;Edit"
                 buttonStyle={{
                   fontSize: "1.8rem",
                   padding: "0.3rem 0.8rem",
+                  textAlign: "center",
                 }}
                 type="editBt"
               />
@@ -96,6 +112,7 @@ export default function ArticlePreview() {
                   buttonStyle={{
                     fontSize: "1.8rem",
                     padding: "0.3rem 0.8rem",
+                    textAlign: "center",
                   }}
                   type="deleteBt"
                   action={() => setShowConfirm(true)}
