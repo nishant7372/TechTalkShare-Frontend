@@ -18,6 +18,7 @@ import ArticlePreview from "./pages/article/view-owner/articlePreview";
 import MessageContainer from "./Components/messages/messageContainer";
 import SharedArticles from "./pages/article/view-shared/sharedArticles";
 import SharedPreview from "./pages/article/view-shared/sharedPreview";
+import Scrape from "./pages/article/download/scrape";
 import NotFound from "./pages/error/notFound";
 import ServerError from "./pages/error/serverError";
 import Loading from "./Components/loading-spinners/loading/loading";
@@ -56,6 +57,10 @@ function App() {
             <Route
               path="/articles/create"
               element={!user ? <Navigate to="/login" /> : <CreateArticle />}
+            />
+            <Route
+              path="/downloads"
+              element={!user ? <Navigate to="/login" /> : <Scrape />}
             />
             <Route
               path="/articles"
