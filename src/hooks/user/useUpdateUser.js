@@ -2,11 +2,9 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 
 export const useUpdateUser = () => {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const updateUser = async (updates) => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
@@ -18,21 +16,21 @@ export const useUpdateUser = () => {
         },
       });
 
-      if (!res) {
-        throw new Error("Unable to update");
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+      return res ? { ok: "Update Successful" } : { error: "Unable to Update" };
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { updateUser, error, isPending };
+  return { updateUser, isPending };
 };
