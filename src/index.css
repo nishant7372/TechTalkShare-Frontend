@@ -103,8 +103,8 @@ div::-webkit-scrollbar-thumb {
 @media print {
   body,
   body * {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
   }
 
   body {
