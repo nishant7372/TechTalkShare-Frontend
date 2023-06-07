@@ -99,3 +99,15 @@ div::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
   border-radius: 6px;
 }
+
+@media print {
+  body,
+  body * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body {
+    background-color: rgba(33, 33, 33, 255) !important;
+  }
+}

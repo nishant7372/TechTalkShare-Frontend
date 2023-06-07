@@ -132,12 +132,6 @@
 }
 
 @media print {
-  body,
-  body * {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
-  }
-
   .preview-container {
     width: 90%;
   }
