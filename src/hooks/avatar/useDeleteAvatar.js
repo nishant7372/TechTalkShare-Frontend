@@ -2,11 +2,9 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 
 export const useDeleteAvatar = () => {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const deleteAvatar = async () => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
@@ -17,21 +15,23 @@ export const useDeleteAvatar = () => {
         },
       });
 
-      if (!res) {
-        throw new Error("Unable to delete avatar");
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+      return res
+        ? { ok: "Avatar Deleted Successfully" }
+        : { error: "Unable to Delete Avatar" };
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { deleteAvatar, error, isPending };
+  return { deleteAvatar, isPending };
 };

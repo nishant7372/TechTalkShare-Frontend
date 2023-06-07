@@ -6,7 +6,6 @@ const bowser = require("bowser");
 
 export const useLogin = () => {
   const { dispatch } = useAuthContext();
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const browser = useMemo(
@@ -15,7 +14,6 @@ export const useLogin = () => {
   );
 
   const login = async (userName, password) => {
-    setError(null);
     setIsPending(true);
 
     try {
@@ -38,26 +36,27 @@ export const useLogin = () => {
       );
 
       if (!res) {
-        throw new Error("could not complete login");
+        return { error: "Unable to LogIn" };
       } else {
         localStorage.setItem("token", res.data.token); // save token in localStorage
+        dispatch({ type: "LOGIN", payload: res.data.user }); // dispatch login action
+
+        return { ok: "Login Successful" };
       }
-
-      //dispatch login action
-
-      dispatch({ type: "LOGIN", payload: res.data.user });
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { login, error, isPending };
+  return { login, isPending };
 };

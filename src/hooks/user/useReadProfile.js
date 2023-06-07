@@ -19,7 +19,6 @@ export const useReadProfile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       // dispatch auth_is_ready
 
       dispatch({ type: "AUTH_IS_READY", payload: res.data });

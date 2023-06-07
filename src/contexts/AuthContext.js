@@ -12,10 +12,11 @@ const authReducer = (state, action) => {
     case "AUTH_IS_READY":
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         authIsReady: true,
         serverError: false,
         authPending: false,
+        currentSessionId: action.payload.currentSessionId,
       };
     case "SERVER_ERROR":
       return { ...state, serverError: true, user: null, authIsReady: false };
@@ -59,7 +60,7 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
     authIsReady: false,
-    currentSessionID: null,
+    currentSessionId: null,
     authPending: true,
   });
 

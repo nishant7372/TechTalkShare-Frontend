@@ -4,11 +4,9 @@ import axiosInstance from "../axios/axiosInstance";
 
 export const useDeleteAccount = () => {
   const { dispatch } = useAuthContext();
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const deleteAccount = async () => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
@@ -21,26 +19,26 @@ export const useDeleteAccount = () => {
       });
 
       if (!res) {
-        throw new Error("Unable to delete Account");
+        return { error: "Unable to Delete Account" };
       } else {
         localStorage.setItem("token", null); //delete token from localStorage
+        dispatch({ type: "LOGOUT" }); //dispatch logout action
+        return { ok: "Account Deleted Successful" };
       }
-
-      //dispatch logout action
-
-      dispatch({ type: "LOGOUT" });
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { deleteAccount, error, isPending };
+  return { deleteAccount, isPending };
 };

@@ -6,7 +6,6 @@ const bowser = require("bowser");
 
 export const useSignup = () => {
   const { dispatch } = useAuthContext();
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const browser = useMemo(
@@ -15,7 +14,6 @@ export const useSignup = () => {
   );
 
   const signup = async (userName, password, name) => {
-    setError(null);
     setIsPending(true);
 
     try {
@@ -26,7 +24,6 @@ export const useSignup = () => {
           name,
           userName,
           password,
-          age: 20,
           creationTime: new Date().toISOString(),
           osname: `${browser.getOSName()} ${browser.getOSVersion()}`,
           model: browser.getPlatformType(),
@@ -40,26 +37,27 @@ export const useSignup = () => {
       );
 
       if (!res) {
-        throw new Error("could not complete signup");
+        return { error: "Unable to Signup" };
       } else {
         localStorage.setItem("token", res.data.token); // save token in localStorage
+        dispatch({ type: "LOGIN", payload: res.data.user }); // dispatch login action
+
+        return { ok: "Account Created Successfully" };
       }
-
-      // dispatch login action
-
-      dispatch({ type: "LOGIN", payload: res.data.user });
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { signup, error, isPending };
+  return { signup, isPending };
 };

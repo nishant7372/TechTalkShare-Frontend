@@ -2,17 +2,14 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 
 export const useLogoutAllOther = () => {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const logoutAllOther = async () => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
     try {
       //user all other session log out
-
       const res = await axiosInstance.post(
         "/users/logoutAllOther",
         {},
@@ -23,21 +20,20 @@ export const useLogoutAllOther = () => {
           },
         }
       );
-      if (res.status !== 200) {
-        throw new Error("could not complete logOut");
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+      return res ? { ok: "Logout Successful" } : { error: "Unable to Logout" };
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
-
-  return { logoutAllOther, error, isPending };
+  return { logoutAllOther, isPending };
 };

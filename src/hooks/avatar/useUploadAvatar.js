@@ -2,11 +2,9 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 
 export const useUploadAvatar = () => {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const uploadAvatar = async (avatarImage) => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
@@ -21,21 +19,23 @@ export const useUploadAvatar = () => {
         },
       });
 
-      if (!res) {
-        throw new Error("Unable to upload image");
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error. Please try again later.");
+      return res
+        ? { ok: "Avatar Uploaded Successfully" }
+        : { error: "Unable to Upload Avatar" };
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        error = "An error occurred. Please try again later.";
       }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { uploadAvatar, error, isPending };
+  return { uploadAvatar, isPending };
 };

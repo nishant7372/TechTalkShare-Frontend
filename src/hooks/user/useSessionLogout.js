@@ -3,12 +3,10 @@ import { useAuthContext } from "./../context/useAuthContext";
 import axiosInstance from "../axios/axiosInstance";
 
 export const useSessionLogout = () => {
-  const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
   const sessionLogout = async (id, active) => {
-    setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");
 
@@ -26,25 +24,29 @@ export const useSessionLogout = () => {
         }
       );
 
-      if (!res) {
-        throw new Error("Unable to logout");
-      }
-      if (active) {
-        localStorage.setItem("token", null); // delete token from localStorage
-        dispatch({ type: "LOGOUT" });
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
-      } else if (error.request) {
-        setError("Network error.");
+      if (res) {
+        if (active) {
+          localStorage.setItem("token", null); // delete token from localStorage
+          dispatch({ type: "LOGOUT" });
+        }
+        return { ok: "Logout Successful" };
       } else {
-        setError("An error occurred.");
+        return { error: "Unable to Logout" };
       }
+    } catch (err) {
+      let error = "";
+      if (err.response) {
+        error = err?.response?.data?.message || "An error occurred.";
+      } else if (err.request) {
+        error = "Network error. Please try again later.";
+      } else {
+        error = "An error occurred. Please try again later.";
+      }
+      return { error };
     } finally {
       setIsPending(false);
     }
   };
 
-  return { sessionLogout, error, isPending };
+  return { sessionLogout, isPending };
 };
