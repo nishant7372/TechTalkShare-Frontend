@@ -7,12 +7,21 @@ import { NavLink, Link } from "react-router-dom";
 import { useLogout } from "../../hooks/user/useLogout";
 import { useAuthContext } from "../../hooks/context/useAuthContext";
 import { useMessageContext } from "../../hooks/context/useMessageContext";
+import { CSSTransition } from "react-transition-group";
+
+import AnimatedButton from "../button/animatedButton";
 import NameLogo from "../logomaker/namelogo";
+import { useState } from "react";
+import { useRef } from "react";
 
 export default function NavBar() {
   const { logout, isPending } = useLogout();
   const { user } = useAuthContext();
   const { dispatch } = useMessageContext();
+
+  const [showSidebar, setShowSiderbar] = useState(false);
+
+  const nodeRef = useRef(null);
 
   const handleLogout = async () => {
     const res = await logout();
@@ -27,6 +36,38 @@ export default function NavBar() {
     <div className={`${styles["nav-container"]} ${styles["sticky"]}`}>
       <div className={styles["navbar"]}>
         <div className={styles["nav-left"]}>
+          <div className={styles["links"]}>
+            <AnimatedButton
+              icon={<i className="fa-solid fa-bars"></i>}
+              buttonStyle={{
+                fontSize: "1.8rem",
+                padding: "0.3rem 1rem",
+                textAlign: "center",
+                borderRadius: "50%",
+              }}
+              type="navigationBt"
+              action={() => setShowSiderbar((prev) => !prev)}
+            />
+          </div>
+          <CSSTransition
+            in={showSidebar}
+            timeout={300}
+            nodeRef={nodeRef}
+            classNames="movein"
+            unmountOnExit
+          >
+            <div className={styles["sidebar"]} ref={nodeRef}>
+              <NavLink to="/articles">
+                <i className="fa-solid fa-bars"></i> &nbsp;My Articles
+              </NavLink>
+              <NavLink to="/shared">
+                <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
+              </NavLink>
+              <NavLink to="/downloads">
+                <i className="fa-solid fa-bars"></i> &nbsp;Downloads
+              </NavLink>
+            </div>
+          </CSSTransition>
           <Link to="/" className={styles["app-name"]}>
             <img
               src={process.env.PUBLIC_URL + "/img/devstore-logo.png"}

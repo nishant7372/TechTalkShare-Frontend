@@ -3,16 +3,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 8rem;
-  animation: moveInBottom 0.2s ease-in-out;
+  top: 8rem;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 15;
+  margin: auto;
+  z-index: 20;
 }
 
-@keyframes moveInBottom {
+/* @keyframes moveInBottom {
   0% {
     opacity: 0;
     transform: translateY(-200px);
@@ -21,8 +19,25 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
 
 .icon {
   font-size: 2rem;
+}
+
+.closeButton {
+  color: white;
+  border-radius: 2px;
+  font-size: 1.6rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+  background-color: gray;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: #666;
 }

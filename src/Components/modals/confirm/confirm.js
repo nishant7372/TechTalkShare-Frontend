@@ -1,8 +1,8 @@
 import styles from "./confirm.module.css";
 
-export default function Confirm({ icon, message, deleteItem }) {
+export default function Confirm({ icon, message, deleteItem, nodeRef }) {
   return (
-    <div className={styles["overlay"]}>
+    <div className={styles["overlay"]} ref={nodeRef}>
       <div className={styles["confirm-message"]}>
         <div>
           <span className={styles["icon"]}>{icon}</span>

@@ -3,9 +3,9 @@
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  height: 2.5rem;
+  height: 2.2rem;
   position: relative;
-  width: 5rem;
+  width: 4.6rem;
 }
 
 .btn:hover {
@@ -24,11 +24,11 @@
 .pin {
   background-color: white;
   border-radius: 50%;
-  height: 2rem;
+  height: 1.7rem;
   left: 2px;
   position: absolute;
   top: 2px;
-  width: 2rem;
+  width: 1.7rem;
   transition: left ease 0.5s;
 }
 

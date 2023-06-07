@@ -3,6 +3,8 @@
   --danger-anim-bt: rgb(233, 42, 42);
   --operation-anim-bt: rgb(253, 5, 253);
   --download-anim-bt: orange;
+  --navigation-anim-bt: grey;
+  --navigation-fill-anim-bt: #312f2f;
 }
 
 .createBt {
@@ -41,6 +43,16 @@
   background: linear-gradient(
     to right,
     var(--download-anim-bt) 50%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
+.navigationBt {
+  color: var(--navigation-anim-bt);
+  border: 1px solid var(--navigation-anim-bt);
+  background: linear-gradient(
+    to right,
+    var(--navigation-fill-anim-bt) 50%,
     rgba(0, 0, 0, 0) 50%
   );
 }
