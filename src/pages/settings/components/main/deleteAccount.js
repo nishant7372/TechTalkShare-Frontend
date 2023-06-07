@@ -1,19 +1,22 @@
 import styles from "./deleteAccount.module.css";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { useDeleteAccount } from "../../../../hooks/user/useDeleteAccount";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+import { CSSTransition } from "react-transition-group";
 
 import Confirm from "../../../../Components/modals/confirm/confirm";
-import Error from "../../../../Components/messages/error";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function DeleteAccount() {
   const [showConfirm, setShowConfirm] = useState(false);
-  const { deleteAccount, error, isPending } = useDeleteAccount();
+  const { deleteAccount, isPending } = useDeleteAccount();
 
-  const [renderMsg, setRenderMsg] = useState(false);
+  const { dispatch: messageDispatch } = useMessageContext();
+
+  const nodeRef = useRef(null);
 
   const handleClick = () => {
     setShowConfirm(true);
@@ -21,13 +24,15 @@ export default function DeleteAccount() {
 
   const deleteItem = async (response) => {
     setShowConfirm(false);
-    if (response) {
-      await deleteAccount();
+    if (!response) {
+      return;
     }
-    setRenderMsg(true);
-    setTimeout(() => {
-      setRenderMsg(false);
-    }, 3000);
+    const res = await deleteAccount();
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
   };
 
   return (
@@ -43,7 +48,12 @@ export default function DeleteAccount() {
         </p>
       </div>
 
-      {!isPending && (
+      {isPending ? (
+        <>
+          <Spinner />
+          <div> Deleting Account...</div>
+        </>
+      ) : (
         <SimpleButton
           icon={<i className="fa-solid fa-trash"></i>}
           content=" &nbsp;Delete Account"
@@ -55,19 +65,20 @@ export default function DeleteAccount() {
           action={handleClick}
         />
       )}
-      {isPending && (
-        <>
-          <Spinner />
-          <div> Deleting Account...</div>
-        </>
-      )}
-      {showConfirm && (
+      <CSSTransition
+        in={showConfirm}
+        timeout={300}
+        nodeRef={nodeRef}
+        classNames="message"
+        unmountOnExit
+      >
         <Confirm
+          icon={"⚠️ "}
           message={"Permanently delete Account."}
           deleteItem={deleteItem}
+          nodeRef={nodeRef}
         />
-      )}
-      {renderMsg && error && <Error error={error} />}
+      </CSSTransition>
     </div>
   );
 }

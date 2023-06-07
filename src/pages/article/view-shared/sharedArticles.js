@@ -1,10 +1,11 @@
 import styles from "./../view-owner/articles.module.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useGetSharedArticles } from "../../../hooks/sharing/useGetSharedArticles";
 import { useSharingContext } from "../../../hooks/context/useSharingContext";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import { CSSTransition } from "react-transition-group";
 
 import SharedArticle from "./sharedArticle";
 import Paginate from "../components/pagination/paginate";
@@ -24,6 +25,8 @@ export default function SharedArticles() {
   const { dispatch: messageDispatch } = useMessageContext();
   const [search, setSearch] = useState("");
   const [tag, setTag] = useState(null);
+
+  const nodeRef = useRef(null);
 
   useEffect(() => {
     const fetch = async (sortBy) => {
@@ -130,12 +133,19 @@ export default function SharedArticles() {
           <Paginate handlePageChange={handlePageChange} />
         </div>
       </div>
-      {openShareModal && (
+      <CSSTransition
+        in={openShareModal}
+        timeout={300}
+        nodeRef={nodeRef}
+        classNames="message"
+        unmountOnExit
+      >
         <ShareModal
           articleShare={articleShare}
           setOpenShareModal={setOpenShareModal}
+          nodeRef={nodeRef}
         />
-      )}
+      </CSSTransition>
     </>
   );
 }

@@ -7,13 +7,14 @@ import NotFound from "../../error/notFound";
 import Tag from "../components/tags/tag";
 import AnimatedButton from "../../../Components/button/animatedButton";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import { CSSTransition } from "react-transition-group";
 import Confirm from "../../../Components/modals/confirm/confirm";
 
 export default function ArticlePreview() {
@@ -26,6 +27,8 @@ export default function ArticlePreview() {
   const [article, setArticle] = useState(null);
   const [showNotFound, setShowNotFound] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const nodeRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -105,7 +108,9 @@ export default function ArticlePreview() {
                 }}
                 type="editBt"
               />
-              {!deletePending && (
+              {deletePending ? (
+                <Loading action={"delete"} />
+              ) : (
                 <AnimatedButton
                   icon={<i className="fa-solid fa-trash"></i>}
                   content=" &nbsp;Delete"
@@ -118,7 +123,6 @@ export default function ArticlePreview() {
                   action={() => setShowConfirm(true)}
                 />
               )}
-              {deletePending && <Loading action={"delete"} />}
             </div>
           </div>
           <div className={styles["date-container"]}>
@@ -146,13 +150,20 @@ export default function ArticlePreview() {
           </div>
         </div>
       )}
-      {showConfirm && (
+      <CSSTransition
+        in={showConfirm}
+        timeout={300}
+        nodeRef={nodeRef}
+        classNames="message"
+        unmountOnExit
+      >
         <Confirm
-          icon="⚠️ "
+          icon={"⚠️ "}
           message={" You are about to delete an Article"}
           deleteItem={handleDelete}
+          nodeRef={nodeRef}
         />
-      )}
+      </CSSTransition>
       {readPending && <Loading action={"read"} />}
       {showNotFound && <NotFound />}
     </>

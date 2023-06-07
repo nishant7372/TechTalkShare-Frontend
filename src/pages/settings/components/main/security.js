@@ -3,38 +3,38 @@ import styles from "./security.module.css";
 import { useState } from "react";
 
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
-import Error from "../../../../Components/messages/error";
-import Successful from "../../../../Components/messages/successful";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Security() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
-  const [localError, setLocalError] = useState(null);
-  const [renderMsg, setRenderMsg] = useState(false);
 
   const closedEye = `${process.env.PUBLIC_URL}/img/eye-password.png`;
   const openEye = `${process.env.PUBLIC_URL}/img/eye-text.png`;
 
-  const { updateUser, error, isPending } = useUpdateUser();
+  const { dispatch: messageDispatch } = useMessageContext();
+
+  const { updateUser, isPending } = useUpdateUser();
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (newPassword === confirmPassword) {
-      setLocalError(null);
-      await updateUser({ password: newPassword });
+      const res = await updateUser({ password: newPassword });
+      if (res.ok) {
+        messageDispatch({ type: "SUCCESS", payload: res.ok });
+      }
+      if (res.error) {
+        messageDispatch({ type: "ERROR", payload: res.error });
+      }
       setNewPassword("");
       setConfirmPassword("");
     } else {
-      setLocalError("Passwords does not Match");
+      messageDispatch({ type: "ERROR", payload: "Passwords does not Match" });
     }
-    setRenderMsg(true);
-    setTimeout(() => {
-      setRenderMsg(false);
-    }, 3000);
   };
 
   const showPassword = () => {
@@ -92,29 +92,28 @@ export default function Security() {
           </div>
         </div>
         <div className={"flex-col"}>
-          {isPending && (
+          {isPending ? (
             <div className={styles["disabled"]}>
               <Spinner />
             </div>
-          )}
-          {!isPending && (
+          ) : (
             <SimpleButton
               icon={<i className="fa-regular fa-pen-to-square"></i>}
               content=" Update"
               buttonStyle={{
                 fontSize: "1.8rem",
                 padding: "0.3rem 0.8rem",
+                ...((newPassword === "" || confirmPassword === "") && {
+                  cursor: "not-allowed",
+                }),
+                ...((newPassword === "" || confirmPassword === "") && {
+                  backgroundColor: "#555",
+                }),
               }}
+              disabled={newPassword === "" || confirmPassword === ""}
               type="updateButton"
               formAction="submit"
             />
-          )}
-
-          {renderMsg && !localError && error && <Error error={error} />}
-          {renderMsg && localError && <Error error={localError} />}
-
-          {renderMsg && !localError && !error && !isPending && (
-            <Successful successful={"Update Successful"} />
           )}
         </div>
       </form>

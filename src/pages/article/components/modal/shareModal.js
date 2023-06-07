@@ -14,7 +14,11 @@ import Error from "../../../../Components/messages/error";
 import SimpleButton from "../../../../Components/button/simpleButton";
 import NameLogo from "../../../../Components/logomaker/namelogo";
 
-export default function ShareModal({ articleShare, setOpenShareModal }) {
+export default function ShareModal({
+  articleShare,
+  setOpenShareModal,
+  nodeRef,
+}) {
   const [userName, setUserName] = useState("");
   const [users, setUsers] = useState(null);
   const [writeOn, setWriteOn] = useState(false);
@@ -72,7 +76,7 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
   }, [userName, users]);
 
   return (
-    <div className={styles["overlay"]}>
+    <div className={styles["overlay"]} ref={nodeRef}>
       <div className={styles["shareModal"]}>
         <form onSubmit={handleSubmit}>
           <div
@@ -106,7 +110,7 @@ export default function ShareModal({ articleShare, setOpenShareModal }) {
             )}
           </div>
           <div className={styles["toggle"]}>
-            <div>Write:</div> <ToggleButton on={writeOn} setOn={setWriteOn} />
+            <div>Edit:</div> <ToggleButton on={writeOn} setOn={setWriteOn} />
             <div>Share:</div> <ToggleButton on={shareOn} setOn={setShareOn} />
           </div>
         </form>

@@ -1,10 +1,11 @@
 import styles from "./articles.module.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useReadArticles } from "../../../hooks/article/useReadArticles";
 import { useArticleContext } from "../../../hooks/context/useArticleContext";
 import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import { CSSTransition } from "react-transition-group";
 
 import Article from "./article";
 import Paginate from "../components/pagination/paginate";
@@ -22,6 +23,7 @@ export default function Articles() {
   } = useArticleContext();
 
   const { dispatch: messageDispatch } = useMessageContext();
+  const nodeRef = useRef(null);
   const [search, setSearch] = useState("");
   const [tag, setTag] = useState(null);
 
@@ -142,12 +144,19 @@ export default function Articles() {
           <Paginate handlePageChange={handlePageChange} />
         </div>
       </div>
-      {openShareModal && (
+      <CSSTransition
+        in={openShareModal}
+        timeout={300}
+        nodeRef={nodeRef}
+        classNames="message"
+        unmountOnExit
+      >
         <ShareModal
           articleShare={articleShare}
           setOpenShareModal={setOpenShareModal}
+          nodeRef={nodeRef}
         />
-      )}
+      </CSSTransition>
     </>
   );
 }

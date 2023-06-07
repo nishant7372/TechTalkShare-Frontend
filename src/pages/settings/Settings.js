@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Option from "./components/optionNames/option";
 import Setting from "./components/settingNames/setting";
 
-import BasicInfo from "./components/main/basicInfo";
+import PersonalInfo from "./components/main/personalInfo";
 import Avatar from "./components/main/avatar";
 
 import Security from "./components/main/security";
@@ -56,7 +56,7 @@ export default function Settings() {
                 />
                 <Option
                   emoji="📖"
-                  option="Basic Info"
+                  option="Personal Info"
                   OptionNo={2}
                   setOption={setOption}
                   active={option === 2}
@@ -66,7 +66,7 @@ export default function Settings() {
 
             <div className={styles["main"]}>
               {option === 1 && <Avatar />}
-              {option === 2 && <BasicInfo />}
+              {option === 2 && <PersonalInfo />}
             </div>
           </div>
         )}

@@ -3,9 +3,9 @@ import styles from "./login.module.css";
 import { useState } from "react";
 
 import { useLogin } from "../../hooks/user/useLogin";
+import { useMessageContext } from "../../hooks/context/useMessageContext";
 
 import Spinner from "../../Components/loading-spinners/spinner/spinner";
-import Error from "../../Components/messages/error";
 
 export default function LogIn() {
   const [passwordType, setPasswordType] = useState("password");
@@ -13,9 +13,9 @@ export default function LogIn() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const [renderMsg, setRenderMsg] = useState(false);
+  const { login, isPending } = useLogin();
 
-  const { login, error, isPending } = useLogin();
+  const { dispatch: messageDispatch } = useMessageContext();
 
   const parseError = (error) => {
     return error.includes("Unable to login")
@@ -31,11 +31,12 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(userName, password);
-    setRenderMsg(true);
-    setInterval(() => {
-      setRenderMsg(false);
-    }, 3000);
+    const res = await login(userName, password);
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: parseError(res.error) });
+    }
   };
 
   return (
@@ -77,16 +78,16 @@ export default function LogIn() {
             </div>
           </div>
         </label>
-        {renderMsg && error && <Error error={parseError(error)} />}
-        {isPending && (
+        {isPending ? (
           <>
             <div className={styles["disabled"]}>
               <Spinner />
               <p>Signing in...</p>
             </div>
           </>
+        ) : (
+          <button className={styles["btn"]}>LogIn</button>
         )}
-        {!isPending && <button className={styles["btn"]}>LogIn</button>}
       </form>
     </div>
   );

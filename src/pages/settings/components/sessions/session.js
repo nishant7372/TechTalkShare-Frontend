@@ -1,32 +1,32 @@
 import styles from "./session.module.css";
 
-import { useState } from "react";
-
 import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
 import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Successful from "../../../../Components/messages/successful";
-import Error from "../../../../Components/messages/error";
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Session({ session, active }) {
-  const [renderMsg, setRenderMsg] = useState(false);
   const { formatDate } = useFormatDate();
-  const { sessionLogout, error, isPending } = useSessionLogout();
+  const { sessionLogout, isPending } = useSessionLogout();
   const { readProfile } = useReadProfile();
+  const { dispatch: messageDispatch } = useMessageContext();
 
   const { _id } = session;
   const { osDetails, creationTime } = session.session;
 
-  const handleClick = async () => {
-    await sessionLogout(_id, active);
+  const handleLogout = async () => {
+    const res = await sessionLogout(_id, active);
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    }
+    if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
     await readProfile();
-    setRenderMsg(true);
-    setTimeout(() => {
-      setRenderMsg(false);
-    }, 3000);
   };
 
   const showDevice = (model) => {
@@ -72,8 +72,9 @@ export default function Session({ session, active }) {
         </div>
       </div>
       <div className={styles["container2"]}>
-        {isPending && <Spinner />}
-        {!isPending && (
+        {isPending ? (
+          <Spinner />
+        ) : (
           <SimpleButton
             icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
             content=" &nbsp;Logout"
@@ -83,15 +84,9 @@ export default function Session({ session, active }) {
               alignSelf: "flex-end",
             }}
             type="logOutButton"
-            action={handleClick}
+            action={handleLogout}
           />
         )}
-        <div>
-          {renderMsg && error && <Error error={error} />}
-          {renderMsg && !error && !isPending && (
-            <Successful successful={"Logout successful"} />
-          )}
-        </div>
       </div>
     </div>
   );

@@ -5,24 +5,17 @@ import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useDeleteAvatar } from "../../../../hooks/avatar/useDeleteAvatar";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
-import Error from "../../../../Components/messages/error";
-import Successful from "../../../../Components/messages/successful";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Avatar() {
-  const {
-    uploadAvatar,
-    error: uploadError,
-    isPending: uploadPending,
-  } = useUploadAvatar();
-  const {
-    deleteAvatar,
-    error: deleteError,
-    isPending: deletePending,
-  } = useDeleteAvatar();
+  const { uploadAvatar, isPending: uploadPending } = useUploadAvatar();
 
+  const { deleteAvatar, isPending: deletePending } = useDeleteAvatar();
+
+  const { dispatch: messageDispatch } = useMessageContext();
   const { readProfile } = useReadProfile();
   const { user } = useAuthContext();
   const avatarImage = process.env.PUBLIC_URL + "/img/avatar.png";
@@ -31,35 +24,24 @@ export default function Avatar() {
 
   const [isSelected, setIsSelected] = useState(false);
 
-  const [renderUploadMsg, setRenderUploadMsg] = useState(false);
-
-  const [renderDeleteMsg, setRenderDeleteMsg] = useState(false);
-
   const handleSave = async (avatarImage) => {
-    await uploadAvatar(avatarImage);
-
+    const res = await uploadAvatar(avatarImage);
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
     setIsSelected(false);
-
-    setRenderUploadMsg(true);
-    setTimeout(() => {
-      setRenderUploadMsg(false);
-    }, 3000);
-
-    await getProfile();
+    await readProfile();
   };
 
   const handleDeleteAvatar = async () => {
-    await deleteAvatar();
-
-    setRenderDeleteMsg(true);
-    setTimeout(() => {
-      setRenderDeleteMsg(false);
-    }, 3000);
-
-    await getProfile();
-  };
-
-  const getProfile = async () => {
+    const res = await deleteAvatar();
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
     await readProfile();
   };
 
@@ -82,8 +64,9 @@ export default function Avatar() {
 
       {isSelected && (
         <div className={"flex-row"}>
-          {uploadPending && <Spinner />}
-          {!uploadPending && (
+          {uploadPending ? (
+            <Spinner />
+          ) : (
             <>
               <SimpleButton
                 icon={<i className="fa-regular fa-floppy-disk"></i>}
@@ -160,15 +143,6 @@ export default function Avatar() {
             </>
           )}
         </div>
-      )}
-
-      {renderUploadMsg && uploadError && <Error error={uploadError} />}
-      {renderUploadMsg && !uploadError && !uploadPending && (
-        <Successful successful={"Upload successful"} />
-      )}
-      {renderDeleteMsg && deleteError && <Error error={deleteError} />}
-      {renderDeleteMsg && !deleteError && !deletePending && (
-        <Successful successful={"Delete successful"} />
       )}
       <div className={"description"}>
         Allowed Formats: ".jpeg, .jpg, .png" <br />

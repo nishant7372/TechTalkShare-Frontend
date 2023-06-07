@@ -1,38 +1,42 @@
-import styles from "./basicInfo.module.css";
+import styles from "./personalInfo.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
-import Error from "../../../../Components/messages/error";
-import Successful from "../../../../Components/messages/successful";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
-export default function BasicInfo() {
+export default function PersonalInfo() {
   const { user } = useAuthContext();
-  const { updateUser, error, isPending } = useUpdateUser();
+  const { updateUser, isPending } = useUpdateUser();
   const { readProfile } = useReadProfile();
+  const { dispatch: messageDispatch } = useMessageContext();
 
+  const [noChange, setNoChange] = useState(false);
   const [name, setName] = useState(user.name);
   const [age, setAge] = useState(user.age);
 
-  const [renderMsg, setRenderMsg] = useState(false);
-
   const handleSave = async () => {
-    await updateUser({ name, age });
+    const res = await updateUser({ name, age });
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
     await readProfile();
-    setRenderMsg(true);
-    setTimeout(() => {
-      setRenderMsg(false);
-    }, 3000);
   };
 
+  useEffect(() => {
+    setNoChange(+age === user.age && name === user.name);
+  }, [age, name, user]);
+
   return (
-    <div className={styles["basicInfo-box"]}>
-      <div className={"heading"}>Basic Info</div>
+    <div className={styles["personalInfo-box"]}>
+      <div className={"heading"}>Personal Info</div>
       <form className={styles["info"]}>
         <div className={"flex-row"}>
           <label htmlFor="name">Name: </label>
@@ -40,6 +44,7 @@ export default function BasicInfo() {
             required
             className={styles["input"]}
             type="text"
+            name="Name"
             placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             value={name}
@@ -51,6 +56,7 @@ export default function BasicInfo() {
             required
             className={styles["input"]}
             type="number"
+            name="Age"
             placeholder="Age"
             onChange={(e) => setAge(e.target.value)}
             value={age}
@@ -58,27 +64,24 @@ export default function BasicInfo() {
         </div>
       </form>
       <div className={"flex-row"}>
-        {isPending && (
+        {isPending ? (
           <div className={styles["disabled"]}>
             <Spinner />
           </div>
-        )}
-        {!isPending && (
+        ) : (
           <SimpleButton
             icon={<i className="fa-regular fa-floppy-disk"></i>}
             content=" &nbsp;Save Changes"
+            disabled={noChange}
             buttonStyle={{
               fontSize: "1.8rem",
               padding: "0.3rem 0.8rem",
+              ...(noChange && { cursor: "not-allowed" }),
+              ...(noChange && { backgroundColor: "#555" }),
             }}
             type="saveButton"
             action={handleSave}
           />
-        )}
-        {renderMsg && error && <Error error={error} />}
-
-        {renderMsg && !error && !isPending && (
-          <Successful successful={"Update Successful"} />
         )}
       </div>
     </div>

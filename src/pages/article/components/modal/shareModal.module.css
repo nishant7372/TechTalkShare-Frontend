@@ -21,12 +21,11 @@
 
 .sharedWith {
   background-color: rgba(255, 255, 255, 0.2);
-  width: 95%;
+  width: 100%;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  gap: 0rem;
   overflow-y: auto;
   height: 350px;
 }
@@ -34,7 +33,7 @@
 .sharedWithUser {
   font-size: 1.7rem;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.5rem 1.5rem;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -51,8 +50,8 @@
 }
 
 .name {
-  font-size: 1.4rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .user-avatar {
@@ -67,7 +66,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.05); /* color */
+  background-color: rgba(255, 255, 255, 0); /* color */
   z-index: 8;
 }
 

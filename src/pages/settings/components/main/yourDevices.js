@@ -1,54 +1,50 @@
 import styles from "./yourDevices.module.css";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
-import { useGetCurrentSession } from "../../../../hooks/user/useGetCurrentSession";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
+import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Session from "../sessions/session";
-import Error from "../../../../Components/messages/error";
-import Successful from "../../../../Components/messages/successful";
 import SimpleButton from "../../../../Components/button/simpleButton";
 import Loading from "../../../../Components/loading-spinners/loading/loading";
 
 export default function CurrentSessions() {
-  const { user, currentSessionID } = useAuthContext();
-  const { logoutAllOther, error, isPending } = useLogoutAllOther();
+  const { user, currentSessionId } = useAuthContext();
+  const { logoutAllOther, isPending } = useLogoutAllOther();
   const { readProfile } = useReadProfile();
 
   const { sessions } = user;
-
-  const [renderMsg, setRenderMsg] = useState(false);
+  const { dispatch: messageDispatch } = useMessageContext();
 
   const handleLogOutAllOther = async () => {
-    await logoutAllOther();
+    const res = await logoutAllOther();
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    }
+    if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
     await readProfile();
-    setRenderMsg(true);
-    setTimeout(() => {
-      setRenderMsg(false);
-    }, 3000);
   };
 
   const activeSession = useMemo(() => {
     return sessions.find(
-      (session) => currentSessionID === session._id.toString()
+      (session) => currentSessionId === session._id.toString()
     );
-  }, [sessions, currentSessionID]);
+  }, [sessions, currentSessionId]);
 
   const otherSessions = useMemo(() => {
     return sessions.filter(
-      (session) => currentSessionID !== session._id.toString()
+      (session) => currentSessionId !== session._id.toString()
     );
-  }, [sessions, currentSessionID]);
-
-  const { getCurrentSession } = useGetCurrentSession();
+  }, [sessions, currentSessionId]);
 
   useEffect(() => {
     const fetch = async () => {
-      await getCurrentSession(); // will only get session ID when null (on component first mount)
       await readProfile(); // to get new logged in sessions (without refresh)
     };
     fetch();
@@ -76,30 +72,26 @@ export default function CurrentSessions() {
             ))}
           </ul>
           <div className="flex-col">
-            {isPending && (
+            {isPending ? (
               <div className={styles["disabled"]}>
                 <Spinner />
                 <span>Logging Out...</span>
               </div>
-            )}
-            {!isPending && (
+            ) : (
               <SimpleButton
                 icon={<i className="fa-solid fa-arrow-right-from-bracket"></i>}
                 content=" &nbsp;Logout All Other Sessions"
                 buttonStyle={{
                   fontSize: "1.8rem",
                   padding: "0.3rem 0.8rem",
+                  ...(sessions.length === 1 && { cursor: "not-allowed" }),
+                  ...(sessions.length === 1 && { backgroundColor: "#555" }),
                 }}
+                disabled={sessions.length === 1}
                 type="logOutButton"
                 action={handleLogOutAllOther}
               />
             )}
-            <div style={{ alignSelf: "flex-start" }}>
-              {renderMsg && error && <Error error={error} />}
-              {renderMsg && !error && !isPending && (
-                <Successful successful={"Logout successful"} />
-              )}
-            </div>
             <p className={"warning"}>
               This will end {sessions.length - 1} of your other active sessions.
               It won't affect your current session.

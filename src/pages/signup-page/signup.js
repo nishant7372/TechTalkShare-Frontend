@@ -3,18 +3,18 @@ import styles from "./signup.module.css";
 import { useState } from "react";
 
 import { useSignup } from "../../hooks/user/useSignup";
+import { useMessageContext } from "../../hooks/context/useMessageContext";
 
 import Spinner from "../../Components/loading-spinners/spinner/spinner";
-import Error from "../../Components/messages/error";
 
 export default function SignUp() {
   const [passwordType, setPasswordType] = useState("password");
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [renderMsg, setRenderMsg] = useState(false);
+  const { dispatch: messageDispatch } = useMessageContext();
 
-  const { signup, error, isPending } = useSignup();
+  const { signup, isPending } = useSignup();
 
   const parseError = (error) => {
     return error.includes("duplicate key error")
@@ -30,11 +30,12 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(userName, password, name);
-    setRenderMsg(true);
-    setInterval(() => {
-      setRenderMsg(false);
-    }, 3000);
+    const res = await signup(userName, password, name);
+    if (res.ok) {
+      messageDispatch({ type: "SUCCESS", payload: res.ok });
+    } else if (res.error) {
+      messageDispatch({ type: "ERROR", payload: parseError(res.error) });
+    }
   };
 
   return (
@@ -88,16 +89,16 @@ export default function SignUp() {
             </div>
           </div>
         </label>
-        {renderMsg && error && <Error error={parseError(error)} />}
-        {isPending && (
+        {isPending ? (
           <>
             <div className={styles["disabled"]}>
               <Spinner />
               <p>Creating Account...</p>
             </div>
           </>
+        ) : (
+          <button className={`${styles["btn"]}`}>SignUp</button>
         )}
-        {!isPending && <button className={`${styles["btn"]}`}>SignUp</button>}
       </form>
     </div>
   );
