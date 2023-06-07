@@ -4,24 +4,23 @@ import axiosInstance from "../hooks/axios/axiosInstance";
 export const AuthContext = createContext();
 
 const authReducer = (state, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case "LOGIN":
-      return { ...state, user: action.payload, serverError: false };
+      return { ...state, user: payload, serverError: false };
     case "LOGOUT":
       return { ...state, user: null, serverError: false };
     case "AUTH_IS_READY":
       return {
         ...state,
-        user: action.payload.user,
+        user: payload?.user,
         authIsReady: true,
         serverError: false,
         authPending: false,
-        currentSessionId: action.payload.currentSessionId,
+        currentSessionId: payload?.currentSessionId,
       };
     case "SERVER_ERROR":
       return { ...state, serverError: true, user: null, authIsReady: false };
-    case "CURRENT_SESSION":
-      return { ...state, currentSessionID: action.payload, serverError: false };
     default:
       return state;
   }

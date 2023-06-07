@@ -37,17 +37,19 @@ export default function NavBar() {
       <div className={styles["navbar"]}>
         <div className={styles["nav-left"]}>
           <div className={styles["links"]}>
-            <AnimatedButton
-              icon={<i className="fa-solid fa-bars"></i>}
-              buttonStyle={{
-                fontSize: "1.8rem",
-                padding: "0.3rem 1rem",
-                textAlign: "center",
-                borderRadius: "50%",
-              }}
-              type="navigationBt"
-              action={() => setShowSiderbar((prev) => !prev)}
-            />
+            {user && (
+              <AnimatedButton
+                icon={<i className="fa-solid fa-bars"></i>}
+                buttonStyle={{
+                  fontSize: "1.8rem",
+                  padding: "0.3rem 1rem",
+                  textAlign: "center",
+                  borderRadius: "50%",
+                }}
+                type="navigationBt"
+                action={() => setShowSiderbar((prev) => !prev)}
+              />
+            )}
           </div>
           <CSSTransition
             in={showSidebar}
