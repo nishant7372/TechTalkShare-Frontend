@@ -20,7 +20,13 @@ const authReducer = (state, action) => {
         currentSessionId: payload?.currentSessionId,
       };
     case "SERVER_ERROR":
-      return { ...state, serverError: true, user: null, authIsReady: false };
+      return {
+        ...state,
+        serverError: true,
+        user: null,
+        authIsReady: false,
+        authPending: false,
+      };
     default:
       return state;
   }

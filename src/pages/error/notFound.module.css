@@ -1,6 +1,6 @@
 #notfound {
   position: relative;
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
   background: #030005;
 }
 

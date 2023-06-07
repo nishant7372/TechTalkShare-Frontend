@@ -30,6 +30,7 @@ import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 function App() {
   const { user, authIsReady, serverError, authPending } = useAuthContext();
   const { success, error } = useMessageContext();
+
   return (
     <div className="App">
       {(success || error) && <MessageContainer />}
