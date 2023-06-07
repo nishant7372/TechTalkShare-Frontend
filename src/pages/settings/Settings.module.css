@@ -5,7 +5,8 @@
 .main-container {
   margin: 4rem;
   max-height: 600px;
-  height: calc(100% - 50px - 8rem);
+  min-height: 450px;
+  height: calc(100vh - 50px - 8rem);
 }
 
 .settingsBox {

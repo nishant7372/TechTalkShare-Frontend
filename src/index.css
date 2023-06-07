@@ -18,11 +18,11 @@ html {
   font-size: 56.25%; /* 1rem -> 9px*/
 }
 
-#root,
+/* #root,
 html,
 body {
   height: 100%;
-}
+} */
 
 @media screen and (min-width: 600px) and (max-width: 1000px) {
   html {
@@ -53,6 +53,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Baloo Bhai 2", cursive, sans-serif;
   background-color: rgba(33, 33, 33, 255);
+  position: relative;
 }
 
 input:-webkit-autofill,
