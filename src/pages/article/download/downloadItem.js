@@ -25,6 +25,11 @@ export default function DownloadItem({ download }) {
             Downloaded: {timeSince(download.updatedAt)} ago
           </div>
         )}
+        {download.status === "queued" && (
+          <div className={styles["h4"]}>
+            Added to Queue: {timeSince(download.updatedAt)} ago
+          </div>
+        )}
         {download.status === "error" && (
           <div className={styles["h4"]}>Failed - Forbidden</div>
         )}
@@ -71,6 +76,7 @@ export default function DownloadItem({ download }) {
             />
           </div>
         )}
+        {download.status === "queued" && <div>⏱</div>}
         {download.status === "downloading" && (
           <div
             style={{ position: "relative" }}
