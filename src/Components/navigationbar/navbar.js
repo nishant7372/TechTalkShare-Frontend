@@ -65,8 +65,11 @@ export default function NavBar() {
                   <NavLink to="/shared">
                     <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
                   </NavLink>
+                  <NavLink to="/download">
+                    <i className="fa-solid fa-bars"></i> &nbsp;Download
+                  </NavLink>
                   <NavLink to="/downloads">
-                    <i className="fa-solid fa-bars"></i> &nbsp;Downloads
+                    <i className="fa-solid fa-bars"></i> &nbsp;Download History
                   </NavLink>
                 </div>
               </CSSTransition>
@@ -89,8 +92,8 @@ export default function NavBar() {
               <NavLink to="/shared">
                 <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
               </NavLink>
-              <NavLink to="/downloads">
-                <i className="fa-solid fa-bars"></i> &nbsp;Downloads
+              <NavLink to="/download">
+                <i className="fa-solid fa-bars"></i> &nbsp;Download
               </NavLink>
             </div>
             <div className={styles["nav-right-auth"]}>

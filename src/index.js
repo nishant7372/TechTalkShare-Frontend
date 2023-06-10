@@ -16,14 +16,14 @@ import { SharingContextProvider } from "./contexts/SharingContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MessageContextProvider>
-      <ArticleContextProvider>
-        <SharingContextProvider>
-          <AuthContextProvider>
+    <AuthContextProvider>
+      <MessageContextProvider>
+        <ArticleContextProvider>
+          <SharingContextProvider>
             <App />
-          </AuthContextProvider>
-        </SharingContextProvider>
-      </ArticleContextProvider>
-    </MessageContextProvider>
+          </SharingContextProvider>
+        </ArticleContextProvider>
+      </MessageContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

@@ -19,7 +19,7 @@ export const useLeetcodeScrape = () => {
       });
 
       return res
-        ? { ok: true, data: res.data }
+        ? { ok: "Download Complete" }
         : { error: "Unable to Download Article" };
     } catch (err) {
       let error = "";

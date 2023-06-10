@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { useSocketConnection } from "../hooks/socket/socketConnection";
 
 export const ArticleContext = createContext();
 
@@ -26,6 +27,7 @@ const articleReducer = (state, action) => {
 };
 
 export const ArticleContextProvider = ({ children }) => {
+  useSocketConnection();
   const [state, dispatch] = useReducer(articleReducer, {
     articles: null,
     articleCount: 0,

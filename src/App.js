@@ -26,6 +26,7 @@ import Loading from "./Components/loading-spinners/loading/loading";
 import { useAuthContext } from "./hooks/context/useAuthContext";
 import { useMessageContext } from "./hooks/context/useMessageContext";
 import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
+import Downloads from "./pages/article/download/downloads";
 
 function App() {
   const { user, authIsReady, serverError, authPending } = useAuthContext();
@@ -60,8 +61,12 @@ function App() {
               element={!user ? <Navigate to="/login" /> : <CreateArticle />}
             />
             <Route
-              path="/downloads"
+              path="/download"
               element={!user ? <Navigate to="/login" /> : <Scrape />}
+            />
+            <Route
+              path="/downloads"
+              element={!user ? <Navigate to="/login" /> : <Downloads />}
             />
             <Route
               path="/articles"
