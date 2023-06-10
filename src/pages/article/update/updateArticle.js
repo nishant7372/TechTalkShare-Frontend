@@ -22,6 +22,7 @@ export default function UpdateArticle() {
   const [tags, setTags] = useState([]);
   const [content, setContent] = useState("");
   const [showNotFound, setShowNotFound] = useState(false);
+  const [noChange, setNoChange] = useState(false);
 
   const { dispatch } = useMessageContext();
 
@@ -53,6 +54,16 @@ export default function UpdateArticle() {
     fetch();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    setNoChange(
+      (topic === article?.topic &&
+        content === article?.content &&
+        tags === article?.tags) ||
+        topic === "" ||
+        content === ""
+    );
+  }, [topic, tags, content]);
 
   // Updating Article
   const handleSubmit = async (e) => {
@@ -106,21 +117,25 @@ export default function UpdateArticle() {
                     action={goBack}
                   />
 
-                  {!updatePending && (
+                  {!updatePending ? (
                     <SimpleButton
                       icon={<i className={`fa-solid fa-paper-plane`}></i>}
                       content={
                         <span className={styles["btnName"]}> Update</span>
                       }
+                      disabled={noChange}
                       buttonStyle={{
                         fontSize: "1.6rem",
                         padding: "0.15rem 0.8rem",
+                        ...(noChange && { cursor: "not-allowed" }),
+                        ...(noChange && { backgroundColor: "#555" }),
                       }}
                       type="saveButton"
                       formAction="submit"
                     />
+                  ) : (
+                    <Loading action="post" />
                   )}
-                  {updatePending && <Loading action="post" />}
                 </div>
               </div>
               <div className={styles["section2"]}>

@@ -23,6 +23,7 @@ export default function CreateArticle() {
   const [topic, setTopic] = useState(tp ? tp : "");
   const [tags, setTags] = useState(tg ? tg : []);
   const [content, setContent] = useState(ct ? ct : "");
+  const [noChange, setNoChange] = useState(true);
 
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ export default function CreateArticle() {
 
   useEffect(() => {
     addtoLocalStorage();
+    setNoChange(topic === "" || content === "");
     // eslint-disable-next-line
   }, [topic, tags, content]);
 
@@ -89,19 +91,23 @@ export default function CreateArticle() {
                 formAction="reset"
               />
 
-              {!isPending && (
+              {!isPending ? (
                 <SimpleButton
                   icon={<i className={`fa-solid fa-paper-plane`}></i>}
                   content={<span className={styles["btnName"]}> Post</span>}
+                  disabled={noChange}
                   buttonStyle={{
                     fontSize: "1.6rem",
                     padding: "0.15rem 0.8rem",
+                    ...(noChange && { cursor: "not-allowed" }),
+                    ...(noChange && { backgroundColor: "#555" }),
                   }}
                   type="saveButton"
                   formAction="submit"
                 />
+              ) : (
+                <Loading action="post" />
               )}
-              {isPending && <Loading action="post" />}
             </div>
           </div>
           <div className={styles["section2"]}>
