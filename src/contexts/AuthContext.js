@@ -10,6 +10,8 @@ const authReducer = (state, action) => {
       return { ...state, user: payload, serverError: false };
     case "LOGOUT":
       return { ...state, user: null, serverError: false };
+    case "SOCKETID":
+      return { ...state, socketId: payload };
     case "AUTH_IS_READY":
       return {
         ...state,
@@ -18,6 +20,11 @@ const authReducer = (state, action) => {
         serverError: false,
         authPending: false,
         currentSessionId: payload?.currentSessionId,
+      };
+    case "ACTIVE_DOWNLOADS":
+      return {
+        ...state,
+        activeDownloads: payload,
       };
     case "SERVER_ERROR":
       return {
@@ -67,6 +74,8 @@ export const AuthContextProvider = ({ children }) => {
     authIsReady: false,
     currentSessionId: null,
     authPending: true,
+    socketId: null,
+    activeDownloads: [],
   });
 
   useEffect(() => {
