@@ -1,44 +1,35 @@
 import { useState } from "react";
 import { useLeetcodeScrape } from "../../../hooks/article/useLeetcodeScrape";
-import { useGetDownloads } from "../../../hooks/download/useGetDownloads";
 import AnimatedButton from "../../../Components/button/animatedButton";
 import styles from "./scrape.module.css";
 import Input from "../../../Components/input/Input";
-import { useEffect } from "react";
 import DownloadItem from "./downloadItem";
+import { useAuthContext } from "../../../hooks/context/useAuthContext";
+import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import { Link } from "react-router-dom";
 
 export default function Scrape() {
   const [URL, setURL] = useState("");
   const { leetcodeScrape } = useLeetcodeScrape();
-  const { getDownloads } = useGetDownloads();
-  const [status, setStatus] = useState(false);
-
-  const [downloads, setDownloads] = useState(null);
+  const { socketId, activeDownloads, user } = useAuthContext();
+  const { dispatch: messageDispatch } = useMessageContext();
 
   const handleChange = (e) => {
     setURL(e.target.value);
   };
 
+  const filter = (activeDownloads) => {
+    return activeDownloads.filter((download) => download.owner === user._id);
+  };
+
   const handleDownload = async () => {
-    setStatus((prev) => !prev);
     let url = URL;
     setURL("");
-    await leetcodeScrape({ url });
-    setStatus((prev) => !prev);
+    const res = await leetcodeScrape({ url, socketId });
+    if (res.error) {
+      messageDispatch({ type: "ERROR", payload: res.error });
+    }
   };
-
-  const sort = (downloads) => {
-    downloads.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    return downloads;
-  };
-
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await getDownloads();
-      setDownloads(res.data);
-    };
-    fetch();
-  }, [status]);
 
   return (
     <div className={styles["download-container"]}>
@@ -73,14 +64,19 @@ export default function Scrape() {
         />
       </div>
       <div className={styles["download-header"]}>
-        <i className="fa-solid fa-download"></i> Downloads
+        <div className="flex-row">
+          <i className="fa-solid fa-download"></i> Active Downloads
+        </div>
+        <Link to="/downloads" className={styles["download-history"]}>
+          <i className="fa-solid fa-clock-rotate-left"></i> History
+        </Link>
       </div>
-      {downloads &&
-        sort(downloads).map((download) => (
-          <DownloadItem key={download._id} download={download} />
+      {activeDownloads &&
+        filter(activeDownloads).map((download, index) => (
+          <DownloadItem key={index} download={download} />
         ))}
-      {downloads && downloads.length === 0 && (
-        <div className={styles["no-download-found"]}>No download found.</div>
+      {activeDownloads && activeDownloads.length === 0 && (
+        <div className={styles["no-download-found"]}>No Active Download.</div>
       )}
       <div className={styles["download-footer"]}></div>
     </div>
