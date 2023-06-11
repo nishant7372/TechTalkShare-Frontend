@@ -85,7 +85,8 @@ export default function ShareModal({
           >
             X
           </div>
-          <div className="flex-row">
+          <div className="flex-row" style={{ position: "relative" }}>
+            <span className={styles["pre"]}>@</span>
             <input
               type="userName"
               onChange={(e) => setUserName(e.target.value.toLowerCase())}
@@ -140,8 +141,8 @@ export default function ShareModal({
                   />
                 )}
                 <div>
-                  <div>{user.userName} </div>{" "}
-                  <div className={styles["name"]}>{user.name} </div>
+                  <div>{user.name} </div>{" "}
+                  <div className={styles["name"]}>@{user.userName} </div>
                 </div>
               </div>
             ))}

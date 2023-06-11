@@ -76,7 +76,26 @@ export default function DownloadItem({ download }) {
             />
           </div>
         )}
-        {download.status === "queued" && <div>⏱</div>}
+        {download.status === "queued" && (
+          <div
+            data-tooltip-id={download._id}
+            data-tooltip-content="queued"
+            data-tooltip-place="top"
+            data-tooltip-variant="success"
+          >
+            <div>⏱</div>
+
+            <Tooltip
+              id={download._id}
+              style={{
+                fontSize: "1.6rem",
+                backgroundColor: "magenta",
+                padding: "0.4rem 0.8rem",
+              }}
+            />
+          </div>
+        )}
+
         {download.status === "downloading" && (
           <div
             style={{ position: "relative" }}

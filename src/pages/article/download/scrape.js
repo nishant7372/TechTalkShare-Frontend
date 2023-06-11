@@ -73,7 +73,7 @@ export default function Scrape() {
       </div>
       {activeDownloads &&
         filter(activeDownloads).map((download, index) => (
-          <DownloadItem key={index} download={download} />
+          <DownloadItem key={index} download={{ ...download, _id: index }} />
         ))}
       {activeDownloads && activeDownloads.length === 0 && (
         <div className={styles["no-download-found"]}>No Active Download.</div>

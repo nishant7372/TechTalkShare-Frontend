@@ -20,7 +20,7 @@
 }
 
 .sharedWith {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgb(4, 3, 10);
   width: 100%;
   border-radius: 4px;
   display: flex;
@@ -69,14 +69,23 @@
   background-color: rgba(255, 255, 255, 0); /* color */
   z-index: 8;
 }
+.pre {
+  position: absolute;
+  z-index: 2;
+  top: 0.2rem;
+  left: 0.5rem;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
 
 .shareInput {
   font-size: 2rem;
   height: 3.4rem;
   padding: 0.2rem 0.8rem;
+  padding-left: 3rem;
   width: 80%;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgb(4, 3, 10);
   border: none;
   border-radius: 4px;
   color: white;
