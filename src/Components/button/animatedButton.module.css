@@ -3,8 +3,13 @@
   --danger-anim-bt: rgb(233, 42, 42);
   --operation-anim-bt: rgb(253, 5, 253);
   --download-anim-bt: orange;
+  --info-anim-bt: rgb(0, 213, 255);
   --navigation-anim-bt: grey;
   --navigation-fill-anim-bt: #312f2f;
+}
+
+.animatedButton {
+  all: unset;
 }
 
 .createBt {
@@ -37,6 +42,16 @@
   );
 }
 
+.infoBt {
+  color: var(--info-anim-bt);
+  border: 1px solid var(--info-anim-bt);
+  background: linear-gradient(
+    to right,
+    var(--info-anim-bt) 50%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
 .downloadBt {
   color: var(--download-anim-bt);
   border: 1px solid var(--download-anim-bt);
@@ -56,6 +71,7 @@
     rgba(0, 0, 0, 0) 50%
   );
 }
+
 .animatedButton {
   height: 100%;
   text-decoration: none;

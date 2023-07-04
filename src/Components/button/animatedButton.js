@@ -15,18 +15,22 @@ export default function AnimatedButton({
   buttonStyle,
   type,
   action,
+  buttonRef,
+  disabled,
 }) {
   return (
     <>
       {!link && (
-        <div
+        <button
           className={`${styles["animatedButton"]} ${styles[type]}`}
           style={buttonStyle}
           onClick={action}
+          ref={buttonRef}
+          disabled={disabled}
         >
           {icon ? icon : ""}
           {content}
-        </div>
+        </button>
       )}
       {link && (
         <Link
