@@ -1,14 +1,16 @@
 import styles from "./messageContainer.module.css";
 
 import { useState, useEffect, useRef } from "react";
-import { useMessageContext } from "../../hooks/context/useMessageContext";
+import { useSelector, useDispatch } from "react-redux";
+import { reset } from "../../features/alertSlice";
 import { CSSTransition } from "react-transition-group";
 
 import Successful from "./successful";
 import Error from "./error";
 
 export default function MessageContainer() {
-  const { error, success, dispatch } = useMessageContext();
+  const { error, success } = useSelector((store) => store.alert);
+  const dispatch = useDispatch();
   const [showMessage, setShowMessage] = useState(false);
 
   const nodeRef = useRef(null);
@@ -32,7 +34,7 @@ export default function MessageContainer() {
   }, []);
 
   const afterExit = () => {
-    dispatch({ type: "RESET" });
+    dispatch(reset());
   };
 
   return (
@@ -40,7 +42,7 @@ export default function MessageContainer() {
       in={showMessage}
       timeout={300}
       nodeRef={nodeRef}
-      classNames="message"
+      classNames="movedown"
       unmountOnExit
       onExited={afterExit}
     >

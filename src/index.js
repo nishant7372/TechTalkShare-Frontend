@@ -8,22 +8,14 @@ import "react-tooltip/dist/react-tooltip.css";
 
 import App from "./App";
 
-import { AuthContextProvider } from "./contexts/AuthContext";
-import { ArticleContextProvider } from "./contexts/ArticleContext";
-import { MessageContextProvider } from "./contexts/MessageContext";
-import { SharingContextProvider } from "./contexts/SharingContext";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <MessageContextProvider>
-        <ArticleContextProvider>
-          <SharingContextProvider>
-            <App />
-          </SharingContextProvider>
-        </ArticleContextProvider>
-      </MessageContextProvider>
-    </AuthContextProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
