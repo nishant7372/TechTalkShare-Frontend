@@ -20,7 +20,6 @@
   opacity: 0;
   transform: translateX(-200px);
 }
-
 .movein-enter-active {
   opacity: 1;
   transform: translateX(0);
@@ -32,5 +31,41 @@
 .movein-exit-active {
   opacity: 0;
   transform: translateX(-200px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.moveup-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.moveup-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.moveup-exit {
+  opacity: 1;
+}
+.moveup-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.movedown-enter {
+  opacity: 0;
+  transform: translateY(-200%);
+}
+.movedown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.movedown-exit {
+  opacity: 1;
+}
+.movedown-exit-active {
+  opacity: 0;
+  transform: translateY(-200%);
   transition: opacity 300ms, transform 300ms;
 }
