@@ -1,11 +1,13 @@
 import styles from "./paginate.module.css";
 
 import ReactPaginate from "react-paginate";
-import { useArticleContext } from "../../../../hooks/context/useArticleContext";
+import { useSelector } from "react-redux";
 
-export default function Paginate({ handlePageChange }) {
-  const { articleCount, currPageNo } = useArticleContext();
+export default function Paginate({ handlePageChange, type }) {
+  const { articleCount, currPageNo } = useSelector((store) => store[type]);
+
   const articlePerPage = 10;
+
   const pages = Math.ceil(articleCount / articlePerPage);
 
   return (
