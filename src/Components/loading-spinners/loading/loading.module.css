@@ -11,7 +11,7 @@
 }
 
 .mainRead {
-  position: absolute;
+  position: fixed;
   margin-top: calc(50vh - 50px);
   margin: auto;
   height: calc(100vh - 50px);

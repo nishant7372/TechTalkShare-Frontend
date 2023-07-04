@@ -1,8 +1,16 @@
 .download-container {
   margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.scrape-container {
+  margin: 2rem auto 0rem auto;
+}
+
+.scrape-container,
+.download-container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.05);
   width: 85%;
   max-width: 130rem;
   border-radius: 4px;
@@ -14,7 +22,6 @@
   align-items: center;
   gap: 2rem;
   padding: 4rem 0;
-  background-color: rgba(33, 33, 33, 255);
 }
 
 .download-header {
@@ -71,4 +78,17 @@
   justify-content: center;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+
+.select {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 4px;
+  max-width: 11rem;
+}
+
+.select option {
+  background-color: black;
+  color: rgba(255, 255, 255, 0.8);
 }
