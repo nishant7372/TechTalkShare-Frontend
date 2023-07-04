@@ -1,13 +1,12 @@
 import styles from "./../view-owner/article.module.css";
 import { Link } from "react-router-dom";
-import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
 import Tag from "../components/tags/tag";
 
-export default function SharedArticle({ articleObj, updated, handleShare }) {
-  const { article, sharedBy, sharePermission } = articleObj;
+export default function SharedArticle({ articleObj, updated }) {
+  const { article, editPermission } = articleObj;
   const { timeSince } = useFormatDate();
 
   const color = ["skyblue", "magenta", "green", "orange"].sort(
@@ -54,43 +53,24 @@ export default function SharedArticle({ articleObj, updated, handleShare }) {
         {!updated && (
           <div className={styles["h4"]}>
             Shared At: {timeSince(articleObj.createdAt)} ago
+            {!editPermission && (
+              <span className={styles["readOnly"]}>Read Only</span>
+            )}
           </div>
         )}
         {updated && (
           <div className={styles["h4"]}>
             Updated At: {timeSince(article.updatedAt)} ago
+            {!editPermission && (
+              <span className={styles["readOnly"]}>Read Only</span>
+            )}
           </div>
         )}
-        {sharedBy.userName !== article.owner.userName && (
-          <div className={styles["h2"]}>
-            SharedBy: {sharedBy.userName} ({sharedBy.name})
-          </div>
-        )}
-        {sharedBy.userName !== article.owner.userName && (
-          <div className={styles["h2"]}>
-            Owner: {article.owner.userName} ({article.owner.name})
-          </div>
-        )}
-        {sharedBy.userName === article.owner.userName && (
-          <div className={styles["h2"]}>
-            Owner/SharedBy: {sharedBy.userName} ({sharedBy.name})
-          </div>
-        )}
-      </div>
 
-      {sharePermission && (
-        <div
-          className={styles["shareButton"]}
-          onClick={() => handleShare(article._id)}
-          data-tooltip-id="my-tooltip"
-          data-tooltip-content="Share"
-          data-tooltip-place="top"
-          data-tooltip-variant="info"
-        >
-          <i className="fa-solid fa-share"></i>
+        <div className={styles["h2"]}>
+          Owner: {article.owner.userName} ({article.owner.name})
         </div>
-      )}
-      <Tooltip id="my-tooltip" />
+      </div>
     </div>
   );
 }

@@ -1,32 +1,28 @@
 import styles from "./../view-owner/articles.module.css";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { useGetSharedArticles } from "../../../hooks/sharing/useGetSharedArticles";
-import { useSharingContext } from "../../../hooks/context/useSharingContext";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
-import { CSSTransition } from "react-transition-group";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setError } from "../../../features/alertSlice";
+import { setActiveFilter, setCurrPageNo } from "../../../features/sharingSlice";
 
 import SharedArticle from "./sharedArticle";
+import TagSelect from "../components/tags/tagSelect";
 import Paginate from "../components/pagination/paginate";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import TagSelect from "../components/tags/tagSelect";
-import ShareModal from "../components/modal/shareModal";
 
 export default function SharedArticles() {
+  const { articles, currPageNo, activeFilter } = useSelector(
+    (store) => store.sharing
+  );
+  const dispatch = useDispatch();
+  
   const { getSharedArticles, isPending } = useGetSharedArticles();
-  const {
-    articles,
-    currPageNo,
-    activeFilter,
-    dispatch: sharingDispatch,
-  } = useSharingContext();
 
-  const { dispatch: messageDispatch } = useMessageContext();
   const [search, setSearch] = useState("");
   const [tag, setTag] = useState(null);
-
-  const nodeRef = useRef(null);
 
   useEffect(() => {
     const fetch = async (sortBy) => {
@@ -38,7 +34,7 @@ export default function SharedArticles() {
         ...(tag && { tag }),
       });
       if (res.error) {
-        messageDispatch({ type: "ERROR", payload: res.error });
+        dispatch(setError(res.error));
       }
     };
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
@@ -47,22 +43,14 @@ export default function SharedArticles() {
   }, [currPageNo, activeFilter, search, tag]);
 
   const handlePageChange = (page) => {
-    sharingDispatch({ type: "PAGE_CHANGED", payload: page.selected });
+    dispatch(setCurrPageNo(page.selected));
   };
 
   const handleFilterClick = async (option) => {
     if (activeFilter !== option) {
-      sharingDispatch({ type: "PAGE_CHANGED", payload: 0 });
-      sharingDispatch({ type: "FILTER", payload: option });
+      dispatch(setCurrPageNo(0));
+      dispatch(setActiveFilter(option));
     }
-  };
-
-  const [openShareModal, setOpenShareModal] = useState(false);
-  const [articleShare, setArticleShare] = useState(null);
-
-  const handleShare = (articleID) => {
-    setOpenShareModal(true);
-    setArticleShare(articleID);
   };
 
   return (
@@ -121,7 +109,6 @@ export default function SharedArticles() {
               key={article._id}
               articleObj={article}
               updated={activeFilter === "Recently Updated"}
-              handleShare={handleShare}
             />
           ))}
         {articles && articles.length === 0 && (
@@ -130,22 +117,9 @@ export default function SharedArticles() {
           </div>
         )}
         <div className={styles["article-footer"]}>
-          <Paginate handlePageChange={handlePageChange} />
+          <Paginate handlePageChange={handlePageChange} type={"sharing"} />
         </div>
       </div>
-      <CSSTransition
-        in={openShareModal}
-        timeout={300}
-        nodeRef={nodeRef}
-        classNames="message"
-        unmountOnExit
-      >
-        <ShareModal
-          articleShare={articleShare}
-          setOpenShareModal={setOpenShareModal}
-          nodeRef={nodeRef}
-        />
-      </CSSTransition>
     </>
   );
 }
