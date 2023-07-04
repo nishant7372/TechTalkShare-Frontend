@@ -10,7 +10,7 @@ export const useReadArticle = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axiosInstance.get(`/articles/${id}`, {
+      const res = await axiosInstance.get(`/article/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
@@ -19,7 +19,7 @@ export const useReadArticle = () => {
 
       return res
         ? { ok: true, data: res.data }
-        : { error: "Unable to Read Article" };
+        : { error: { message: "Unable to Read Article", status: 500 } };
     } catch (err) {
       let error = "";
       if (err.response) {
@@ -29,7 +29,7 @@ export const useReadArticle = () => {
       } else {
         error = "An error occurred. Please try again later.";
       }
-      return { error };
+      return { error: { message: error, status: err.response.status } };
     } finally {
       setIsPending(false);
     }
