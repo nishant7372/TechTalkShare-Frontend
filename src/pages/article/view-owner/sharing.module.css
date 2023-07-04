@@ -1,0 +1,98 @@
+.sharing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.5rem;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  height: 3.5rem;
+}
+
+.h4 {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.icon {
+  width: 3.5rem;
+  height: 100%;
+  position: relative;
+}
+
+.icon-img {
+  width: 3.5rem;
+  height: 100%;
+}
+
+.top-container {
+  width: 100%;
+  display: flex;
+  font-size: 1.6rem;
+  gap: 1rem;
+}
+
+.col1,
+.col2,
+.col3,
+.col4,
+.col5 {
+  width: 20%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tag-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sharing-topic {
+  text-decoration: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 50%; /*previous - 70%*/
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sharing-topic:hover {
+  color: white;
+}
+
+.main-container {
+  width: calc(100% - 6rem - 10rem);
+}
+
+@media screen and (max-width: 1000px) {
+  .sharing-topic {
+    max-width: 30%; /*previous - 40%*/
+  }
+}
+
+.h2 {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.d-icon {
+  position: absolute;
+  right: -1rem;
+  bottom: 0.4rem;
+  background-image: linear-gradient(to bottom, white, rgb(81, 81, 244));
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.2rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: darkblue;
+}
