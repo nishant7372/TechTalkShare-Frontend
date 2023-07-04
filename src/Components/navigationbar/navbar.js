@@ -1,23 +1,23 @@
 import styles from "./navbar.module.css";
-
 import "./navbar.css";
 
+import { useState, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
-
-import { useLogout } from "../../hooks/user/useLogout";
-import { useAuthContext } from "../../hooks/context/useAuthContext";
-import { useMessageContext } from "../../hooks/context/useMessageContext";
 import { CSSTransition } from "react-transition-group";
 
-import AnimatedButton from "../button/animatedButton";
+import { useLogout } from "../../hooks/user/useLogout";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setSuccess } from "../../features/alertSlice";
+
 import NameLogo from "../logomaker/namelogo";
-import { useState } from "react";
-import { useRef } from "react";
+import AnimatedButton from "../button/animatedButton";
 
 export default function NavBar() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((store) => store.auth);
+
   const { logout, isPending } = useLogout();
-  const { user } = useAuthContext();
-  const { dispatch } = useMessageContext();
 
   const [showSidebar, setShowSiderbar] = useState(false);
 
@@ -26,9 +26,9 @@ export default function NavBar() {
   const handleLogout = async () => {
     const res = await logout();
     if (res.ok) {
-      dispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      dispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
   };
 
@@ -60,16 +60,23 @@ export default function NavBar() {
               >
                 <div className={styles["sidebar"]} ref={nodeRef}>
                   <NavLink to="/articles">
-                    <i className="fa-solid fa-bars"></i> &nbsp;My Articles
+                    <i className="fa-solid fa-note-sticky"></i> &nbsp;My
+                    Articles
                   </NavLink>
                   <NavLink to="/shared">
-                    <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
+                    <i className="fa-solid fa-share-from-square"></i>{" "}
+                    &nbsp;Shared with me
                   </NavLink>
                   <NavLink to="/download">
-                    <i className="fa-solid fa-bars"></i> &nbsp;Download
+                    <i className="fa-solid fa-cloud-arrow-down"></i>{" "}
+                    &nbsp;Download
                   </NavLink>
                   <NavLink to="/downloads">
-                    <i className="fa-solid fa-bars"></i> &nbsp;Download History
+                    <i className="fa-solid fa-clock-rotate-left"></i>{" "}
+                    &nbsp;Download History
+                  </NavLink>
+                  <NavLink to="/chat">
+                    <i className="fa-brands fa-rocketchat"></i> &nbsp;Chat
                   </NavLink>
                 </div>
               </CSSTransition>
@@ -87,13 +94,17 @@ export default function NavBar() {
           <>
             <div className={styles["nav-middle"]}>
               <NavLink to="/articles">
-                <i className="fa-solid fa-bars"></i> &nbsp;My Articles
+                <i className="fa-solid fa-note-sticky"></i> &nbsp;My Articles
               </NavLink>
               <NavLink to="/shared">
-                <i className="fa-solid fa-bars"></i> &nbsp;Shared with me
+                <i className="fa-solid fa-share-from-square"></i> &nbsp;Shared
+                with me
               </NavLink>
               <NavLink to="/download">
-                <i className="fa-solid fa-bars"></i> &nbsp;Download
+                <i className="fa-solid fa-cloud-arrow-down"></i> &nbsp;Download
+              </NavLink>
+              <NavLink to="/chat">
+                <i className="fa-brands fa-rocketchat"></i> &nbsp; Chat
               </NavLink>
             </div>
             <div className={styles["nav-right-auth"]}>
