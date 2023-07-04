@@ -4,49 +4,49 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import { useShareArticle } from "../../../../hooks/sharing/useShareArticle";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetUsers } from "../../../../hooks/user/useGetUsers";
-import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 
 import Loading from "../../../../Components/loading-spinners/loading/loading";
 import ToggleButton from "../../../../Components/button/toggleButton";
 import Error from "../../../../Components/messages/error";
 import SimpleButton from "../../../../Components/button/simpleButton";
 import NameLogo from "../../../../Components/logomaker/namelogo";
+import { setError, setSuccess } from "../../../../features/alertSlice";
 
 export default function ShareModal({
   articleShare,
   setOpenShareModal,
   nodeRef,
+  updateSharings,
 }) {
   const [userName, setUserName] = useState("");
   const [users, setUsers] = useState(null);
-  const [writeOn, setWriteOn] = useState(false);
-  const [shareOn, setShareOn] = useState(false);
+  const [editOn, setEditOn] = useState(false);
   const [sharedWith, setSharedWith] = useState([]);
 
   const { shareArticle, isPending } = useShareArticle();
-  const { user: me } = useAuthContext();
+  const { user: me } = useSelector((store) => store.auth);
   const {
     getUsers,
     error: usersError,
     isPending: usersPending,
   } = useGetUsers();
-  const { dispatch } = useMessageContext();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await shareArticle({
       articleID: articleShare,
       userName: userName,
-      writePermission: writeOn,
-      sharePermission: shareOn,
+      editPermission: editOn,
     });
     if (res.ok) {
-      dispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
       setOpenShareModal(false);
+      updateSharings();
     } else if (res.error) {
-      dispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
   };
 
@@ -111,8 +111,8 @@ export default function ShareModal({
             )}
           </div>
           <div className={styles["toggle"]}>
-            <div>Edit:</div> <ToggleButton on={writeOn} setOn={setWriteOn} />
-            <div>Share:</div> <ToggleButton on={shareOn} setOn={setShareOn} />
+            <div>Edit Permission:</div>{" "}
+            <ToggleButton on={editOn} setOn={setEditOn} />
           </div>
         </form>
         <div className={styles["sharedWith"]}>
