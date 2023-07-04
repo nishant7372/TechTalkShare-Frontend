@@ -1,0 +1,119 @@
+.leftSection {
+  width: 27rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: white;
+  padding: 1.5rem;
+  height: calc(100% - 3rem);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pre {
+  position: absolute;
+  z-index: 2;
+  top: 0.2rem;
+  left: 1rem;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.userSearchBar {
+  font-size: 2rem;
+  padding: 0.2rem 0.8rem;
+  padding-left: 3.5rem;
+  width: calc(100% - 3.8rem);
+  outline: none;
+  background-color: rgb(4, 3, 10);
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+.userSearchBar::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.users {
+  background-color: rgb(4, 3, 10);
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  overflow-y: auto;
+  height: 95%;
+}
+
+.user {
+  font-size: 1.7rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  transition: background-color 100ms ease;
+  text-decoration: none;
+  color: white;
+}
+
+.user:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.userAvatar {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.online-status {
+  background-color: rgb(42, 239, 42);
+  margin-left: 0.8rem;
+  font-size: 0.6rem;
+  padding: 0 0.5rem;
+  border-radius: 50%;
+  position: relative;
+  bottom: 0.35rem;
+}
+
+.name {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.userErrors {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 500px) {
+  .leftSection {
+    width: 100%;
+  }
+  .hidden {
+    width: 0%;
+    display: none;
+  }
+  .userAvatar {
+    width: 5rem;
+    height: 5rem;
+  }
+  .name {
+    font-size: 1.5rem;
+  }
+  .user {
+    padding: 1rem 2rem;
+  }
+}

@@ -1,0 +1,140 @@
+.chatbox {
+  width: calc(100% - 33rem);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.upperSection {
+  height: calc(100% - 5rem);
+  border-radius: 4px;
+}
+
+.recieverName {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  height: 3rem;
+  align-items: center;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.online {
+  background-color: green;
+  font-size: 1.2rem;
+  padding: 0rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.offline {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 1.2rem;
+  padding: 0rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.chatContainer::before {
+  content: "";
+  display: block;
+  margin-top: auto;
+}
+
+.chatContainer {
+  color: white;
+  font-size: 1.6rem;
+  height: calc(100% - 9rem);
+  display: flex;
+  gap: 0.6rem;
+  flex-direction: column;
+  padding: 2rem;
+  overflow: auto;
+  position: relative;
+}
+
+.messageContainer {
+  color: white;
+  font-size: 1.6rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-direction: column;
+}
+
+.lowerSection {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.ls-1 {
+  width: calc(100% - 5rem);
+}
+
+.chatInput {
+  min-height: 3.6rem;
+  font-size: 2rem;
+  padding: 0.2rem 0.8rem;
+  padding-left: 3rem;
+  width: calc(100% - 15rem);
+  outline: none;
+  background-color: rgb(4, 3, 10);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  resize: none;
+  z-index: 4;
+  position: absolute;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+
+.chatInput:focus {
+  box-shadow: 0 0 0 1px #2684ff;
+}
+
+.chatInput::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ls2 {
+  width: 4rem;
+}
+
+.emoji {
+  font-size: 3.2rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 4;
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 5rem;
+  left: 0rem;
+}
+
+.date {
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: auto;
+  font-size: 2rem;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 500px) {
+  .chatbox {
+    width: 100%;
+  }
+}
