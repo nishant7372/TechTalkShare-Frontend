@@ -6,43 +6,55 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import useOnRefresh from "./hooks/useOnRefresh";
+import { useSocketConnection } from "./hooks/socket/socketConnection";
+
+import Chat from "./pages/chat-page/chat";
 import Home from "./pages/home-page/home";
 import LogIn from "./pages/login-page/login";
+import NotFound from "./pages/error/notFound";
 import SignUp from "./pages/signup-page/signup";
-import NavBar from "./Components/navigationbar/navbar";
 import Settings from "./pages/settings/Settings";
+import ServerError from "./pages/error/serverError";
+import Scrape from "./pages/article/download/scrape";
+import NavBar from "./Components/navigationbar/navbar";
 import Articles from "./pages/article/view-owner/articles";
 import CreateArticle from "./pages/article/create/createArticle";
 import UpdateArticle from "./pages/article/update/updateArticle";
-import ArticlePreview from "./pages/article/view-owner/articlePreview";
-import MessageContainer from "./Components/messages/messageContainer";
-import SharedArticles from "./pages/article/view-shared/sharedArticles";
-import SharedPreview from "./pages/article/view-shared/sharedPreview";
-import Scrape from "./pages/article/download/scrape";
-import NotFound from "./pages/error/notFound";
-import ServerError from "./pages/error/serverError";
 import Loading from "./Components/loading-spinners/loading/loading";
+import SharedPreview from "./pages/article/view-shared/sharedPreview";
+import MessageContainer from "./Components/messages/messageContainer";
+import ArticlePreview from "./pages/article/view-owner/articlePreview";
+import SharedArticles from "./pages/article/view-shared/sharedArticles";
 
-import { useAuthContext } from "./hooks/context/useAuthContext";
-import { useMessageContext } from "./hooks/context/useMessageContext";
-import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
+import { useSelector } from "react-redux";
+
+import Sharings from "./pages/article/view-owner/sharings";
 import Downloads from "./pages/article/download/downloads";
+import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 
 function App() {
-  const { user, authIsReady, serverError, authPending } = useAuthContext();
-  const { success, error } = useMessageContext();
+  useSocketConnection();
+  useOnRefresh();
+
+  const { user, authIsReady, serverSideError } = useSelector(
+    (store) => store.auth
+  );
+  const { success, error } = useSelector((store) => store.alert);
 
   return (
     <div className="App">
       {(success || error) && <MessageContainer />}
-      {authPending && <Loading action="mainRead" />}
-      {authIsReady && (
+      {!authIsReady && <Loading action="mainRead" />}
+      {authIsReady && !serverSideError && (
         <Router>
           <NavBar />
           <Routes>
             <Route
               path="/"
-              element={!user ? <Navigate to="/login" /> : <Home />}
+              element={
+                !user ? <Navigate to="/login" /> : <Navigate to="/articles" />
+              }
             />
             <Route
               path="/login"
@@ -65,12 +77,20 @@ function App() {
               element={!user ? <Navigate to="/login" /> : <Scrape />}
             />
             <Route
+              path="/chat/*"
+              element={!user ? <Navigate to="/login" /> : <Chat />}
+            />
+            <Route
               path="/downloads"
               element={!user ? <Navigate to="/login" /> : <Downloads />}
             />
             <Route
               path="/articles"
               element={!user ? <Navigate to="/login" /> : <Articles />}
+            />
+            <Route
+              path="/sharings/:id"
+              element={!user ? <Navigate to="/login" /> : <Sharings />}
             />
             <Route
               path="/shared"
@@ -98,7 +118,7 @@ function App() {
           </Routes>
         </Router>
       )}
-      {!authPending && serverError && <ServerError />}
+      {authIsReady && serverSideError && <ServerError />}
     </div>
   );
 }
