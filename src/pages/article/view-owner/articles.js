@@ -1,11 +1,13 @@
 import styles from "./articles.module.css";
 
 import { useEffect, useState, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
 
 import { useReadArticles } from "../../../hooks/article/useReadArticles";
-import { useArticleContext } from "../../../hooks/context/useArticleContext";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
-import { CSSTransition } from "react-transition-group";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setError } from "../../../features/alertSlice";
+import { setCurrPageNo, setActiveFilter } from "../../../features/articleSlice";
 
 import Article from "./article";
 import Paginate from "../components/pagination/paginate";
@@ -13,16 +15,16 @@ import Loading from "../../../Components/loading-spinners/loading/loading";
 import TagSelect from "../components/tags/tagSelect";
 import ShareModal from "../components/modal/shareModal";
 import AnimatedButton from "../../../Components/button/animatedButton";
+
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();
-  const {
-    articles,
-    currPageNo,
-    activeFilter,
-    dispatch: articleDispatch,
-  } = useArticleContext();
 
-  const { dispatch: messageDispatch } = useMessageContext();
+  const { articles, currPageNo, activeFilter } = useSelector(
+    (store) => store.article
+  );
+
+  const dispatch = useDispatch();
+
   const nodeRef = useRef(null);
   const [search, setSearch] = useState("");
   const [tag, setTag] = useState(null);
@@ -38,7 +40,7 @@ export default function Articles() {
       });
 
       if (res.error) {
-        messageDispatch({ type: "ERROR", payload: res.error });
+        dispatch(setError(res.error));
       }
     };
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
@@ -47,13 +49,13 @@ export default function Articles() {
   }, [currPageNo, activeFilter, search, tag]);
 
   const handlePageChange = (page) => {
-    articleDispatch({ type: "PAGE_CHANGED", payload: page.selected });
+    dispatch(setCurrPageNo(page.selected));
   };
 
   const handleFilterClick = async (option) => {
     if (activeFilter !== option) {
-      articleDispatch({ type: "PAGE_CHANGED", payload: 0 });
-      articleDispatch({ type: "FILTER", payload: option });
+      dispatch(setCurrPageNo(0));
+      dispatch(setActiveFilter(option));
     }
   };
 
@@ -141,7 +143,7 @@ export default function Articles() {
           </div>
         )}
         <div className={styles["article-footer"]}>
-          <Paginate handlePageChange={handlePageChange} />
+          <Paginate handlePageChange={handlePageChange} type={"article"} />
         </div>
       </div>
       <CSSTransition
@@ -155,6 +157,7 @@ export default function Articles() {
           articleShare={articleShare}
           setOpenShareModal={setOpenShareModal}
           nodeRef={nodeRef}
+          editPermission={true}
         />
       </CSSTransition>
     </>

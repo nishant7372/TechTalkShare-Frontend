@@ -13,7 +13,8 @@
 
 .preview-container {
   margin-top: 2rem;
-  width: 90%;
+  width: 95%;
+  overflow-y: auto;
 }
 
 .markdown {
@@ -21,15 +22,15 @@
   border-radius: 4px;
 }
 
-.topic-bar {
+.topic-container {
   display: flex;
-  gap: 0.5rem;
-  width: 100%;
+  gap: 3rem;
+  width: calc(100% - 4rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   align-items: center;
   font-size: 2.2rem;
   color: rgba(255, 255, 255, 0.6);
-  justify-content: space-between;
+  padding: 1rem 2rem;
 }
 
 .backButton {
@@ -44,30 +45,37 @@
 .topic {
   color: white;
   overflow-wrap: break-word;
-  width: 95%;
 }
 
-.container-left {
-  padding: 1rem 0.5rem 1rem 2rem;
+.functionButtons {
+  margin-top: 2rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
   display: flex;
-  gap: 3rem;
-  width: calc(100% - 35rem);
+  flex-wrap: wrap;
 }
 
-.container-right {
-  padding: 1rem 2rem 1rem 0.5rem;
+.date-container {
+  margin-top: 2rem;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  width: 100%;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .tag-container {
+  margin-top: 2rem;
   display: flex;
-  padding-top: 2rem;
-  padding-left: 5%;
   gap: 1rem;
   align-items: center;
-  justify-content: flex-start;
-  width: calc(100% - 5%);
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 600px) {
@@ -91,44 +99,9 @@
   }
 }
 
-.date-container {
-  display: flex;
-  padding-top: 2rem;
-  gap: 2rem;
-  padding-left: 5%;
-  width: calc(100% - 5%);
-}
-
 .h4 {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.6rem;
-}
-
-.permission-container {
-  color: white;
-  font-size: 1.8rem;
-  display: flex;
-  padding-top: 1rem;
-  gap: 2rem;
-  padding-left: 5%;
-  width: calc(100% - 5%);
-  align-items: center;
-}
-
-.yes {
-  border-radius: 2px;
-  font-size: 1.4rem;
-  background-color: green;
-  padding: 0.1rem 0.5rem;
-  margin-left: -0.8rem;
-}
-
-.no {
-  border-radius: 2px;
-  font-size: 1.4rem;
-  background-color: rgb(202, 5, 5);
-  padding: 0.1rem 0.5rem;
-  margin-left: -0.8rem;
 }
 
 @media print {
