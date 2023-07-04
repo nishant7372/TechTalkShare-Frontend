@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useArticleContext } from "../context/useArticleContext";
 import axiosInstance from "./../axios/axiosInstance";
+import { useDispatch } from "react-redux";
+import { setArticles, setArticleCount } from "../../features/articleSlice";
 
 export const useReadArticles = () => {
-  const { dispatch } = useArticleContext();
+  const dispatch = useDispatch();
+
   const [isPending, setIsPending] = useState(false);
 
   const readArticles = async (params) => {
@@ -20,7 +22,8 @@ export const useReadArticles = () => {
         },
       });
 
-      dispatch({ type: "ARTICLES", payload: res.data });
+      dispatch(setArticles(res.data.articles));
+      dispatch(setArticleCount(res.data.articleCount));
 
       return res ? { ok: true } : { error: "Unable to fetch Articles" };
     } catch (err) {

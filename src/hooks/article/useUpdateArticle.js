@@ -10,7 +10,7 @@ export const useUpdateArticle = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axiosInstance.patch(`/articles/${id}`, updates, {
+      const res = await axiosInstance.patch(`/article/${id}`, updates, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",

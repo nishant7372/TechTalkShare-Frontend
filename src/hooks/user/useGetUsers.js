@@ -5,7 +5,7 @@ export const useGetUsers = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
-  const getUsers = async (id) => {
+  const getUsers = async () => {
     setError(null);
     setIsPending(true);
     const token = localStorage.getItem("token");

@@ -10,7 +10,7 @@ export const useDeleteArticle = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axiosInstance.delete(`/articles/${id}`, {
+      const res = await axiosInstance.delete(`/article/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",

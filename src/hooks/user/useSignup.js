@@ -1,11 +1,12 @@
 import { useState, useMemo } from "react";
-import { useAuthContext } from "./../context/useAuthContext";
+import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
+import { setUser } from "../../features/authSlice";
 
 const bowser = require("bowser");
 
 export const useSignup = () => {
-  const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
   const [isPending, setIsPending] = useState(false);
 
   const browser = useMemo(
@@ -40,9 +41,9 @@ export const useSignup = () => {
         return { error: "Unable to Signup" };
       } else {
         localStorage.setItem("token", res.data.token); // save token in localStorage
-        dispatch({ type: "LOGIN", payload: res.data.user }); // dispatch login action
+        dispatch(setUser(res.data.user)); // setting user on login action
 
-        return { ok: "Account Created Successfully" };
+        return { ok: "Signup Successful" };
       }
     } catch (err) {
       let error = "";

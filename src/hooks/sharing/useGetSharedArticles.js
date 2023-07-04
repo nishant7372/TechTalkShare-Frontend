@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
-import { useSharingContext } from "../context/useSharingContext";
+import { useDispatch } from "react-redux";
+import { setArticles, setArticleCount } from "../../features/sharingSlice";
 
 export const useGetSharedArticles = () => {
-  const { dispatch } = useSharingContext();
+  const dispatch = useDispatch();
   const [isPending, setIsPending] = useState(false);
 
   const getSharedArticles = async (params) => {
@@ -20,7 +21,8 @@ export const useGetSharedArticles = () => {
         },
       });
 
-      dispatch({ type: "SHARED_ARTICLES", payload: res.data });
+      dispatch(setArticles(res.data.articles));
+      dispatch(setArticleCount(res.data.articleCount));
 
       return res ? { ok: true } : { error: "Unable to fetch Articles" };
     } catch (err) {

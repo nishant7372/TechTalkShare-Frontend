@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useAuthContext } from "./../context/useAuthContext";
+import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
+import { setUser } from "../../features/authSlice";
 
 export const useDeleteAccount = () => {
-  const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
   const [isPending, setIsPending] = useState(false);
 
   const deleteAccount = async () => {
@@ -22,7 +23,7 @@ export const useDeleteAccount = () => {
         return { error: "Unable to Delete Account" };
       } else {
         localStorage.setItem("token", null); //delete token from localStorage
-        dispatch({ type: "LOGOUT" }); //dispatch logout action
+        dispatch(setUser(null)); // setting user null on logout
         return { ok: "Account Deleted Successful" };
       }
     } catch (err) {

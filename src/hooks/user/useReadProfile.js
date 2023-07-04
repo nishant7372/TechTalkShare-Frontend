@@ -1,15 +1,19 @@
 import { useState } from "react";
-import { useAuthContext } from "./../context/useAuthContext";
+import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
+import { setAuthIsReady, setServerError } from "../../features/authSlice";
+import { setError } from "../../features/alertSlice";
 
 export const useReadProfile = () => {
-  const { dispatch } = useAuthContext();
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
   const [isPending, setIsPending] = useState(false);
 
   const readProfile = async () => {
-    if (localStorage.getItem("token") === "null") return;
-    setError(null);
+    if (
+      localStorage.getItem("token") === "null" ||
+      localStorage.getItem("token") === null
+    )
+      return;
     setIsPending(true);
     const token = localStorage.getItem("token");
     try {
@@ -19,26 +23,32 @@ export const useReadProfile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // dispatch auth_is_ready
-
-      dispatch({ type: "AUTH_IS_READY", payload: res.data });
+      if (res) {
+        dispatch(setAuthIsReady(res.data)); // dispatch auth_is_ready
+        return { ok: "User Information Fetched" };
+      } else {
+        dispatch(setAuthIsReady(null));
+        return { error: "Unable to Fetch User" };
+      }
     } catch (error) {
+      let err;
       if (error?.response?.status === 401) {
         localStorage.setItem("token", null); //delete token from localStorage when not Authorized
-        dispatch({ type: "AUTH_IS_READY", payload: null });
-        alert("You have been logged out!");
+        dispatch(setAuthIsReady(null));
+        return dispatch(setError("You have been logged out!"));
       }
-      dispatch({ type: "SERVER_ERROR" });
+      dispatch(setServerError(true));
       if (error.response) {
-        setError(error?.response?.data?.message || "An error occurred.");
+        err = error?.response?.data?.message || "An error occurred.";
       } else if (error.request) {
-        setError("Network error. Please try again later.");
+        err = "Network error. Please try again later.";
       } else {
-        setError("An error occurred. Please try again later.");
+        err = "An error occurred. Please try again later.";
       }
+      return { error: err };
     } finally {
       setIsPending(false);
     }
   };
-  return { readProfile, error, isPending };
+  return { readProfile, isPending };
 };

@@ -29,7 +29,7 @@ export const useGetSharedArticle = () => {
       } else {
         error = "An error occurred. Please try again later.";
       }
-      return { error };
+      return { error: { message: error, status: err.response.status } };
     } finally {
       setIsPending(false);
     }

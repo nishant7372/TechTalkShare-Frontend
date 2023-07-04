@@ -10,7 +10,7 @@ export const useCreateArticle = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axiosInstance.post("/articles", data, {
+      const res = await axiosInstance.post("/article", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-type": "application/json; charset=UTF-8",
