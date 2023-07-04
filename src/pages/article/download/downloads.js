@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
-import DownloadItem from "./downloadItem";
-import { useGetDownloads } from "../../../hooks/download/useGetDownloads";
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
 import styles from "./scrape.module.css";
+
+import { useState, useEffect } from "react";
+
+import { useGetDownloads } from "../../../hooks/download/useGetDownloads";
+
+import { useDispatch } from "react-redux";
+import { setError } from "../../../features/alertSlice";
+
+import DownloadItem from "./downloadItem";
+import Loading from "../../../Components/loading-spinners/loading/loading";
 
 export default function Downloads() {
   const { getDownloads, isPending } = useGetDownloads();
-  const { dispatch: messageDispatch } = useMessageContext();
+  const dispatch = useDispatch();
   const [downloads, setDownloads] = useState(null);
 
   const sort = (downloads) => {
@@ -19,7 +24,7 @@ export default function Downloads() {
     const fetch = async () => {
       const res = await getDownloads();
       if (res.error) {
-        messageDispatch({ type: "ERROR", payload: res.error });
+        dispatch(setError(res.error));
       } else if (res.data) {
         setDownloads(res.data);
       }

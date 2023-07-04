@@ -4,17 +4,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
+import { useDispatch } from "react-redux";
 
 import Editor from "../components/editors/editor";
 import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
 import SimpleButton from "../../../Components/button/simpleButton";
 import { useEffect } from "react";
+import { setError, setSuccess } from "../../../features/alertSlice";
 
 export default function CreateArticle() {
   const { createArticle, isPending } = useCreateArticle();
-  const { dispatch } = useMessageContext();
+  const dispatch = useDispatch();
 
   let tp = JSON.parse(localStorage.getItem("topic"));
   let tg = JSON.parse(localStorage.getItem("tags"));
@@ -56,10 +57,10 @@ export default function CreateArticle() {
     const res = await createArticle({ topic, content, tags });
 
     if (res.ok) {
-      dispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
       goBack();
     } else if (res.error) {
-      dispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
   };
 

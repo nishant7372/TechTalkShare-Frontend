@@ -3,12 +3,18 @@ import styles from "./security.module.css";
 import { useState } from "react";
 
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
-import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import { useDispatch } from "react-redux";
+import { setError, setSuccess } from "../../../../features/alertSlice";
+
 import SimpleButton from "../../../../Components/button/simpleButton";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 
 export default function Security() {
+  const dispatch = useDispatch();
+
+  const { updateUser, isPending } = useUpdateUser();
+
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
@@ -16,24 +22,19 @@ export default function Security() {
   const closedEye = `${process.env.PUBLIC_URL}/img/eye-password.png`;
   const openEye = `${process.env.PUBLIC_URL}/img/eye-text.png`;
 
-  const { dispatch: messageDispatch } = useMessageContext();
-
-  const { updateUser, isPending } = useUpdateUser();
-
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (newPassword === confirmPassword) {
       const res = await updateUser({ password: newPassword });
       if (res.ok) {
-        messageDispatch({ type: "SUCCESS", payload: res.ok });
-      }
-      if (res.error) {
-        messageDispatch({ type: "ERROR", payload: res.error });
+        dispatch(setSuccess(res.ok));
+      } else if (res.error) {
+        dispatch(setError(res.error));
       }
       setNewPassword("");
       setConfirmPassword("");
     } else {
-      messageDispatch({ type: "ERROR", payload: "Passwords does not Match" });
+      dispatch(setError("Passwords does not Match"));
     }
   };
 

@@ -1,35 +1,37 @@
 import styles from "./avatar.module.css";
 
 import { useState } from "react";
+
 import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useDeleteAvatar } from "../../../../hooks/avatar/useDeleteAvatar";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setSuccess } from "../../../../features/alertSlice";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import SimpleButton from "../../../../Components/button/simpleButton";
 
 export default function Avatar() {
-  const { uploadAvatar, isPending: uploadPending } = useUploadAvatar();
+  const dispatch = useDispatch();
 
+  const { user } = useSelector((store) => store.auth);
+
+  const { readProfile } = useReadProfile();
+  const { uploadAvatar, isPending: uploadPending } = useUploadAvatar();
   const { deleteAvatar, isPending: deletePending } = useDeleteAvatar();
 
-  const { dispatch: messageDispatch } = useMessageContext();
-  const { readProfile } = useReadProfile();
-  const { user } = useAuthContext();
   const avatarImage = process.env.PUBLIC_URL + "/img/avatar.png";
 
   const [currImg, setCurrImg] = useState(avatarImage);
-
   const [isSelected, setIsSelected] = useState(false);
 
   const handleSave = async (avatarImage) => {
     const res = await uploadAvatar(avatarImage);
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      messageDispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
     setIsSelected(false);
     await readProfile();
@@ -38,9 +40,9 @@ export default function Avatar() {
   const handleDeleteAvatar = async () => {
     const res = await deleteAvatar();
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      messageDispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
     await readProfile();
   };

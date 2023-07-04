@@ -2,31 +2,32 @@ import styles from "./yourDevices.module.css";
 
 import { useEffect, useMemo } from "react";
 
-import { useAuthContext } from "../../../../hooks/context/useAuthContext";
-import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
 
-import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setSuccess } from "../../../../features/alertSlice";
+
 import Session from "../sessions/session";
 import SimpleButton from "../../../../Components/button/simpleButton";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import Loading from "../../../../Components/loading-spinners/loading/loading";
 
 export default function CurrentSessions() {
-  const { user, currentSessionId } = useAuthContext();
-  const { logoutAllOther, isPending } = useLogoutAllOther();
-  const { readProfile } = useReadProfile();
+  const dispatch = useDispatch();
 
+  const { user, currentSessionId } = useSelector((store) => store.auth);
   const { sessions } = user;
-  const { dispatch: messageDispatch } = useMessageContext();
+
+  const { readProfile } = useReadProfile();
+  const { logoutAllOther, isPending } = useLogoutAllOther();
 
   const handleLogOutAllOther = async () => {
     const res = await logoutAllOther();
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
-    }
-    if (res.error) {
-      messageDispatch({ type: "ERROR", payload: res.error });
+      dispatch(setSuccess(res.ok));
+    } else if (res.error) {
+      dispatch(setError(res.error));
     }
     await readProfile();
   };

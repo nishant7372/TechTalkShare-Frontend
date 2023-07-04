@@ -3,9 +3,11 @@ import styles from "./login.module.css";
 import { useState } from "react";
 
 import { useLogin } from "../../hooks/user/useLogin";
-import { useMessageContext } from "../../hooks/context/useMessageContext";
 
 import Spinner from "../../Components/loading-spinners/spinner/spinner";
+
+import { useDispatch } from "react-redux";
+import { setError, setSuccess } from "../../features/alertSlice";
 
 export default function LogIn() {
   const [passwordType, setPasswordType] = useState("password");
@@ -15,7 +17,7 @@ export default function LogIn() {
 
   const { login, isPending } = useLogin();
 
-  const { dispatch: messageDispatch } = useMessageContext();
+  const dispatch = useDispatch();
 
   const parseError = (error) => {
     return error.includes("Unable to login")
@@ -33,9 +35,9 @@ export default function LogIn() {
     e.preventDefault();
     const res = await login(userName, password);
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      messageDispatch({ type: "ERROR", payload: parseError(res.error) });
+      dispatch(setError(parseError(res.error)));
     }
   };
 

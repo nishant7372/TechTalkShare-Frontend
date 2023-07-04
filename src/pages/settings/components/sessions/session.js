@@ -1,19 +1,22 @@
 import styles from "./session.module.css";
 
 import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
-import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
+import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
+
+import { useDispatch } from "react-redux";
+import { setSuccess, setError } from "../../../../features/alertSlice";
 
 import Successful from "../../../../Components/messages/successful";
-import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import SimpleButton from "../../../../Components/button/simpleButton";
+import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 
 export default function Session({ session, active }) {
+  const dispatch = useDispatch();
+
   const { formatDate } = useFormatDate();
-  const { sessionLogout, isPending } = useSessionLogout();
   const { readProfile } = useReadProfile();
-  const { dispatch: messageDispatch } = useMessageContext();
+  const { sessionLogout, isPending } = useSessionLogout();
 
   const { _id } = session;
   const { osDetails, creationTime } = session.session;
@@ -21,10 +24,9 @@ export default function Session({ session, active }) {
   const handleLogout = async () => {
     const res = await sessionLogout(_id, active);
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
-    }
-    if (res.error) {
-      messageDispatch({ type: "ERROR", payload: res.error });
+      dispatch(setSuccess(res.ok));
+    } else if (res.error) {
+      dispatch(setError(res.error));
     }
     await readProfile();
   };

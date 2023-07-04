@@ -5,12 +5,14 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useUpdateSharedArticle } from "../../../hooks/sharing/useUpdateSharedArticle";
 import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
+import { useDispatch } from "react-redux";
+import { setError, setSuccess } from "../../../features/alertSlice";
+
+import NotFound from "../../error/notFound";
 import Editor from "../components/editors/editor";
 import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import NotFound from "../../error/notFound";
 import SimpleButton from "../../../Components/button/simpleButton";
 
 export default function UpdateSharedArticle() {
@@ -24,7 +26,7 @@ export default function UpdateSharedArticle() {
   const [showNotFound, setShowNotFound] = useState(false);
   const [noChange, setNoChange] = useState(false);
 
-  const { dispatch } = useMessageContext();
+  const dispatch = useDispatch();
 
   const { updateSharedArticle, isPending: updatePending } =
     useUpdateSharedArticle();
@@ -41,15 +43,16 @@ export default function UpdateSharedArticle() {
   useEffect(() => {
     const fetch = async () => {
       const res = await getSharedArticle(id);
-      if (res.ok && res.data.sharing.writePermission) {
+      if (res.ok && res.data.sharing.editPermission) {
         setArticle(res.data.article);
         setTopic(res.data.article.topic);
         setContent(res.data.article.content);
         setTags(res.data.article.tags);
       } else if (res.error) {
-        dispatch({ type: "ERROR", payload: res.error });
-        if (res.error === "An error occurred.") setShowNotFound(true);
-      } else if (!res.data.sharing.writePermission) {
+        dispatch(setError(res.error.message));
+        if (res.error.status === 404) setShowNotFound(true);
+      } else if (!res.data.sharing.editPermission) {
+        dispatch(setError("401 Unauthorized"));
         setShowNotFound(true);
       }
     };
@@ -82,10 +85,10 @@ export default function UpdateSharedArticle() {
     const res = await updateSharedArticle(id, updates);
 
     if (res.ok) {
-      dispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
       goBack();
     } else if (res.error) {
-      dispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
   };
 

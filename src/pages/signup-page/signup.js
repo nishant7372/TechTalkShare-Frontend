@@ -3,18 +3,21 @@ import styles from "./signup.module.css";
 import { useState } from "react";
 
 import { useSignup } from "../../hooks/user/useSignup";
-import { useMessageContext } from "../../hooks/context/useMessageContext";
+
+import { useDispatch } from "react-redux";
+import { setError, setSuccess } from "../../features/alertSlice";
 
 import Spinner from "../../Components/loading-spinners/spinner/spinner";
 
 export default function SignUp() {
-  const [passwordType, setPasswordType] = useState("password");
+  const dispatch = useDispatch();
+
+  const { signup, isPending } = useSignup();
+
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { dispatch: messageDispatch } = useMessageContext();
-
-  const { signup, isPending } = useSignup();
+  const [passwordType, setPasswordType] = useState("password");
 
   const parseError = (error) => {
     return error.includes("duplicate key error")
@@ -32,9 +35,9 @@ export default function SignUp() {
     e.preventDefault();
     const res = await signup(userName, password, name);
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      messageDispatch({ type: "ERROR", payload: parseError(res.error) });
+      dispatch(setError(parseError(res.error)));
     }
   };
 

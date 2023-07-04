@@ -2,19 +2,21 @@ import styles from "./personalInfo.module.css";
 
 import { useState, useEffect } from "react";
 
-import { useAuthContext } from "../../../../hooks/context/useAuthContext";
 import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useMessageContext } from "../../../../hooks/context/useMessageContext";
 
 import Spinner from "../../../../Components/loading-spinners/spinner/spinner";
 import SimpleButton from "../../../../Components/button/simpleButton";
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setSuccess } from "../../../../features/alertSlice";
 
 export default function PersonalInfo() {
-  const { user } = useAuthContext();
-  const { updateUser, isPending } = useUpdateUser();
+  const { user } = useSelector((store) => store.auth);
+
+  const dispatch = useDispatch();
+
   const { readProfile } = useReadProfile();
-  const { dispatch: messageDispatch } = useMessageContext();
+  const { updateUser, isPending } = useUpdateUser();
 
   const [noChange, setNoChange] = useState(false);
   const [name, setName] = useState(user.name);
@@ -23,9 +25,9 @@ export default function PersonalInfo() {
   const handleSave = async () => {
     const res = await updateUser({ name, age });
     if (res.ok) {
-      messageDispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
     } else if (res.error) {
-      messageDispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
     await readProfile();
   };

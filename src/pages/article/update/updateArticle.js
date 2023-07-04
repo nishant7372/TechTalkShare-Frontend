@@ -5,12 +5,14 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useUpdateArticle } from "../../../hooks/article/useUpdateArticle";
 import { useReadArticle } from "../../../hooks/article/useReadArticle";
-import { useMessageContext } from "../../../hooks/context/useMessageContext";
 
+import { useDispatch } from "react-redux";
+import { setError, setSuccess } from "../../../features/alertSlice";
+
+import NotFound from "../../error/notFound";
 import Editor from "../components/editors/editor";
 import TagSelect from "../components/tags/tagSelect";
 import Loading from "../../../Components/loading-spinners/loading/loading";
-import NotFound from "../../error/notFound";
 import SimpleButton from "../../../Components/button/simpleButton";
 
 export default function UpdateArticle() {
@@ -24,10 +26,9 @@ export default function UpdateArticle() {
   const [showNotFound, setShowNotFound] = useState(false);
   const [noChange, setNoChange] = useState(false);
 
-  const { dispatch } = useMessageContext();
+  const dispatch = useDispatch();
 
   const { updateArticle, isPending: updatePending } = useUpdateArticle();
-
   const { readArticle, isPending: readPending } = useReadArticle();
 
   const navigate = useNavigate();
@@ -47,8 +48,8 @@ export default function UpdateArticle() {
         setContent(res.data.content);
         setTags(res.data.tags);
       } else if (res.error) {
-        dispatch({ type: "ERROR", payload: res.error });
-        if (res.error === "An error occurred.") setShowNotFound(true);
+        dispatch(setError(res.error.message));
+        if (res.error.status === 404) setShowNotFound(true);
       }
     };
     fetch();
@@ -80,10 +81,10 @@ export default function UpdateArticle() {
     const res = await updateArticle(id, updates);
 
     if (res.ok) {
-      dispatch({ type: "SUCCESS", payload: res.ok });
+      dispatch(setSuccess(res.ok));
       goBack();
     } else if (res.error) {
-      dispatch({ type: "ERROR", payload: res.error });
+      dispatch(setError(res.error));
     }
   };
 
