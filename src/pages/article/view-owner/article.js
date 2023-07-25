@@ -1,11 +1,11 @@
-import styles from "./article.module.css";
+import styles from "./Article.module.css";
 
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import Tag from "../components/tags/tag";
+import Tag from "./../../../components/tags/Tag";
 
 export default function Article({ article, updated, handleShare }) {
   const { timeSince } = useFormatDate();

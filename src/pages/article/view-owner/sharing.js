@@ -1,4 +1,4 @@
-import styles from "./sharing.module.css";
+import styles from "./Sharing.module.css";
 
 import { useState } from "react";
 import { useEffect } from "react";
@@ -11,19 +11,18 @@ import { useDeleteSharing } from "../../../hooks/sharing/useDeleteSharing";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
 
-import ToggleButton from "../../../Components/button/toggleButton";
-import SimpleButton from "../../../Components/button/simpleButton";
-import Spinner from "../../../Components/loading-spinners/spinner/spinner";
-
+import ToggleButton from "../../../components/button/ToggleButton";
+import Button from "../../../components/button/Button";
+import Spinner from "../../../components/loaders/spinner/Spinner";
 
 export default function Sharing({ sharing, updated, updateSharings }) {
   const { timeSince } = useFormatDate();
 
   const dispatch = useDispatch();
-  
+
   const { deleteSharing, isPending: deletePending } = useDeleteSharing();
   const { updateSharing, isPending: updatePending } = useUpdateSharing();
-  
+
   const [noChange, setNoChange] = useState(false);
   const [editPermission, setEditPermission] = useState(sharing.editPermission);
 
@@ -114,7 +113,7 @@ export default function Sharing({ sharing, updated, updateSharings }) {
               data-tooltip-variant="info"
               style={{ display: "inline-block" }}
             >
-              <SimpleButton
+              <Button
                 icon={<i className="fa-regular fa-floppy-disk"></i>}
                 content="&nbsp; Save"
                 disabled={noChange}
@@ -145,7 +144,7 @@ export default function Sharing({ sharing, updated, updateSharings }) {
               <Spinner />
             </div>
           ) : (
-            <SimpleButton
+            <Button
               icon={<i className="fa-solid fa-user-slash"></i>}
               content="&nbsp; Revoke"
               buttonStyle={{

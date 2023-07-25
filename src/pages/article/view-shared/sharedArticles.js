@@ -1,4 +1,4 @@
-import styles from "./../view-owner/articles.module.css";
+import styles from "./../view-owner/Articles.module.css";
 
 import { useEffect, useState } from "react";
 
@@ -8,17 +8,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 import { setActiveFilter, setCurrPageNo } from "../../../features/sharingSlice";
 
-import SharedArticle from "./sharedArticle";
-import TagSelect from "../components/tags/tagSelect";
-import Paginate from "../components/pagination/paginate";
-import Loading from "../../../Components/loading-spinners/loading/loading";
+import SharedArticle from "./SharedArticle";
+import TagSelect from "./../../../components/tags/TagSelect";
+import Paginate from "./../../../components/pagination/Paginate";
+import Loading from "./../../../components/loaders/loading/Loading";
 
 export default function SharedArticles() {
   const { articles, currPageNo, activeFilter } = useSelector(
     (store) => store.sharing
   );
   const dispatch = useDispatch();
-  
+
   const { getSharedArticles, isPending } = useGetSharedArticles();
 
   const [search, setSearch] = useState("");

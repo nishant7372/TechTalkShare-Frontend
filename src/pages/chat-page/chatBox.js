@@ -1,4 +1,4 @@
-import styles from "./chatBox.module.css";
+import styles from "./ChatBox.module.css";
 
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
@@ -11,12 +11,12 @@ import { useFormatDate } from "../../hooks/utils/useFormatDate";
 import { useDispatch, useSelector } from "react-redux";
 import { setError } from "../../features/alertSlice";
 
-import Message from "./message";
+import Message from "./Message";
 import EmojiPicker from "emoji-picker-react";
-import NameLogo from "../../Components/logomaker/namelogo";
-import AnimatedButton from "../../Components/button/animatedButton";
-import NotFound from "../error/notFound";
-import Loading from "../../Components/loading-spinners/loading/loading";
+import NameLogo from "../../components/avatar/NameAvatar";
+import AnimatedButton from "../../components/button/AnimatedButton";
+import NotFound from "../error/NotFound";
+import Loading from "../../components/loaders/loading/Loading";
 
 export default function ChatBox({
   onlineUsers,
@@ -106,6 +106,7 @@ export default function ChatBox({
       document.removeEventListener("click", handleClick);
       handleSetReciever(null);
     };
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -122,6 +123,7 @@ export default function ChatBox({
       }
     };
     fetchReciever();
+    // eslint-disable-next-line
   }, [userName]);
 
   const handleSend = () => {

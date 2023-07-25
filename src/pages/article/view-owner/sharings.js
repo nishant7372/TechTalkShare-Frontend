@@ -1,4 +1,4 @@
-import styles from "./sharings.module.css";
+import styles from "./Sharings.module.css";
 
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
@@ -9,11 +9,11 @@ import { useGetSharings } from "../../../hooks/sharing/useGetSharings";
 import { useDispatch } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 
-import Sharing from "./sharing";
-import NotFound from "../../error/notFound";
-import ShareModal from "../components/modal/shareModal";
-import AnimatedButton from "../../../Components/button/animatedButton";
-import Loading from "../../../Components/loading-spinners/loading/loading";
+import Sharing from "./Sharing";
+import NotFound from "../../error/NotFound";
+import ShareModal from "../../../components/modals/sharemodal/ShareModal";
+import AnimatedButton from "../../../components/button/AnimatedButton";
+import Loading from "../../../components/loaders/loading/Loading";
 
 export default function Sharings() {
   const { id } = useParams();
@@ -59,6 +59,7 @@ export default function Sharings() {
 
   useEffect(() => {
     fetchSharings();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export default function Sharings() {
     } else {
       if (data) applySortedData(data);
     }
+    // eslint-disable-next-line
   }, [data, activeFilter, searchTerm]);
 
   return (

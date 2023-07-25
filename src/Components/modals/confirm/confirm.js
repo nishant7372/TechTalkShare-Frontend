@@ -1,4 +1,4 @@
-import styles from "./confirm.module.css";
+import styles from "./Confirm.module.css";
 
 export default function Confirm({ icon, message, deleteItem, nodeRef }) {
   return (

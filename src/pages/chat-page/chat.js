@@ -1,4 +1,4 @@
-import styles from "./chat.module.css";
+import styles from "./Chat.module.css";
 import { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetMessages } from "../../hooks/messages/useGetMessages";
 import { setError } from "../../features/alertSlice";
 
-import ChatBox from "./chatBox";
+import ChatBox from "./ChatBox";
 
-import Users from "./users";
+import Users from "./Users";
 
 export default function Chat() {
   const { user: me } = useSelector((store) => store.auth);
@@ -50,7 +50,7 @@ export default function Chat() {
   }, [reciever]);
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_PROD_SERVER_URL);
+    const socket = io(process.env.REACT_APP_DEV_SERVER_URL);
     socket.emit("connected", {
       message: "Chat Connection Established",
       userId: me._id,

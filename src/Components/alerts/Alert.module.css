@@ -1,0 +1,31 @@
+* {
+  --success-msg: rgb(50, 178, 11);
+  --error-msg: rgb(240, 47, 47);
+  --info-msg: rgb(9, 141, 193);
+}
+
+.ERROR,
+.SUCCESS {
+  border-radius: 2px;
+  font-size: 1.6rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ERROR {
+  background-color: var(--error-msg);
+}
+
+.SUCCESS {
+  background-color: var(--success-msg);
+}
+
+.INFO {
+  background-color: var(--info-msg);
+}

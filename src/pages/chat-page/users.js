@@ -1,11 +1,11 @@
-import styles from "./users.module.css";
-import "./users.css";
+import styles from "./Users.module.css";
+import "./Users.css";
 import { useState, useEffect } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import Loading from "../../Components/loading-spinners/loading/loading";
-import Error from "../../Components/messages/error";
-import NameLogo from "../../Components/logomaker/namelogo";
+import Loading from "../../components/loaders/loading/Loading";
+import Alert from "../../components/alerts/Alert";
+import NameLogo from "../../components/avatar/NameAvatar";
 
 import { useGetUsers } from "../../hooks/user/useGetUsers";
 import { useSelector } from "react-redux";
@@ -111,7 +111,7 @@ export default function Users({ onlineUsers, reciever }) {
         {usersPending && <Loading action={"users-loading"} />}
         {usersError && (
           <div className={styles["userErrors"]}>
-            <Error error={usersError} />
+            <Alert message={usersError} type="ERROR" />
           </div>
         )}
       </div>

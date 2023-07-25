@@ -9,29 +9,27 @@ import {
 import useOnRefresh from "./hooks/useOnRefresh";
 import { useSocketConnection } from "./hooks/socket/socketConnection";
 
-import Chat from "./pages/chat-page/chat";
-import Home from "./pages/home-page/home";
-import LogIn from "./pages/login-page/login";
-import NotFound from "./pages/error/notFound";
-import SignUp from "./pages/signup-page/signup";
+import LogIn from "./pages/login/LogIn";
+import Chat from "./pages/chat-page/Chat";
+import SignUp from "./pages/signup/SignUp";
+import NotFound from "./pages/error/NotFound";
 import Settings from "./pages/settings/Settings";
-import ServerError from "./pages/error/serverError";
-import Scrape from "./pages/article/download/scrape";
-import NavBar from "./Components/navigationbar/navbar";
-import Articles from "./pages/article/view-owner/articles";
-import CreateArticle from "./pages/article/create/createArticle";
-import UpdateArticle from "./pages/article/update/updateArticle";
-import Loading from "./Components/loading-spinners/loading/loading";
-import SharedPreview from "./pages/article/view-shared/sharedPreview";
-import MessageContainer from "./Components/messages/messageContainer";
-import ArticlePreview from "./pages/article/view-owner/articlePreview";
-import SharedArticles from "./pages/article/view-shared/sharedArticles";
+import ServerError from "./pages/error/ServerError";
+import Scrape from "./pages/article/download/Scrape";
+import NavBar from "./components/navbar/Navbar";
+import Sharings from "./pages/article/view-owner/Sharings";
+import Downloads from "./pages/article/download/Downloads";
+import Articles from "./pages/article/view-owner/Articles";
+import CreateArticle from "./pages/article/create/CreateArticle";
+import UpdateArticle from "./pages/article/update/UpdateArticle";
+import MessageContainer from "./components/alerts/AlertContainer";
+import Loading from "./components/loaders/loading/Loading";
+import SharedPreview from "./pages/article/view-shared/SharedPreview";
+import ArticlePreview from "./pages/article/view-owner/ArticlePreview";
+import SharedArticles from "./pages/article/view-shared/SharedArticles";
+import UpdateSharedArticle from "./pages/article/update/UpdateSharedArticle";
 
 import { useSelector } from "react-redux";
-
-import Sharings from "./pages/article/view-owner/sharings";
-import Downloads from "./pages/article/download/downloads";
-import UpdateSharedArticle from "./pages/article/update/updateSharedArticle";
 
 function App() {
   useSocketConnection();
@@ -40,11 +38,11 @@ function App() {
   const { user, authIsReady, serverSideError } = useSelector(
     (store) => store.auth
   );
-  const { success, error } = useSelector((store) => store.alert);
+  const { alert } = useSelector((store) => store.alert);
 
   return (
     <div className="App">
-      {(success || error) && <MessageContainer />}
+      {alert && <MessageContainer />}
       {!authIsReady && <Loading action="mainRead" />}
       {authIsReady && !serverSideError && (
         <Router>

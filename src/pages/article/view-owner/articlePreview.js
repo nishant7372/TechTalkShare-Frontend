@@ -1,4 +1,4 @@
-import styles from "./articlePreview.module.css";
+import styles from "./ArticlePreview.module.css";
 
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
@@ -13,11 +13,11 @@ import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
 
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import NotFound from "../../error/notFound";
-import Tag from "../components/tags/tag";
-import AnimatedButton from "../../../Components/button/animatedButton";
-import Confirm from "../../../Components/modals/confirm/confirm";
+import Loading from "../../../components/loaders/loading/Loading";
+import NotFound from "../../error/NotFound";
+import Tag from "./../../../components/tags/Tag";
+import AnimatedButton from "../../../components/button/AnimatedButton";
+import Confirm from "../../../components/modals/confirm/Confirm";
 
 export default function ArticlePreview() {
   const { id } = useParams();

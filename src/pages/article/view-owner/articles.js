@@ -1,4 +1,4 @@
-import styles from "./articles.module.css";
+import styles from "./Articles.module.css";
 
 import { useEffect, useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
@@ -9,12 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 import { setCurrPageNo, setActiveFilter } from "../../../features/articleSlice";
 
-import Article from "./article";
-import Paginate from "../components/pagination/paginate";
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import TagSelect from "../components/tags/tagSelect";
-import ShareModal from "../components/modal/shareModal";
-import AnimatedButton from "../../../Components/button/animatedButton";
+import Article from "./Article";
+import Paginate from "./../../../components/pagination/Paginate";
+import Loading from "../../../components/loaders/loading/Loading";
+import TagSelect from "./../../../components/tags/TagSelect";
+import ShareModal from "./../../../components/modals/sharemodal/ShareModal";
+import AnimatedButton from "../../../components/button/AnimatedButton";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();

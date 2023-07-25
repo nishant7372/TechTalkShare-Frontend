@@ -1,4 +1,4 @@
-import styles from "./updateArticle.module.css";
+import styles from "./UpdateArticle.module.css";
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,11 +9,11 @@ import { useReadArticle } from "../../../hooks/article/useReadArticle";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
 
-import NotFound from "../../error/notFound";
-import Editor from "../components/editors/editor";
-import TagSelect from "../components/tags/tagSelect";
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import SimpleButton from "../../../Components/button/simpleButton";
+import NotFound from "../../error/NotFound";
+import Editor from "./../../../components/editors/Editor";
+import TagSelect from "./../../../components/tags/TagSelect";
+import Loading from "../../../components/loaders/loading/Loading";
+import Button from "../../../components/button/Button";
 
 export default function UpdateArticle() {
   const { id } = useParams();
@@ -64,6 +64,7 @@ export default function UpdateArticle() {
         topic === "" ||
         content === ""
     );
+    // eslint-disable-next-line
   }, [topic, tags, content]);
 
   // Updating Article
@@ -106,7 +107,7 @@ export default function UpdateArticle() {
                   autoFocus
                 />
                 <div className={styles["s1-right"]}>
-                  <SimpleButton
+                  <Button
                     icon={<i className={`fa-solid fa-circle-xmark`}></i>}
                     content={<span className={styles["btnName"]}> Cancel</span>}
                     buttonStyle={{
@@ -119,7 +120,7 @@ export default function UpdateArticle() {
                   />
 
                   {!updatePending ? (
-                    <SimpleButton
+                    <Button
                       icon={<i className={`fa-solid fa-paper-plane`}></i>}
                       content={
                         <span className={styles["btnName"]}> Update</span>

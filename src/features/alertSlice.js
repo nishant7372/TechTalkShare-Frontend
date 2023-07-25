@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  error: null,
-  success: null,
+  alert: null,
 };
 
 const alertSlice = createSlice({
@@ -10,14 +9,13 @@ const alertSlice = createSlice({
   initialState,
   reducers: {
     setError: (state, action) => {
-      state.error = action.payload;
+      state.alert = { message: action.payload, type: "ERROR" };
     },
     setSuccess: (state, action) => {
-      state.success = action.payload;
+      state.alert = { message: action.payload, type: "SUCCESS" };
     },
     reset: (state) => {
-      state.error = null;
-      state.success = null;
+      state.alert = null;
     },
   },
 });

@@ -1,4 +1,4 @@
-import styles from "./../view-owner/articlePreview.module.css";
+import styles from "./../view-owner/ArticlePreview.module.css";
 
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,11 +9,11 @@ import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle"
 import { useDispatch } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 
-import Tag from "../components/tags/tag";
-import NotFound from "../../error/notFound";
+import Tag from "../../../components/tags/Tag";
+import NotFound from "../../error/NotFound";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import AnimatedButton from "../../../Components/button/animatedButton";
+import Loading from "../../../components/loaders/loading/Loading";
+import AnimatedButton from "../../../components/button/AnimatedButton";
 
 export default function SharedPreview() {
   const { id } = useParams();

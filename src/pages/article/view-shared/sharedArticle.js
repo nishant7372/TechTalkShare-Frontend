@@ -1,9 +1,9 @@
-import styles from "./../view-owner/article.module.css";
+import styles from "./../view-owner/Article.module.css";
 import { Link } from "react-router-dom";
 
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
-import Tag from "../components/tags/tag";
+import Tag from "./../../../components/tags/Tag";
 
 export default function SharedArticle({ articleObj, updated }) {
   const { article, editPermission } = articleObj;

@@ -1,16 +1,16 @@
-import styles from "./scrape.module.css";
+import styles from "./Scrape.module.css";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useLeetcodeScrape } from "../../../hooks/article/useLeetcodeScrape";
+import { useLeetcodeScrape } from "../../../hooks/download/useLeetcodeScrape";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 
-import DownloadItem from "./downloadItem";
-import Input from "../../../Components/input/Input";
-import AnimatedButton from "../../../Components/button/animatedButton";
+import DownloadItem from "./DownloadItem";
+import Input from "../../../components/input/Input";
+import AnimatedButton from "../../../components/button/AnimatedButton";
 
 export default function Scrape() {
   const [URL, setURL] = useState("");

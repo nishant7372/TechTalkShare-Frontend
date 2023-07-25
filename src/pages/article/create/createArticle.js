@@ -1,16 +1,16 @@
-import styles from "./createArticle.module.css";
+import styles from "./CreateArticle.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
 import { useDispatch } from "react-redux";
 
-import Editor from "../components/editors/editor";
-import TagSelect from "../components/tags/tagSelect";
-import Loading from "../../../Components/loading-spinners/loading/loading";
-import SimpleButton from "../../../Components/button/simpleButton";
-import { useEffect } from "react";
+import Editor from "./../../../components/editors/Editor";
+import TagSelect from "../../../components/tags/TagSelect";
+import Loading from "../../../components/loaders/loading/Loading";
+import Button from "../../../components/button/Button";
+
 import { setError, setSuccess } from "../../../features/alertSlice";
 
 export default function CreateArticle() {
@@ -80,7 +80,7 @@ export default function CreateArticle() {
               autoFocus
             />
             <div className={styles["s1-right"]}>
-              <SimpleButton
+              <Button
                 icon={<i className="fa-solid fa-circle-xmark"></i>}
                 content={<span className={styles["btnName"]}> Cancel</span>}
                 buttonStyle={{
@@ -93,7 +93,7 @@ export default function CreateArticle() {
               />
 
               {!isPending ? (
-                <SimpleButton
+                <Button
                   icon={<i className={`fa-solid fa-paper-plane`}></i>}
                   content={<span className={styles["btnName"]}> Post</span>}
                   disabled={noChange}

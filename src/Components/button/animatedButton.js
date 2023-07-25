@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./animatedButton.module.css";
+import styles from "./AnimatedButton.module.css";
 
 // icon -> font Awesome icon
 // link -> route link

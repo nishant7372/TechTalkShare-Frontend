@@ -1,4 +1,4 @@
-import styles from "./downloadItem.module.css";
+import styles from "./DownloadItem.module.css";
 import { Tooltip } from "react-tooltip";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 

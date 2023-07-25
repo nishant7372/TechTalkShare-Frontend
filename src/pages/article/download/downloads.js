@@ -1,4 +1,4 @@
-import styles from "./scrape.module.css";
+import styles from "./Scrape.module.css";
 
 import { useState, useEffect } from "react";
 
@@ -7,8 +7,8 @@ import { useGetDownloads } from "../../../hooks/download/useGetDownloads";
 import { useDispatch } from "react-redux";
 import { setError } from "../../../features/alertSlice";
 
-import DownloadItem from "./downloadItem";
-import Loading from "../../../Components/loading-spinners/loading/loading";
+import DownloadItem from "./DownloadItem";
+import Loading from "../../../components/loaders/loading/Loading";
 
 export default function Downloads() {
   const { getDownloads, isPending } = useGetDownloads();
@@ -30,6 +30,7 @@ export default function Downloads() {
       }
     };
     fetch();
+    // eslint-disable-next-line
   }, []);
 
   return (

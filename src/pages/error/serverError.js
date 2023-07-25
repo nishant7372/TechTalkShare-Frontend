@@ -1,4 +1,4 @@
-import styles from "./serverError.module.css";
+import styles from "./ServerError.module.css";
 
 export default function ServerError() {
   return (

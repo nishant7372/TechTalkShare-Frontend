@@ -1,4 +1,4 @@
-import styles from "./message.module.css";
+import styles from "./Message.module.css";
 
 import { useFormatDate } from "../../hooks/utils/useFormatDate";
 

@@ -1,4 +1,4 @@
-import styles from "./toggleButton.module.css";
+import styles from "./ToggleButton.module.css";
 
 export default function ToggleButton({ on, setOn, buttonStyle }) {
   const toggle = () => setOn((o) => !o);
