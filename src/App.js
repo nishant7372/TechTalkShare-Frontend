@@ -10,7 +10,7 @@ import useOnRefresh from "./hooks/useOnRefresh";
 import { useSocketConnection } from "./hooks/socket/socketConnection";
 
 import LogIn from "./pages/login/LogIn";
-import Chat from "./pages/chat-page/Chat";
+import Chats from "./pages/chat-page/Chats";
 import SignUp from "./pages/signup/SignUp";
 import NotFound from "./pages/error/NotFound";
 import Settings from "./pages/settings/Settings";
@@ -76,7 +76,7 @@ function App() {
             />
             <Route
               path="/chat/*"
-              element={!user ? <Navigate to="/login" /> : <Chat />}
+              element={!user ? <Navigate to="/login" /> : <Chats />}
             />
             <Route
               path="/downloads"

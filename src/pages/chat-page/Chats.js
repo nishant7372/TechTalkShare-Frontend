@@ -1,4 +1,4 @@
-import styles from "./Chat.module.css";
+import styles from "./Chats.module.css";
 import { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ import ChatBox from "./ChatBox";
 
 import Users from "./Users";
 
-export default function Chat() {
+export default function Chats() {
   const { user: me } = useSelector((store) => store.auth);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);

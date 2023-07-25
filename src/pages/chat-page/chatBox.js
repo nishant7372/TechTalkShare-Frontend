@@ -1,22 +1,21 @@
 import styles from "./ChatBox.module.css";
 
-import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-
+import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
 import { useGetUser } from "../../hooks/user/useGetUser";
 import { useFormatDate } from "../../hooks/utils/useFormatDate";
 
-import { useDispatch, useSelector } from "react-redux";
 import { setError } from "../../features/alertSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import Message from "./Message";
+import NotFound from "../error/NotFound";
 import EmojiPicker from "emoji-picker-react";
 import NameLogo from "../../components/avatar/NameAvatar";
-import AnimatedButton from "../../components/button/AnimatedButton";
-import NotFound from "../error/NotFound";
 import Loading from "../../components/loaders/loading/Loading";
+import AnimatedButton from "../../components/button/AnimatedButton";
 
 export default function ChatBox({
   onlineUsers,
