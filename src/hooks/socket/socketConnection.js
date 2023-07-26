@@ -13,7 +13,7 @@ export const useSocketConnection = () => {
   };
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_DEV_SERVER_URL);
+    const socket = io(process.env.REACT_APP_PROD_SERVER_URL);
     socket.emit("connected", { message: "Connected Successfully" });
     socket.on("socketId", (res) => {
       dispatch(setSocketId(res.socketId));

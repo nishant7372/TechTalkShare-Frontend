@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const useFormatDate = () => {
   const formatTime = (dateString) => {
     const date = new Date(dateString);
@@ -61,31 +63,24 @@ export const useFormatDate = () => {
     return `${t} second${t === 1 ? "" : "s"}`;
   };
 
-  const formatDate2 = (dateString) => {
-    const inputDate = new Date(dateString);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
+  const formatChatDate = (date, expectedFormat) => {
+    const now = moment();
+    const targetDate = expectedFormat
+      ? moment(date, expectedFormat, true)
+      : moment(date);
 
-    if (isSameDate(inputDate, today)) {
+    if (now.isSame(targetDate, "day")) {
       return "Today";
-    } else if (isSameDate(inputDate, yesterday)) {
+    } else if (now.subtract(1, "day").isSame(targetDate, "day")) {
       return "Yesterday";
+    } else if (now.isSame(targetDate, "week")) {
+      return targetDate.format("dddd");
+    } else if (now.isSame(targetDate, "year")) {
+      return targetDate.format("MMMM D");
     } else {
-      const day = inputDate.getDate().toString().padStart(2, "0");
-      const month = (inputDate.getMonth() + 1).toString().padStart(2, "0");
-      const year = inputDate.getFullYear().toString();
-      return `${day}/${month}/${year}`;
+      return targetDate.format("MMMM D, YYYY");
     }
   };
 
-  function isSameDate(date1, date2) {
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    );
-  }
-
-  return { formatTime, formatDate, timeSince, formatDate2 };
+  return { formatTime, formatDate, timeSince, formatChatDate };
 };

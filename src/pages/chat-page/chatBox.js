@@ -1,5 +1,7 @@
 import styles from "./ChatBox.module.css";
 
+import moment from "moment";
+
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
@@ -23,6 +25,7 @@ export default function ChatBox({
   messages,
   messagesLoading,
   handleSetReciever,
+  handleUserMenuDisplay,
 }) {
   const dispatch = useDispatch();
 
@@ -37,7 +40,7 @@ export default function ChatBox({
 
   const { user: me } = useSelector((store) => store.auth);
   const { userName } = useParams();
-  const { formatDate2 } = useFormatDate();
+  const { formatChatDate } = useFormatDate();
 
   const submitButtonRef = useRef(null);
   const scrollRef = useRef(null);
@@ -53,11 +56,11 @@ export default function ChatBox({
     }
   };
 
-  function groupMessagesByDay(messages) {
+  const groupMessages = (messages) => {
     const groups = {};
 
     messages.forEach((message) => {
-      const date = new Date(message.createdAt).toLocaleDateString();
+      const date = moment(message.createdAt).format("DD-MM-YYYY");
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -67,15 +70,6 @@ export default function ChatBox({
     return Object.entries(groups).sort(
       (a, b) => new Date(a[0]) - new Date(b[0])
     );
-  }
-
-  const filterMessages = (messages) => {
-    const filtered = messages.filter(
-      ({ sender: senderId, reciever: recieverId }) =>
-        (senderId === me._id && recieverId === reciever._id) ||
-        (recieverId === me._id && senderId === reciever._id)
-    );
-    return groupMessagesByDay(filtered);
   };
 
   useEffect(() => {
@@ -125,6 +119,17 @@ export default function ChatBox({
     // eslint-disable-next-line
   }, [userName]);
 
+  useEffect(() => {
+    if (isPending || reciever || messagesLoading) {
+      handleUserMenuDisplay(true);
+    } else {
+      handleUserMenuDisplay(false);
+    }
+    return () => {
+      handleUserMenuDisplay(false);
+    };
+  }, [isPending, reciever, messagesLoading]);
+
   const handleSend = () => {
     sendMessage(message);
     setMessage("");
@@ -171,7 +176,7 @@ export default function ChatBox({
             </div>
             <div className={styles["chatContainer"]} ref={scrollRef}>
               {messages &&
-                filterMessages(messages).map((msgGroup, index) => (
+                groupMessages(messages).map((grp, index) => (
                   <div key={index}>
                     <div
                       style={{
@@ -184,12 +189,12 @@ export default function ChatBox({
                       }}
                     >
                       <div className={styles["date"]}>
-                        {formatDate2(new Date(msgGroup[0]).toISOString())}
+                        {formatChatDate(grp[0], "DD-MM-YYYY")}
                       </div>
                     </div>
 
                     <div className={styles["messageContainer"]}>
-                      {msgGroup[1].map((msg, msgIndex) => (
+                      {grp[1].map((msg, msgIndex) => (
                         <Message
                           key={msgIndex}
                           message={msg}

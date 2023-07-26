@@ -17,6 +17,7 @@ export default function Chats() {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
   const [reciever, setReciever] = useState(null);
+  const [hideUserMenu, setHideUserMenu] = useState(false);
 
   const { getMessages, isPending: messagesLoading } = useGetMessages();
   const [messages, setMessages] = useState([]);
@@ -24,6 +25,10 @@ export default function Chats() {
 
   const handleSetReciever = (user) => {
     setReciever(user);
+  };
+
+  const handleUserMenuDisplay = (res) => {
+    setHideUserMenu(res);
   };
 
   const sendMessage = (message) => {
@@ -50,7 +55,7 @@ export default function Chats() {
   }, [reciever]);
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_DEV_SERVER_URL);
+    const socket = io(process.env.REACT_APP_PROD_SERVER_URL);
     socket.emit("connected", {
       message: "Chat Connection Established",
       userId: me._id,
@@ -71,7 +76,7 @@ export default function Chats() {
 
   return (
     <div className={styles["chat-page"]}>
-      <Users reciever={reciever} onlineUsers={onlineUsers} />
+      <Users hideUserMenu={hideUserMenu} onlineUsers={onlineUsers} />
       <Routes>
         <Route
           path="/:userName"
@@ -85,6 +90,7 @@ export default function Chats() {
                 messages={messages}
                 messagesLoading={messagesLoading}
                 handleSetReciever={handleSetReciever}
+                handleUserMenuDisplay={handleUserMenuDisplay}
               />
             )
           }

@@ -10,7 +10,7 @@ import NameLogo from "../../components/avatar/NameAvatar";
 import { useGetUsers } from "../../hooks/user/useGetUsers";
 import { useSelector } from "react-redux";
 
-export default function Users({ onlineUsers, reciever }) {
+export default function Users({ onlineUsers, hideUserMenu }) {
   const {
     getUsers,
     error: usersError,
@@ -55,7 +55,7 @@ export default function Users({ onlineUsers, reciever }) {
   return (
     <div
       className={`${styles["leftSection"]} ${
-        reciever ? styles["hidden"] : null
+        hideUserMenu ? styles["hidden"] : null
       }`}
     >
       <div style={{ position: "relative" }}>
