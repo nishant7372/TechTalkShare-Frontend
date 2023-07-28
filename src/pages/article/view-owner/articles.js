@@ -70,6 +70,7 @@ export default function Articles() {
   return (
     <>
       {isPending && <Loading action={"mainRead"} />}
+
       <div className={styles["article-container"]}>
         <div className={styles["article-header"]}>
           <div className="flex-row">

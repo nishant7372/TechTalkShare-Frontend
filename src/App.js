@@ -12,6 +12,7 @@ import { useSocketConnection } from "./hooks/socket/socketConnection";
 import LogIn from "./pages/login/LogIn";
 import Chats from "./pages/chat-page/Chats";
 import SignUp from "./pages/signup/SignUp";
+import Home from "./pages/home/Home";
 import NotFound from "./pages/error/NotFound";
 import Settings from "./pages/settings/Settings";
 import ServerError from "./pages/error/ServerError";
@@ -50,9 +51,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                !user ? <Navigate to="/login" /> : <Navigate to="/articles" />
-              }
+              element={!user ? <Navigate to="/login" /> : <Home />}
             />
             <Route
               path="/login"
@@ -66,6 +65,7 @@ function App() {
               path="/settings"
               element={user ? <Settings /> : <Navigate to="/login" />}
             />
+
             <Route
               path="/articles/create"
               element={!user ? <Navigate to="/login" /> : <CreateArticle />}
