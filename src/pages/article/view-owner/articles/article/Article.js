@@ -3,10 +3,10 @@ import styles from "./Article.module.css";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
+import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
 
-import Tag from "./../../../components/tags/Tag";
-import images from "../../../constants/images";
+import Tag from "../../../../../components/tags/Tag";
+import images from "../../../../../constants/images";
 
 export default function Article({ article, updated, handleShare }) {
   const { timeSince } = useFormatDate();

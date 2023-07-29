@@ -6,18 +6,18 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
-import { useReadArticle } from "../../../hooks/article/useReadArticle";
-import { useDeleteArticle } from "../../../hooks/article/useDeleteArticle";
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
+import { useReadArticle } from "../../../../hooks/article/useReadArticle";
+import { useDeleteArticle } from "../../../../hooks/article/useDeleteArticle";
+import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
 
 import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../../features/alertSlice";
+import { setError, setSuccess } from "../../../../features/alertSlice";
 
-import Loading from "../../../components/loaders/loading/Loading";
-import NotFound from "../../error/NotFound";
-import Tag from "./../../../components/tags/Tag";
-import AnimatedButton from "../../../components/button/AnimatedButton";
-import Confirm from "../../../components/modals/confirm/Confirm";
+import Loading from "../../../../components/loaders/loading/Loading";
+import NotFound from "../../../error/NotFound";
+import Tag from "./../../../../components/tags/Tag";
+import AnimatedButton from "../../../../components/button/AnimatedButton";
+import Confirm from "../../../../components/modals/confirm/Confirm";
 
 export default function ArticlePreview() {
   const { id } = useParams();

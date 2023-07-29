@@ -3,18 +3,21 @@ import styles from "./Articles.module.css";
 import { useEffect, useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import { useReadArticles } from "../../../hooks/article/useReadArticles";
+import { useReadArticles } from "../../../../hooks/article/useReadArticles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setError } from "../../../features/alertSlice";
-import { setCurrPageNo, setActiveFilter } from "../../../features/articleSlice";
+import { setError } from "../../../../features/alertSlice";
+import {
+  setCurrPageNo,
+  setActiveFilter,
+} from "../../../../features/articleSlice";
 
-import Article from "./Article";
-import Paginate from "./../../../components/pagination/Paginate";
-import Loading from "../../../components/loaders/loading/Loading";
-import TagSelect from "./../../../components/tags/TagSelect";
-import ShareModal from "./../../../components/modals/sharemodal/ShareModal";
-import AnimatedButton from "../../../components/button/AnimatedButton";
+import Article from "./article/Article";
+import Paginate from "../../../../components/pagination/Paginate";
+import Loading from "../../../../components/loaders/loading/Loading";
+import TagSelect from "../../../../components/tags/TagSelect";
+import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
+import AnimatedButton from "../../../../components/button/AnimatedButton";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();

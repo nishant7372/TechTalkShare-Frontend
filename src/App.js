@@ -16,19 +16,19 @@ import Home from "./pages/home/Home";
 import NotFound from "./pages/error/NotFound";
 import Settings from "./pages/settings/Settings";
 import ServerError from "./pages/error/ServerError";
-import Scrape from "./pages/article/download/Scrape";
+import Scrape from "./pages/article/download/scrape/Scrape";
 import NavBar from "./components/navbar/Navbar";
-import Sharings from "./pages/article/view-owner/Sharings";
-import Downloads from "./pages/article/download/Downloads";
-import Articles from "./pages/article/view-owner/Articles";
-import CreateArticle from "./pages/article/create/CreateArticle";
-import UpdateArticle from "./pages/article/update/UpdateArticle";
+import Sharings from "./pages/article/view-owner/sharings/Sharings";
+import Downloads from "./pages/article/download/downloads/Downloads";
+import Articles from "./pages/article/view-owner/articles/Articles";
+import Create from "./pages/article/create/Create";
+import Update from "./pages/article/update/Update";
 import MessageContainer from "./components/alerts/AlertContainer";
 import Loading from "./components/loaders/loading/Loading";
-import SharedPreview from "./pages/article/view-shared/SharedPreview";
-import ArticlePreview from "./pages/article/view-owner/ArticlePreview";
-import SharedArticles from "./pages/article/view-shared/SharedArticles";
-import UpdateSharedArticle from "./pages/article/update/UpdateSharedArticle";
+import SharedPreview from "./pages/article/view-shared/sharedPreview/SharedPreview";
+import ArticlePreview from "./pages/article/view-owner/articlePreview/ArticlePreview";
+import SharedArticles from "./pages/article/view-shared/sharedArticles/SharedArticles";
+import UpdateShared from "./pages/article/update/UpdateShared";
 
 import { useSelector } from "react-redux";
 
@@ -68,7 +68,7 @@ function App() {
 
             <Route
               path="/articles/create"
-              element={!user ? <Navigate to="/login" /> : <CreateArticle />}
+              element={!user ? <Navigate to="/login" /> : <Create />}
             />
             <Route
               path="/download"
@@ -104,13 +104,11 @@ function App() {
             />
             <Route
               path="/articles/update/:id"
-              element={!user ? <Navigate to="/login" /> : <UpdateArticle />}
+              element={!user ? <Navigate to="/login" /> : <Update />}
             />
             <Route
               path="/shared/update/:id"
-              element={
-                !user ? <Navigate to="/login" /> : <UpdateSharedArticle />
-              }
+              element={!user ? <Navigate to="/login" /> : <UpdateShared />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

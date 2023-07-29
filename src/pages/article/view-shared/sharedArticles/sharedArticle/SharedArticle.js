@@ -1,10 +1,10 @@
-import styles from "./../view-owner/Article.module.css";
+import styles from "./../../../view-owner/articles/article/Article.module.css";
 import { Link } from "react-router-dom";
 
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
+import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
 
-import Tag from "./../../../components/tags/Tag";
-import images from "../../../constants/images";
+import Tag from "../../../../../components/tags/Tag";
+import images from "../../../../../constants/images";
 
 export default function SharedArticle({ articleObj, updated }) {
   const { article, editPermission } = articleObj;

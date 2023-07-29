@@ -1,4 +1,4 @@
-import styles from "./CreateArticle.module.css";
+import styles from "./Create.module.css";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
 import { useDispatch } from "react-redux";
 
-import Editor from "./../../../components/editors/Editor";
+import Editor from "../../../components/editors/Editor";
 import TagSelect from "../../../components/tags/TagSelect";
 import Loading from "../../../components/loaders/loading/Loading";
 import Button from "../../../components/button/Button";
 
 import { setError, setSuccess } from "../../../features/alertSlice";
 
-export default function CreateArticle() {
+export default function Create() {
   const { createArticle, isPending } = useCreateArticle();
   const dispatch = useDispatch();
 

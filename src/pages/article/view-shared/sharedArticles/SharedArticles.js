@@ -1,17 +1,20 @@
-import styles from "./../view-owner/Articles.module.css";
+import styles from "./../../view-owner/articles/Articles.module.css";
 
 import { useEffect, useState } from "react";
 
-import { useGetSharedArticles } from "../../../hooks/sharing/useGetSharedArticles";
+import { useGetSharedArticles } from "../../../../hooks/sharing/useGetSharedArticles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setError } from "../../../features/alertSlice";
-import { setActiveFilter, setCurrPageNo } from "../../../features/sharingSlice";
+import { setError } from "../../../../features/alertSlice";
+import {
+  setActiveFilter,
+  setCurrPageNo,
+} from "../../../../features/sharingSlice";
 
-import SharedArticle from "./SharedArticle";
-import TagSelect from "./../../../components/tags/TagSelect";
-import Paginate from "./../../../components/pagination/Paginate";
-import Loading from "./../../../components/loaders/loading/Loading";
+import SharedArticle from "./sharedArticle/SharedArticle";
+import TagSelect from "../../../../components/tags/TagSelect";
+import Paginate from "../../../../components/pagination/Paginate";
+import Loading from "../../../../components/loaders/loading/Loading";
 
 export default function SharedArticles() {
   const { articles, currPageNo, activeFilter } = useSelector(

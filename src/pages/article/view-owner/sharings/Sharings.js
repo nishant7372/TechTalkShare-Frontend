@@ -4,16 +4,16 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
-import { useGetSharings } from "../../../hooks/sharing/useGetSharings";
+import { useGetSharings } from "../../../../hooks/sharing/useGetSharings";
 
 import { useDispatch } from "react-redux";
-import { setError } from "../../../features/alertSlice";
+import { setError } from "../../../../features/alertSlice";
 
-import Sharing from "./Sharing";
-import NotFound from "../../error/NotFound";
-import ShareModal from "../../../components/modals/sharemodal/ShareModal";
-import AnimatedButton from "../../../components/button/AnimatedButton";
-import Loading from "../../../components/loaders/loading/Loading";
+import Sharing from "./sharing/Sharing";
+import NotFound from "../../../error/NotFound";
+import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
+import AnimatedButton from "../../../../components/button/AnimatedButton";
+import Loading from "../../../../components/loaders/loading/Loading";
 
 export default function Sharings() {
   const { id } = useParams();

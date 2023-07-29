@@ -1,14 +1,14 @@
-import styles from "./Scrape.module.css";
+import styles from "./../scrape/Scrape.module.css";
 
 import { useState, useEffect } from "react";
 
-import { useGetDownloads } from "../../../hooks/download/useGetDownloads";
+import { useGetDownloads } from "../../../../hooks/download/useGetDownloads";
 
 import { useDispatch } from "react-redux";
-import { setError } from "../../../features/alertSlice";
+import { setError } from "../../../../features/alertSlice";
 
-import DownloadItem from "./DownloadItem";
-import Loading from "../../../components/loaders/loading/Loading";
+import DownloadItem from "../downloadItem/DownloadItem";
+import Loading from "../../../../components/loaders/loading/Loading";
 
 export default function Downloads() {
   const { getDownloads, isPending } = useGetDownloads();

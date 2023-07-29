@@ -4,14 +4,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Tooltip } from "react-tooltip";
 
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
-import { useUpdateSharing } from "../../../hooks/sharing/useUpdateSharing";
-import { useDeleteSharing } from "../../../hooks/sharing/useDeleteSharing";
+import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
+import { useUpdateSharing } from "../../../../../hooks/sharing/useUpdateSharing";
+import { useDeleteSharing } from "../../../../../hooks/sharing/useDeleteSharing";
 
-import ToggleButton from "../../../components/button/ToggleButton";
-import Button from "../../../components/button/Button";
-import Spinner from "../../../components/loaders/spinner/Spinner";
-import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
+import ToggleButton from "../../../../../components/button/ToggleButton";
+import Button from "../../../../../components/button/Button";
+import Spinner from "../../../../../components/loaders/spinner/Spinner";
+import { useHandleResponse } from "../../../../../hooks/utils/useHandleResponse";
 
 export default function Sharing({ sharing, updated, updateSharings }) {
   const { timeSince } = useFormatDate();

@@ -1,4 +1,4 @@
-import styles from "./UpdateArticle.module.css";
+import styles from "./Update.module.css";
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,12 +10,12 @@ import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
 
 import NotFound from "../../error/NotFound";
-import Editor from "./../../../components/editors/Editor";
-import TagSelect from "./../../../components/tags/TagSelect";
+import Editor from "../../../components/editors/Editor";
+import TagSelect from "../../../components/tags/TagSelect";
 import Loading from "../../../components/loaders/loading/Loading";
 import Button from "../../../components/button/Button";
 
-export default function UpdateArticle() {
+export default function Update() {
   const { id } = useParams();
 
   const [article, setArticle] = useState(null);

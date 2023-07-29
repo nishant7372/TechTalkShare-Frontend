@@ -1,6 +1,6 @@
 import styles from "./DownloadItem.module.css";
 import { Tooltip } from "react-tooltip";
-import { useFormatDate } from "../../../hooks/utils/useFormatDate";
+import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
 
 export default function DownloadItem({ download }) {
   const { timeSince } = useFormatDate();
