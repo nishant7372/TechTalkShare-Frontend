@@ -18,6 +18,7 @@ import EmojiPicker from "emoji-picker-react";
 import NameLogo from "../../components/avatar/NameAvatar";
 import Loading from "../../components/loaders/loading/Loading";
 import AnimatedButton from "../../components/button/AnimatedButton";
+import images from "../../constants/images";
 
 export default function ChatBox({
   onlineUsers,
@@ -136,10 +137,8 @@ export default function ChatBox({
     setRows(1);
   };
 
-  const backgroundImageUrl = process.env.PUBLIC_URL + "/img/chatbg1.jpg";
-
   const containerStyle = {
-    backgroundImage: `url(${backgroundImageUrl})`,
+    backgroundImage: `url(${images.chatBg})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     width: "100%",

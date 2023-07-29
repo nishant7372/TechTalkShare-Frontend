@@ -8,18 +8,15 @@ import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 import { useUpdateSharing } from "../../../hooks/sharing/useUpdateSharing";
 import { useDeleteSharing } from "../../../hooks/sharing/useDeleteSharing";
 
-import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../../features/alertSlice";
-
 import ToggleButton from "../../../components/button/ToggleButton";
 import Button from "../../../components/button/Button";
 import Spinner from "../../../components/loaders/spinner/Spinner";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 export default function Sharing({ sharing, updated, updateSharings }) {
   const { timeSince } = useFormatDate();
 
-  const dispatch = useDispatch();
-
+  const { handleResponse } = useHandleResponse();
   const { deleteSharing, isPending: deletePending } = useDeleteSharing();
   const { updateSharing, isPending: updatePending } = useUpdateSharing();
 
@@ -34,21 +31,13 @@ export default function Sharing({ sharing, updated, updateSharings }) {
     const res = await updateSharing(sharing._id, {
       ...(editPermission !== sharing.editPermission && { editPermission }),
     });
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     updateSharings();
   };
 
   const handleDelete = async () => {
     const res = await deleteSharing(sharing._id);
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     updateSharings();
   };
 

@@ -4,16 +4,14 @@ import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
 import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
 
-import { useDispatch } from "react-redux";
-import { setSuccess, setError } from "../../../../features/alertSlice";
-
 import Alert from "../../../../components/alerts/Alert";
 import Button from "../../../../components/button/Button";
 import Spinner from "../../../../components/loaders/spinner/Spinner";
+import images from "../../../../constants/images";
+import { useHandleResponse } from "../../../../hooks/utils/useHandleResponse";
 
 export default function Session({ session, active }) {
-  const dispatch = useDispatch();
-
+  const { handleResponse } = useHandleResponse();
   const { formatDate } = useFormatDate();
   const { readProfile } = useReadProfile();
   const { sessionLogout, isPending } = useSessionLogout();
@@ -23,11 +21,7 @@ export default function Session({ session, active }) {
 
   const handleLogout = async () => {
     const res = await sessionLogout(_id, active);
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     await readProfile();
   };
 
@@ -48,7 +42,7 @@ export default function Session({ session, active }) {
         <div className={styles["big-img"]}>
           {osDetails.model === "tablet" && (
             <img
-              src={process.env.PUBLIC_URL + "/img/tablet.png"}
+              src={images.tablet}
               className={styles["device-img"]}
               alt="tablet"
             />

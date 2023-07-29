@@ -11,6 +11,7 @@ import { setError } from "../../features/alertSlice";
 import ChatBox from "./ChatBox";
 
 import Users from "./Users";
+import images from "../../constants/images";
 
 export default function Chats() {
   const { user: me } = useSelector((store) => store.auth);
@@ -103,10 +104,7 @@ export default function Chats() {
             ) : (
               <div className={styles["chatbox"]}>
                 <div className={styles["noUserSelected"]}>
-                  <img
-                    src={process.env.PUBLIC_URL + "/img/chat.png"}
-                    alt="chat"
-                  />
+                  <img src={images.chat} alt="chat" />
                   <div>Select a chat to start messaging</div>
                 </div>
               </div>

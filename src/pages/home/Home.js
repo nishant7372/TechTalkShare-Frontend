@@ -1,3 +1,4 @@
+import images from "../../constants/images";
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 
@@ -5,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles["home"]}>
       <img
-        src={process.env.PUBLIC_URL + "/img/wave.png"}
+        src={images.wave}
         alt="wave"
         style={{
           position: "absolute",

@@ -2,13 +2,14 @@ import styles from "./Security.module.css";
 
 import { useState } from "react";
 
-import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
+import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
 
 import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../../../features/alertSlice";
+import { setError, setSuccess } from "../../../features/alertSlice";
 
-import Button from "../../../../components/button/Button";
-import Spinner from "../../../../components/loaders/spinner/Spinner";
+import Button from "../../../components/button/Button";
+import Spinner from "../../../components/loaders/spinner/Spinner";
+import images from "../../../constants/images";
 
 export default function Security() {
   const dispatch = useDispatch();
@@ -19,8 +20,8 @@ export default function Security() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
 
-  const closedEye = `${process.env.PUBLIC_URL}/img/eye-password.png`;
-  const openEye = `${process.env.PUBLIC_URL}/img/eye-text.png`;
+  const closedEye = images.eyePassword;
+  const openEye = images.eyeText;
 
   const handleUpdate = async (e) => {
     e.preventDefault();

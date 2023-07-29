@@ -2,18 +2,18 @@ import styles from "./PersonalInfo.module.css";
 
 import { useState, useEffect } from "react";
 
-import { useUpdateUser } from "../../../../hooks/user/useUpdateUser";
-import { useReadProfile } from "../../../../hooks/user/useReadProfile";
+import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
+import { useReadProfile } from "../../../hooks/user/useReadProfile";
 
-import Spinner from "../../../../components/loaders/spinner/Spinner";
-import Button from "../../../../components/button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { setError, setSuccess } from "../../../../features/alertSlice";
+import Spinner from "../../../components/loaders/spinner/Spinner";
+import Button from "../../../components/button/Button";
+import { useSelector } from "react-redux";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 export default function PersonalInfo() {
   const { user } = useSelector((store) => store.auth);
 
-  const dispatch = useDispatch();
+  const { handleResponse } = useHandleResponse();
 
   const { readProfile } = useReadProfile();
   const { updateUser, isPending } = useUpdateUser();
@@ -24,11 +24,7 @@ export default function PersonalInfo() {
 
   const handleSave = async () => {
     const res = await updateUser({ name, age });
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     await readProfile();
   };
 

@@ -2,33 +2,28 @@ import styles from "./YourDevices.module.css";
 
 import { useEffect, useMemo } from "react";
 
-import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useLogoutAllOther } from "../../../../hooks/user/useLogoutAllOther";
+import { useReadProfile } from "../../../hooks/user/useReadProfile";
+import { useLogoutAllOther } from "../../../hooks/user/useLogoutAllOther";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setError, setSuccess } from "../../../../features/alertSlice";
+import { useSelector } from "react-redux";
 
-import Session from "../session/Session";
-import Button from "../../../../components/button/Button";
-import Spinner from "../../../../components/loaders/spinner/Spinner";
-import Loading from "../../../../components/loaders/loading/Loading";
+import Session from "./session/Session";
+import Button from "../../../components/button/Button";
+import Spinner from "../../../components/loaders/spinner/Spinner";
+import Loading from "../../../components/loaders/loading/Loading";
 
 export default function CurrentSessions() {
-  const dispatch = useDispatch();
-
   const { user, currentSessionId } = useSelector((store) => store.auth);
   const { sessions } = user;
+  const { handleResponse } = useHandleResponse();
 
   const { readProfile } = useReadProfile();
   const { logoutAllOther, isPending } = useLogoutAllOther();
 
   const handleLogOutAllOther = async () => {
     const res = await logoutAllOther();
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     await readProfile();
   };
 
@@ -93,10 +88,12 @@ export default function CurrentSessions() {
                 action={handleLogOutAllOther}
               />
             )}
-            <p className={"warning"}>
-              This will end {sessions.length - 1} of your other active sessions.
-              It won't affect your current session.
-            </p>
+            {sessions.length > 1 && (
+              <p className={"warning"}>
+                This will end {sessions.length - 1} of your other active
+                sessions. It won't affect your current session.
+              </p>
+            )}
           </div>
         </>
       ) : (

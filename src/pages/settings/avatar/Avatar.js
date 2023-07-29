@@ -2,48 +2,40 @@ import styles from "./Avatar.module.css";
 
 import { useState } from "react";
 
-import { useUploadAvatar } from "../../../../hooks/avatar/useUploadAvatar";
-import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useDeleteAvatar } from "../../../../hooks/avatar/useDeleteAvatar";
+import { useUploadAvatar } from "../../../hooks/avatar/useUploadAvatar";
+import { useReadProfile } from "../../../hooks/user/useReadProfile";
+import { useDeleteAvatar } from "../../../hooks/avatar/useDeleteAvatar";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setError, setSuccess } from "../../../../features/alertSlice";
+import { useSelector } from "react-redux";
 
-import Spinner from "../../../../components/loaders/spinner/Spinner";
-import Button from "../../../../components/button/Button";
+import Spinner from "../../../components/loaders/spinner/Spinner";
+import Button from "../../../components/button/Button";
+import images from "../../../constants/images";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 export default function Avatar() {
-  const dispatch = useDispatch();
-
   const { user } = useSelector((store) => store.auth);
 
   const { readProfile } = useReadProfile();
   const { uploadAvatar, isPending: uploadPending } = useUploadAvatar();
   const { deleteAvatar, isPending: deletePending } = useDeleteAvatar();
+  const { handleResponse } = useHandleResponse();
 
-  const avatarImage = process.env.PUBLIC_URL + "/img/avatar.png";
+  const avatarImage = images.avatar;
 
   const [currImg, setCurrImg] = useState(avatarImage);
   const [isSelected, setIsSelected] = useState(false);
 
   const handleSave = async (avatarImage) => {
     const res = await uploadAvatar(avatarImage);
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     setIsSelected(false);
     await readProfile();
   };
 
   const handleDeleteAvatar = async () => {
     const res = await deleteAvatar();
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
     await readProfile();
   };
 

@@ -6,6 +6,7 @@ import { Tooltip } from "react-tooltip";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
 import Tag from "./../../../components/tags/Tag";
+import images from "../../../constants/images";
 
 export default function Article({ article, updated, handleShare }) {
   const { timeSince } = useFormatDate();
@@ -17,11 +18,7 @@ export default function Article({ article, updated, handleShare }) {
   return (
     <div className={styles["article"]}>
       <div className={styles["icon"]}>
-        <img
-          src={process.env.PUBLIC_URL + "/img/note.png"}
-          alt="note"
-          className={styles["icon-img"]}
-        />
+        <img src={images.note} alt="note" className={styles["icon-img"]} />
         {article.downloaded && (
           <>
             <div

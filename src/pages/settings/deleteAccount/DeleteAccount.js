@@ -3,20 +3,18 @@ import styles from "./DeleteAccount.module.css";
 import { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import { useDeleteAccount } from "../../../../hooks/user/useDeleteAccount";
+import { useDeleteAccount } from "../../../hooks/user/useDeleteAccount";
 
-import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../../../features/alertSlice";
-
-import Confirm from "../../../../components/modals/confirm/Confirm";
-import Button from "../../../../components/button/Button";
-import Spinner from "../../../../components/loaders/spinner/Spinner";
+import Confirm from "../../../components/modals/confirm/Confirm";
+import Button from "../../../components/button/Button";
+import Spinner from "../../../components/loaders/spinner/Spinner";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 export default function DeleteAccount() {
   const nodeRef = useRef(null);
-  const dispatch = useDispatch();
 
   const [showConfirm, setShowConfirm] = useState(false);
+  const { handleResponse } = useHandleResponse();
   const { deleteAccount, isPending } = useDeleteAccount();
 
   const handleClick = () => {
@@ -29,11 +27,7 @@ export default function DeleteAccount() {
       return;
     }
     const res = await deleteAccount();
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+    handleResponse(res);
   };
 
   return (

@@ -7,14 +7,15 @@ import { CSSTransition } from "react-transition-group";
 
 import { useLogout } from "../../hooks/user/useLogout";
 
-import { useDispatch, useSelector } from "react-redux";
-import { setError, setSuccess } from "../../features/alertSlice";
+import { useSelector } from "react-redux";
+import { useHandleResponse } from "../../hooks/utils/useHandleResponse";
 
 import NameLogo from "../avatar/NameAvatar";
 import AnimatedButton from "../button/AnimatedButton";
+import images from "../../constants/images";
 
 export default function NavBar() {
-  const dispatch = useDispatch();
+  const { handleResponse } = useHandleResponse();
   const { user } = useSelector((store) => store.auth);
 
   const { logout, isPending } = useLogout();
@@ -25,11 +26,8 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     const res = await logout();
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(res.error));
-    }
+
+    handleResponse(res);
   };
 
   return (
@@ -83,10 +81,7 @@ export default function NavBar() {
             </>
           )}
           <Link to="/" className={styles["app-name"]}>
-            <img
-              src={process.env.PUBLIC_URL + "/img/devstore-logo.png"}
-              alt="logo"
-            ></img>
+            <img src={images.devstoreLogo} alt="logo"></img>
           </Link>
         </div>
 

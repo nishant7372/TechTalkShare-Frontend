@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../features/alertSlice";
 
 import Spinner from "../../components/loaders/spinner/Spinner";
+import images from "../../constants/images";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordType, setPasswordType] = useState("password");
+  const [passwordType, setPasswordType] = useState("eyePassword");
 
   const parseError = (error) => {
     return error.includes("duplicate key error")
@@ -26,9 +27,9 @@ export default function SignUp() {
   };
 
   const showPassword = () => {
-    passwordType === "password"
-      ? setPasswordType("text")
-      : setPasswordType("password");
+    passwordType === "eyePassword"
+      ? setPasswordType("eyeText")
+      : setPasswordType("eyePassword");
   };
 
   const handleSubmit = async (e) => {
@@ -76,7 +77,7 @@ export default function SignUp() {
           <span>Password</span>
           <div className={styles["password-field"]}>
             <input
-              type={passwordType}
+              type={passwordType === "eyePassword" ? "password" : "text"}
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -85,7 +86,7 @@ export default function SignUp() {
             />
             <div className={styles["img"]}>
               <img
-                src={`${process.env.PUBLIC_URL}/img/eye-${passwordType}.png`}
+                src={images[passwordType]}
                 onClick={showPassword}
                 alt="eye-toggle"
               />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useFormatDate } from "../../../hooks/utils/useFormatDate";
 
 import Tag from "./../../../components/tags/Tag";
+import images from "../../../constants/images";
 
 export default function SharedArticle({ articleObj, updated }) {
   const { article, editPermission } = articleObj;
@@ -16,11 +17,7 @@ export default function SharedArticle({ articleObj, updated }) {
   return (
     <div className={styles["article"]}>
       <div className={styles["icon"]}>
-        <img
-          src={process.env.PUBLIC_URL + "/img/note.png"}
-          alt="note"
-          className={styles["icon-img"]}
-        />
+        <img src={images.note} alt="note" className={styles["icon-img"]} />
 
         <i
           className={`fa-solid fa-reply ${styles["d-icon"]}`}
