@@ -10,7 +10,7 @@ import useOnRefresh from "./hooks/useOnRefresh";
 import { useSocketConnection } from "./hooks/socket/socketConnection";
 
 import LogIn from "./pages/login/LogIn";
-import Chats from "./pages/chat-page/Chats";
+import Chats from "./pages/chat/Chats";
 import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/error/NotFound";
