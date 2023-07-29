@@ -5,8 +5,8 @@ import { CSSTransition } from "react-transition-group";
 
 import { useDeleteAccount } from "../../../hooks/user/useDeleteAccount";
 
-import Confirm from "../../../components/modals/confirm/Confirm";
-import Button from "../../../components/button/Button";
+import Confirm from "../../../components/modals/confirmModal/Confirm";
+import Button from "../../../components/buttons/Button";
 import Spinner from "../../../components/loaders/spinner/Spinner";
 import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 

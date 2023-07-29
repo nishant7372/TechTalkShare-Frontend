@@ -5,7 +5,7 @@ import { useReadProfile } from "../../../../hooks/user/useReadProfile";
 import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
 
 import Alert from "../../../../components/alerts/Alert";
-import Button from "../../../../components/button/Button";
+import Button from "../../../../components/buttons/Button";
 import Spinner from "../../../../components/loaders/spinner/Spinner";
 import images from "../../../../constants/images";
 import { useHandleResponse } from "../../../../hooks/utils/useHandleResponse";

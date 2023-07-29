@@ -16,8 +16,8 @@ import { setError, setSuccess } from "../../../../features/alertSlice";
 import Loading from "../../../../components/loaders/loading/Loading";
 import NotFound from "../../../error/NotFound";
 import Tag from "./../../../../components/tags/Tag";
-import AnimatedButton from "../../../../components/button/AnimatedButton";
-import Confirm from "../../../../components/modals/confirm/Confirm";
+import AnimatedButton from "../../../../components/buttons/AnimatedButton";
+import Confirm from "../../../../components/modals/confirmModal/Confirm";
 
 export default function ArticlePreview() {
   const { id } = useParams();

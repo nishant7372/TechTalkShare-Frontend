@@ -7,7 +7,7 @@ import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
 
-import Button from "../../../components/button/Button";
+import Button from "../../../components/buttons/Button";
 import Spinner from "../../../components/loaders/spinner/Spinner";
 import images from "../../../constants/images";
 

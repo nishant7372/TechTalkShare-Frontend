@@ -10,7 +10,7 @@ import { setError } from "../../../../features/alertSlice";
 
 import DownloadItem from "../downloadItem/DownloadItem";
 import Input from "../../../../components/input/Input";
-import AnimatedButton from "../../../../components/button/AnimatedButton";
+import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 
 export default function Scrape() {
   const [URL, setURL] = useState("");

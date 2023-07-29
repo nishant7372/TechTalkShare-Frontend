@@ -17,7 +17,7 @@ import Paginate from "../../../../components/pagination/Paginate";
 import Loading from "../../../../components/loaders/loading/Loading";
 import TagSelect from "../../../../components/tags/TagSelect";
 import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
-import AnimatedButton from "../../../../components/button/AnimatedButton";
+import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();

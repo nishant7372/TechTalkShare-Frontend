@@ -6,7 +6,7 @@ import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
 import { useReadProfile } from "../../../hooks/user/useReadProfile";
 
 import Spinner from "../../../components/loaders/spinner/Spinner";
-import Button from "../../../components/button/Button";
+import Button from "../../../components/buttons/Button";
 import { useSelector } from "react-redux";
 import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 

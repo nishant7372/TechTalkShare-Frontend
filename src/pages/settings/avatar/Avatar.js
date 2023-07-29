@@ -9,7 +9,7 @@ import { useDeleteAvatar } from "../../../hooks/avatar/useDeleteAvatar";
 import { useSelector } from "react-redux";
 
 import Spinner from "../../../components/loaders/spinner/Spinner";
-import Button from "../../../components/button/Button";
+import Button from "../../../components/buttons/Button";
 import images from "../../../constants/images";
 import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 

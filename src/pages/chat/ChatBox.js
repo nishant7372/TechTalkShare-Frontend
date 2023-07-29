@@ -17,7 +17,7 @@ import NotFound from "../error/NotFound";
 import EmojiPicker from "emoji-picker-react";
 import NameLogo from "../../components/avatar/NameAvatar";
 import Loading from "../../components/loaders/loading/Loading";
-import AnimatedButton from "../../components/button/AnimatedButton";
+import AnimatedButton from "../../components/buttons/AnimatedButton";
 import images from "../../constants/images";
 
 export default function ChatBox({

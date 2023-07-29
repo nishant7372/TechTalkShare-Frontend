@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetUsers } from "../../../hooks/user/useGetUsers";
 
 import Loading from "../../../components/loaders/loading/Loading";
-import ToggleButton from "../../../components/button/ToggleButton";
+import ToggleButton from "../../buttons/ToggleButton";
 import Alert from "../../../components/alerts/Alert";
-import Button from "../../../components/button/Button";
+import Button from "../../buttons/Button";
 import NameLogo from "../../../components/avatar/NameAvatar";
 import { setError, setSuccess } from "../../../features/alertSlice";
 

@@ -12,7 +12,7 @@ import { setError } from "../../../../features/alertSlice";
 import Sharing from "./sharing/Sharing";
 import NotFound from "../../../error/NotFound";
 import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
-import AnimatedButton from "../../../../components/button/AnimatedButton";
+import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 import Loading from "../../../../components/loaders/loading/Loading";
 
 export default function Sharings() {

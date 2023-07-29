@@ -8,8 +8,8 @@ import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
 import { useUpdateSharing } from "../../../../../hooks/sharing/useUpdateSharing";
 import { useDeleteSharing } from "../../../../../hooks/sharing/useDeleteSharing";
 
-import ToggleButton from "../../../../../components/button/ToggleButton";
-import Button from "../../../../../components/button/Button";
+import ToggleButton from "../../../../../components/buttons/ToggleButton";
+import Button from "../../../../../components/buttons/Button";
 import Spinner from "../../../../../components/loaders/spinner/Spinner";
 import { useHandleResponse } from "../../../../../hooks/utils/useHandleResponse";
 

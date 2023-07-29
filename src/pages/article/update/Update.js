@@ -13,7 +13,7 @@ import NotFound from "../../error/NotFound";
 import Editor from "../../../components/editors/Editor";
 import TagSelect from "../../../components/tags/TagSelect";
 import Loading from "../../../components/loaders/loading/Loading";
-import Button from "../../../components/button/Button";
+import Button from "../../../components/buttons/Button";
 
 export default function Update() {
   const { id } = useParams();

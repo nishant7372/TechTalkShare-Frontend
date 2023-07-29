@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { useHandleResponse } from "../../hooks/utils/useHandleResponse";
 
 import NameLogo from "../avatar/NameAvatar";
-import AnimatedButton from "../button/AnimatedButton";
+import AnimatedButton from "../buttons/AnimatedButton";
 import images from "../../constants/images";
 
 export default function NavBar() {

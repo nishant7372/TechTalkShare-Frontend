@@ -13,7 +13,7 @@ import Tag from "../../../../components/tags/Tag";
 import NotFound from "../../../error/NotFound";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import Loading from "../../../../components/loaders/loading/Loading";
-import AnimatedButton from "../../../../components/button/AnimatedButton";
+import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 
 export default function SharedPreview() {
   const { id } = useParams();

@@ -9,7 +9,7 @@ import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 import { useSelector } from "react-redux";
 
 import Session from "./session/Session";
-import Button from "../../../components/button/Button";
+import Button from "../../../components/buttons/Button";
 import Spinner from "../../../components/loaders/spinner/Spinner";
 import Loading from "../../../components/loaders/loading/Loading";
 
