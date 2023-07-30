@@ -15,6 +15,7 @@ import SharedArticle from "./sharedArticle/SharedArticle";
 import TagSelect from "../../../../components/tags/TagSelect";
 import Paginate from "../../../../components/pagination/Paginate";
 import Loading from "../../../../components/loaders/loading/Loading";
+import images from "../../../../constants/images";
 
 export default function SharedArticles() {
   const { articles, currPageNo, activeFilter } = useSelector(
@@ -40,6 +41,7 @@ export default function SharedArticles() {
         dispatch(setError(res.error));
       }
     };
+
     if (activeFilter === "Recently Updated") fetch("updatedAt:desc");
     if (activeFilter === "Recently Shared") fetch("createdAt:desc");
     // eslint-disable-next-line
@@ -48,6 +50,10 @@ export default function SharedArticles() {
   const handlePageChange = (page) => {
     dispatch(setCurrPageNo(page.selected));
   };
+
+  useEffect(() => {
+    if (tag) dispatch(setCurrPageNo(0));
+  }, [tag]);
 
   const handleFilterClick = async (option) => {
     if (activeFilter !== option) {
@@ -84,7 +90,10 @@ export default function SharedArticles() {
               <input
                 type="search"
                 placeholder="🔍 Search..."
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  dispatch(setCurrPageNo(0));
+                  setSearch(e.target.value);
+                }}
                 value={search}
                 required
                 maxLength={100}
@@ -106,17 +115,36 @@ export default function SharedArticles() {
             </div>
           </div>
         </div>
-        {articles &&
+        {articles?.length > 0 ? (
           articles.map((article) => (
             <SharedArticle
               key={article._id}
               articleObj={article}
               updated={activeFilter === "Recently Updated"}
             />
-          ))}
-        {articles && articles.length === 0 && (
+          ))
+        ) : (
           <div className={styles["no-article-found"]}>
-            Nothing is shared with you.
+            {search === "" && !tag ? (
+              <img className={styles["empty"]} src={images.empty} alt="empty" />
+            ) : (
+              <>
+                <img
+                  className={styles["noResultsFound"]}
+                  src={images.noResultsFound}
+                  alt="noResultsFound"
+                />
+                <div
+                  style={{
+                    fontSize: "3rem",
+                    color: "rgba(255, 255, 255, 0.8)",
+                    marginTop: "-3rem",
+                  }}
+                >
+                  No Results Found
+                </div>
+              </>
+            )}
           </div>
         )}
         <div className={styles["article-footer"]}>

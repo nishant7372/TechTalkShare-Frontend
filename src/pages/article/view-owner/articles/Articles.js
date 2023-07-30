@@ -18,6 +18,7 @@ import Loading from "../../../../components/loaders/loading/Loading";
 import TagSelect from "../../../../components/tags/TagSelect";
 import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
+import images from "../../../../constants/images";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();
@@ -50,6 +51,10 @@ export default function Articles() {
     if (activeFilter === "Newest to Oldest") fetch("createdAt:desc");
     // eslint-disable-next-line
   }, [currPageNo, activeFilter, search, tag]);
+
+  useEffect(() => {
+    if (tag) dispatch(setCurrPageNo(0));
+  }, [tag]);
 
   const handlePageChange = (page) => {
     dispatch(setCurrPageNo(page.selected));
@@ -99,7 +104,10 @@ export default function Articles() {
               <input
                 type="search"
                 placeholder="🔍 Search..."
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  dispatch(setCurrPageNo(0));
+                  setSearch(e.target.value);
+                }}
                 value={search}
                 required
                 maxLength={50}
@@ -132,7 +140,7 @@ export default function Articles() {
             />
           </div>
         </div>
-        {articles &&
+        {articles?.length > 0 ? (
           articles.map((article) => (
             <Article
               key={article._id}
@@ -140,12 +148,32 @@ export default function Articles() {
               updated={activeFilter === "Recently Updated"}
               handleShare={handleShare}
             />
-          ))}
-        {articles && articles.length === 0 && (
+          ))
+        ) : (
           <div className={styles["no-article-found"]}>
-            No article found. Click on create to add new one.
+            {search === "" && !tag ? (
+              <img className={styles["empty"]} src={images.empty} alt="empty" />
+            ) : (
+              <>
+                <img
+                  className={styles["noResultsFound"]}
+                  src={images.noResultsFound}
+                  alt="noResultsFound"
+                />
+                <div
+                  style={{
+                    fontSize: "3rem",
+                    color: "rgba(255, 255, 255, 0.8)",
+                    marginTop: "-3rem",
+                  }}
+                >
+                  No Results Found
+                </div>
+              </>
+            )}
           </div>
         )}
+
         <div className={styles["article-footer"]}>
           <Paginate handlePageChange={handlePageChange} type={"article"} />
         </div>

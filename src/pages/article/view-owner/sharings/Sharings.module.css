@@ -98,6 +98,12 @@
   padding: 2rem;
   font-size: 2rem;
   margin: auto;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  width: calc(100% - 4rem);
 }
 
 @media only screen and (max-width: 800px) {
@@ -163,4 +169,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.empty {
+  filter: invert(84.5%);
+  height: 50rem;
+  align-self: center;
 }

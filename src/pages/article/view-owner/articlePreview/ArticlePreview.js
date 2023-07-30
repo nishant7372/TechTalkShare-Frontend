@@ -106,7 +106,7 @@ export default function ArticlePreview() {
             />
             <AnimatedButton
               icon={<i className="fa-solid fa-share-nodes"></i>}
-              link={`/sharings/${id}`}
+              link={`/articles/sharings/${id}`}
               content=" &nbsp;Share"
               buttonStyle={{
                 fontSize: "1.8rem",

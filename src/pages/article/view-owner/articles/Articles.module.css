@@ -98,6 +98,12 @@
   padding: 2rem;
   font-size: 2rem;
   margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: calc(100% - 4rem);
+  overflow: hidden;
+  height: 50rem;
 }
 
 @media only screen and (max-width: 800px) {
@@ -130,4 +136,13 @@
 .active {
   color: white;
   font-weight: 500;
+}
+
+.empty {
+  filter: invert(84.5%);
+  height: 50rem;
+}
+
+.noResultsFound {
+  height: 85%;
 }

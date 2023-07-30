@@ -10,6 +10,8 @@ const images = {
   tablet: `${PUBLIC_URL}/img/tablet.png`,
   eyePassword: `${PUBLIC_URL}/img/eye-password.png`,
   eyeText: `${PUBLIC_URL}/img/eye-text.png`,
+  empty: `${PUBLIC_URL}/img/empty.png`,
+  noResultsFound: `${PUBLIC_URL}/img/search-empty.png`,
 };
 
 export default images;

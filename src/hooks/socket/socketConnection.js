@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../features/alertSlice";
 import { setActiveDownloads } from "../../features/downloadSlice";
 import { setSocketId } from "../../features/authSlice";
+import apiConstants from "../../constants/apiConstants";
 
 export const useSocketConnection = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const useSocketConnection = () => {
   };
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_PROD_SERVER_URL);
+    const socket = io(apiConstants.BASE_URL);
     socket.emit("connected", { message: "Connected Successfully" });
     socket.on("socketId", (res) => {
       dispatch(setSocketId(res.socketId));

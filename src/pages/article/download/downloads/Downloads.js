@@ -9,6 +9,7 @@ import { setError } from "../../../../features/alertSlice";
 
 import DownloadItem from "../downloadItem/DownloadItem";
 import Loading from "../../../../components/loaders/loading/Loading";
+import images from "../../../../constants/images";
 
 export default function Downloads() {
   const { getDownloads, isPending } = useGetDownloads();
@@ -45,8 +46,9 @@ export default function Downloads() {
         sort(downloads).map((download) => (
           <DownloadItem key={download._id} download={download} />
         ))}
-      {downloads && downloads.length === 0 && (
-        <div className={styles["no-download-found"]}>No Recent Downloads.</div>
+
+      {downloads?.length === 0 && (
+        <img className={styles["empty"]} src={images.empty} alt="empty" />
       )}
       <div className={styles["download-footer"]}></div>
     </div>

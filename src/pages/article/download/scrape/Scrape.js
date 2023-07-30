@@ -11,6 +11,7 @@ import { setError } from "../../../../features/alertSlice";
 import DownloadItem from "../downloadItem/DownloadItem";
 import Input from "../../../../components/input/Input";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
+import images from "../../../../constants/images";
 
 export default function Scrape() {
   const [URL, setURL] = useState("");
@@ -91,8 +92,13 @@ export default function Scrape() {
           filter(activeDownloads).map((download, index) => (
             <DownloadItem key={index} download={{ ...download, _id: index }} />
           ))}
-        {activeDownloads && activeDownloads.length === 0 && (
-          <div className={styles["no-download-found"]}>No Active Download.</div>
+        {activeDownloads?.length === 0 && (
+          <img
+            className={styles["empty"]}
+            style={{ height: "45rem" }}
+            src={images.empty}
+            alt="empty"
+          />
         )}
         <div className={styles["download-footer"]}></div>
       </div>

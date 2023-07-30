@@ -1,7 +1,8 @@
 import axios from "axios";
+import apiConstants from "../../constants/apiConstants";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_PROD_SERVER_URL,
+  baseURL: apiConstants.BASE_URL,
   timeout: 60000, // 60 sec timeout
 });
 

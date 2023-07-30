@@ -14,6 +14,8 @@ import NotFound from "../../../error/NotFound";
 import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 import Loading from "../../../../components/loaders/loading/Loading";
+import Tag from "../../../../components/tags/Tag";
+import images from "../../../../constants/images";
 
 export default function Sharings() {
   const { id } = useParams();
@@ -154,7 +156,18 @@ export default function Sharings() {
             ))}
           {sharings && sharings.length === 0 && (
             <div className={styles["no-sharings-found"]}>
-              No Sharing found. Click on Sharing to share this article.
+              <img
+                className={styles["empty"]}
+                style={{ height: "45rem" }}
+                src={images.empty}
+                alt="empty"
+              />
+              <div className="flex-row">
+                {" "}
+                No Sharing found. Click on
+                <Tag tag={{ value: "+ Share" }} color={"transparent"} />
+                to share this article.
+              </div>
             </div>
           )}
           <div className={styles["sharing-footer"]}></div>

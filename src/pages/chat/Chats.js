@@ -12,6 +12,7 @@ import ChatBox from "./ChatBox";
 
 import Users from "./Users";
 import images from "../../constants/images";
+import apiConstants from "../../constants/apiConstants";
 
 export default function Chats() {
   const { user: me } = useSelector((store) => store.auth);
@@ -56,7 +57,7 @@ export default function Chats() {
   }, [reciever]);
 
   useEffect(() => {
-    const socket = io(process.env.REACT_APP_PROD_SERVER_URL);
+    const socket = io(apiConstants.BASE_URL);
     socket.emit("connected", {
       message: "Chat Connection Established",
       userId: me._id,

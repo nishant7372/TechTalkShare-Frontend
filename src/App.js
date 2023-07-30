@@ -14,15 +14,15 @@ import Chats from "./pages/chat/Chats";
 import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/error/NotFound";
+import NavBar from "./components/navbar/Navbar";
+import Create from "./pages/article/create/Create";
+import Update from "./pages/article/update/Update";
 import Settings from "./pages/settings/Settings";
 import ServerError from "./pages/error/ServerError";
 import Scrape from "./pages/article/download/scrape/Scrape";
-import NavBar from "./components/navbar/Navbar";
 import Sharings from "./pages/article/view-owner/sharings/Sharings";
 import Downloads from "./pages/article/download/downloads/Downloads";
 import Articles from "./pages/article/view-owner/articles/Articles";
-import Create from "./pages/article/create/Create";
-import Update from "./pages/article/update/Update";
 import MessageContainer from "./components/alerts/AlertContainer";
 import Loading from "./components/loaders/loading/Loading";
 import SharedPreview from "./pages/article/view-shared/sharedPreview/SharedPreview";
@@ -50,10 +50,6 @@ function App() {
           <NavBar />
           <Routes>
             <Route
-              path="/"
-              element={!user ? <Navigate to="/login" /> : <Home />}
-            />
-            <Route
               path="/login"
               element={user ? <Navigate to="/" /> : <LogIn />}
             />
@@ -62,33 +58,48 @@ function App() {
               element={user ? <Navigate to="/" /> : <SignUp />}
             />
             <Route
-              path="/settings"
-              element={user ? <Settings /> : <Navigate to="/login" />}
-            />
-
-            <Route
-              path="/articles/create"
-              element={!user ? <Navigate to="/login" /> : <Create />}
+              path="/"
+              element={!user ? <Navigate to="/login" /> : <Home />}
             />
             <Route
-              path="/download"
-              element={!user ? <Navigate to="/login" /> : <Scrape />}
-            />
-            <Route
-              path="/chat/*"
-              element={!user ? <Navigate to="/login" /> : <Chats />}
-            />
-            <Route
-              path="/downloads"
-              element={!user ? <Navigate to="/login" /> : <Downloads />}
+              path="/home"
+              element={!user ? <Navigate to="/login" /> : <Home />}
             />
             <Route
               path="/articles"
               element={!user ? <Navigate to="/login" /> : <Articles />}
             />
             <Route
-              path="/sharings/:id"
+              path="/articles/:id"
+              element={!user ? <Navigate to="/login" /> : <ArticlePreview />}
+            />
+            <Route
+              path="/articles/create"
+              element={!user ? <Navigate to="/login" /> : <Create />}
+            />
+            <Route
+              path="/articles/update/:id"
+              element={!user ? <Navigate to="/login" /> : <Update />}
+            />
+            <Route
+              path="/articles/sharings/:id"
               element={!user ? <Navigate to="/login" /> : <Sharings />}
+            />
+            <Route
+              path="/settings"
+              element={!user ? <Navigate to="/login" /> : <Settings />}
+            />
+            <Route
+              path="/download"
+              element={!user ? <Navigate to="/login" /> : <Scrape />}
+            />
+            <Route
+              path="/downloads"
+              element={!user ? <Navigate to="/login" /> : <Downloads />}
+            />
+            <Route
+              path="/chat/*"
+              element={!user ? <Navigate to="/login" /> : <Chats />}
             />
             <Route
               path="/shared"
@@ -97,14 +108,6 @@ function App() {
             <Route
               path="/shared/:id"
               element={!user ? <Navigate to="/login" /> : <SharedPreview />}
-            />
-            <Route
-              path="/articles/:id"
-              element={!user ? <Navigate to="/login" /> : <ArticlePreview />}
-            />
-            <Route
-              path="/articles/update/:id"
-              element={!user ? <Navigate to="/login" /> : <Update />}
             />
             <Route
               path="/shared/update/:id"
