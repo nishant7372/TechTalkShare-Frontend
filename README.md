@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/671ad429-d50b-4b58-9dae-cb3f616abe81" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/7b2e942b-42a0-4379-92a5-eefeb52d436b" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/06c5c8f2-d383-4da5-9bbc-a65bde6020b6" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/32cea330-a1fe-4817-b9f7-dc6468c02103" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/e9700915-515d-442b-9446-960848dd22a0" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/335c2c3d-82f7-4845-8e21-f2db0eb55ac9" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/bec16655-29db-4caa-b0de-1aae6bffa072" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/363d8cba-e004-4e1b-ac0c-44a1790df81e" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/ebfbc7c3-a5ea-4f8a-89f2-5e247495f086" width="48%"/>
+<img src="https://github.com/nishant7372/devstore_frontend/assets/91368799/8fe03a75-24e6-47ff-8cfb-88035b441049" width="48%"/>
+
 ## Available Scripts
 
 In the project directory, you can run:
