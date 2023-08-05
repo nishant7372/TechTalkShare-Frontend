@@ -117,6 +117,7 @@ export default function UpdateShared() {
                     buttonStyle={{
                       fontSize: "1.6rem",
                       padding: "0.15rem 0.8rem",
+                      alignSelf: "flex-start",
                     }}
                     type="cancelButton"
                     formAction="reset"

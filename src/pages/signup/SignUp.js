@@ -9,6 +9,7 @@ import { setError, setSuccess } from "../../features/alertSlice";
 
 import Spinner from "../../components/loaders/spinner/Spinner";
 import images from "../../constants/images";
+import Button from "../../components/buttons/Button";
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -101,7 +102,11 @@ export default function SignUp() {
             </div>
           </>
         ) : (
-          <button className={`${styles["btn"]}`}>SignUp</button>
+          <Button
+            content={"SignUp"}
+            type={"customButton"}
+            buttonStyle={{ padding: "0.6rem 1.6rem", fontWeight: "600" }}
+          />
         )}
       </form>
     </div>

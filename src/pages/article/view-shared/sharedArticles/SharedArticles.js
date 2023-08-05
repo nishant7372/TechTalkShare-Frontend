@@ -16,17 +16,24 @@ import TagSelect from "../../../../components/tags/TagSelect";
 import Paginate from "../../../../components/pagination/Paginate";
 import Loading from "../../../../components/loaders/loading/Loading";
 import images from "../../../../constants/images";
+import MessageBox from "../../../../components/messageBox/MessageBox";
+import { CSSTransition } from "react-transition-group";
+import { useRef } from "react";
 
 export default function SharedArticles() {
   const { articles, currPageNo, activeFilter } = useSelector(
     (store) => store.sharing
   );
   const dispatch = useDispatch();
+  const [openMessageBox, setOpenMessageBox] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   const { getSharedArticles, isPending } = useGetSharedArticles();
 
   const [search, setSearch] = useState("");
   const [tag, setTag] = useState(null);
+
+  const nodeRef = useRef(null);
 
   useEffect(() => {
     const fetch = async (sortBy) => {
@@ -49,6 +56,11 @@ export default function SharedArticles() {
 
   const handlePageChange = (page) => {
     dispatch(setCurrPageNo(page.selected));
+  };
+
+  const handleShowMessage = (flag, data) => {
+    setOpenMessageBox(flag);
+    setModalData(data);
   };
 
   useEffect(() => {
@@ -121,6 +133,7 @@ export default function SharedArticles() {
               key={article._id}
               articleObj={article}
               updated={activeFilter === "Recently Updated"}
+              handleShowMessage={handleShowMessage}
             />
           ))
         ) : (
@@ -150,6 +163,19 @@ export default function SharedArticles() {
         <div className={styles["article-footer"]}>
           <Paginate handlePageChange={handlePageChange} type={"sharing"} />
         </div>
+        <CSSTransition
+          in={openMessageBox}
+          timeout={300}
+          nodeRef={nodeRef}
+          classNames="moveup"
+          unmountOnExit
+        >
+          <MessageBox
+            handleShowMessage={handleShowMessage}
+            nodeRef={nodeRef}
+            modalData={modalData}
+          />
+        </CSSTransition>
       </div>
     </>
   );

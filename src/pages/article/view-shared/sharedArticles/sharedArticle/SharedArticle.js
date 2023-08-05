@@ -6,8 +6,12 @@ import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
 import Tag from "../../../../../components/tags/Tag";
 import images from "../../../../../constants/images";
 
-export default function SharedArticle({ articleObj, updated }) {
-  const { article, editPermission } = articleObj;
+export default function SharedArticle({
+  articleObj,
+  updated,
+  handleShowMessage,
+}) {
+  const { article, editPermission, message } = articleObj;
   const { timeSince } = useFormatDate();
 
   const color = ["skyblue", "magenta", "green", "orange"].sort(
@@ -64,8 +68,19 @@ export default function SharedArticle({ articleObj, updated }) {
           </div>
         )}
 
-        <div className={styles["h2"]}>
-          Owner: {article.owner.userName} ({article.owner.name})
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div className={styles["h2"]}>
+            Owner: {article.owner.userName} ({article.owner.name})
+          </div>
+          {message && (
+            <div
+              onClick={() =>
+                handleShowMessage(true, { message, owner: article.owner })
+              }
+            >
+              <i className={`fa-solid fa-message ${styles["message-icon"]}`} />
+            </div>
+          )}
         </div>
       </div>
     </div>

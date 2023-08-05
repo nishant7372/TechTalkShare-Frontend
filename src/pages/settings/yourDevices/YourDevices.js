@@ -79,6 +79,7 @@ export default function CurrentSessions() {
                 content=" &nbsp;Logout All Other Sessions"
                 buttonStyle={{
                   fontSize: "1.8rem",
+                  alignSelf: "flex-start",
                   padding: "0.3rem 0.8rem",
                   ...(sessions.length === 1 && { cursor: "not-allowed" }),
                   ...(sessions.length === 1 && { backgroundColor: "#555" }),

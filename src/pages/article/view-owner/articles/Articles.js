@@ -182,7 +182,7 @@ export default function Articles() {
         in={openShareModal}
         timeout={300}
         nodeRef={nodeRef}
-        classNames="message"
+        classNames="movein"
         unmountOnExit
       >
         <ShareModal

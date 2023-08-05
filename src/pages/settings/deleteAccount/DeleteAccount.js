@@ -55,6 +55,7 @@ export default function DeleteAccount() {
           buttonStyle={{
             fontSize: "1.8rem",
             padding: "0.3rem 0.8rem",
+            alignSelf: "flex-start",
           }}
           type="deleteButton"
           action={handleClick}

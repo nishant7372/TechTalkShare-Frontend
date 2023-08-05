@@ -1,0 +1,45 @@
+.rsw-editor {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 1rem;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  overflow: auto;
+  height: 12rem;
+}
+
+.rsw-toolbar {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: flex-end;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.rs-main {
+  box-shadow: 15px 5px -10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.rsw-separator {
+  border: 2px solid red;
+}
+
+.rsw-btn {
+  color: #ffffff8d;
+}
+
+.rsw-btn:hover {
+  background-color: #333;
+}
+
+.rsw-btn:active {
+  background-color: #444;
+}
+
+.rsw-btn[data-active="true"] {
+  background: #555;
+  color: #fff;
+}

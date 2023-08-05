@@ -36,6 +36,9 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   cursor: pointer;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
 }
 
 .closeButton:hover {

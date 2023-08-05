@@ -86,6 +86,7 @@ export default function Create() {
                 buttonStyle={{
                   fontSize: "1.6rem",
                   padding: "0.15rem 0.8rem",
+                  alignSelf: "flex-start",
                 }}
                 type="cancelButton"
                 action={goBack}

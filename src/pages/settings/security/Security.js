@@ -105,6 +105,7 @@ export default function Security() {
               buttonStyle={{
                 fontSize: "1.8rem",
                 padding: "0.3rem 0.8rem",
+                alignSelf: "flex-start",
                 ...((newPassword === "" || confirmPassword === "") && {
                   cursor: "not-allowed",
                 }),

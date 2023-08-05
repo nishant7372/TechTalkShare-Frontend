@@ -9,6 +9,7 @@ import Spinner from "../../components/loaders/spinner/Spinner";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../features/alertSlice";
 import images from "../../constants/images";
+import Button from "../../components/buttons/Button";
 
 export default function LogIn() {
   const [passwordType, setPasswordType] = useState("eyePassword");
@@ -89,7 +90,11 @@ export default function LogIn() {
             </div>
           </>
         ) : (
-          <button className={styles["btn"]}>LogIn</button>
+          <Button
+            content={"LogIn"}
+            type={"customButton"}
+            buttonStyle={{ padding: "0.6rem 1.6rem", fontWeight: "600" }}
+          />
         )}
       </form>
     </div>

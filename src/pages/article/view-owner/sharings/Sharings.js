@@ -178,7 +178,7 @@ export default function Sharings() {
         in={openShareModal}
         timeout={300}
         nodeRef={nodeRef}
-        classNames="message"
+        classNames="movein"
         unmountOnExit
       >
         <ShareModal

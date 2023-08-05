@@ -54,7 +54,11 @@ export default function AlertContainer() {
                   alert.type === "ERROR" ? `exclamation` : `check`
                 }`}
               ></i>
-              <span>{alert.message}</span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: alert.message,
+                }}
+              />
             </>
           }
           type={alert.type}

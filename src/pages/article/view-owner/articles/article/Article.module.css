@@ -82,6 +82,16 @@
   color: white;
 }
 
+.message-icon {
+  font-size: 1.6rem;
+  color: rgb(255, 191, 0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.message-icon:hover {
+  transform: scale(1.1);
+}
+
 .d-icon {
   position: absolute;
   right: -1rem;

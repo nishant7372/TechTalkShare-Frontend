@@ -1,7 +1,7 @@
 import styles from "./NameAvatar.module.css";
 import { useLogoMaker } from "../../hooks/utils/useLogoMaker";
 
-export default function NameLogo({ logoStyle, name }) {
+export default function NameLogo({ logoStyle, name = "" }) {
   const { getFirstLetters } = useLogoMaker();
   const colors = [
     "skyblue",
@@ -17,7 +17,7 @@ export default function NameLogo({ logoStyle, name }) {
   function hash(string) {
     let number = 0;
 
-    for (let i = 0; i < string.length; i++) {
+    for (let i = 0; i < string?.length; i++) {
       const charCode = string.charCodeAt(i);
       const charNumber = charCode - 96; // Assuming lowercase letters (a = 1, b = 2, ...)
       number = number * 26 + charNumber;
@@ -30,7 +30,7 @@ export default function NameLogo({ logoStyle, name }) {
     <div
       title={name}
       className={`${styles["userNameLogo"]} ${
-        styles[colors[hash(name.toLowerCase())]]
+        styles[colors[hash(name?.toLowerCase())]]
       }`}
       style={logoStyle}
     >

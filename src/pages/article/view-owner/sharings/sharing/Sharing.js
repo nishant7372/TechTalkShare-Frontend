@@ -141,6 +141,7 @@ export default function Sharing({ sharing, updated, updateSharings }) {
                 padding: "0.3rem 0.8rem",
                 textWrap: "noWrap",
                 textAlign: "center",
+                alignSelf: "flex-start",
               }}
               type="deleteButton"
               action={handleDelete}

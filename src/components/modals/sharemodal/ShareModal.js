@@ -1,18 +1,61 @@
 import styles from "./ShareModal.module.css";
 
 import { useState } from "react";
-import { useEffect } from "react";
+import Button from "../../buttons/Button";
+import CustomEditor from "../../editors/CustomEditor";
+import ToggleButton from "../../buttons/ToggleButton";
+import Tag from "../../tags/Tag";
+import SelectUser from "./SelectUser";
 
 import { useShareArticle } from "../../../hooks/sharing/useShareArticle";
-import { useDispatch, useSelector } from "react-redux";
-import { useGetUsers } from "../../../hooks/user/useGetUsers";
+import { useDispatch } from "react-redux";
 
 import Loading from "../../../components/loaders/loading/Loading";
-import ToggleButton from "../../buttons/ToggleButton";
-import Alert from "../../../components/alerts/Alert";
-import Button from "../../buttons/Button";
-import NameLogo from "../../../components/avatar/NameAvatar";
 import { setError, setSuccess } from "../../../features/alertSlice";
+import { useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+
+const User = ({ user, index, removeUser }) => {
+  return (
+    <div className={styles["user"]}>
+      {user?.avatar ? (
+        <span>
+          <img
+            src={`data:image/jpeg;base64, ${user.avatar}`}
+            alt="user-avatar"
+            className={styles["user-avatar"]}
+          />
+        </span>
+      ) : (
+        <span className={styles.userLogo}>{user?.name?.charAt(0)}</span>
+      )}
+      <span>{user.name}</span>
+      <span className={styles.userCross} onClick={() => removeUser(index)}>
+        <i className="fa-solid fa-xmark"></i>
+      </span>
+    </div>
+  );
+};
+
+const customStyles = {
+  barsIcon: {
+    backgroundColor: "#ffffff30",
+    padding: "1.5rem",
+    fontSize: "1.6rem",
+    borderRadius: "50%",
+    color: "#ffffffdd",
+  },
+  plusIcon: {
+    backgroundColor: "#ffffff13",
+    padding: "1rem 0.8rem",
+    borderRadius: "50%",
+    color: "#ffffffd6",
+    fontSize: "1.6rem",
+    boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.5)",
+    cursor: "pointer",
+  },
+  buttonStyle: { padding: "0.8rem 1.6rem" },
+};
 
 export default function ShareModal({
   articleShare,
@@ -20,143 +63,138 @@ export default function ShareModal({
   nodeRef,
   updateSharings,
 }) {
-  const [userName, setUserName] = useState("");
-  const [users, setUsers] = useState(null);
-  const [editOn, setEditOn] = useState(false);
-  const [sharedWith, setSharedWith] = useState([]);
-
   const { shareArticle, isPending } = useShareArticle();
-  const { user: me } = useSelector((store) => store.auth);
-  const {
-    getUsers,
-    error: usersError,
-    isPending: usersPending,
-  } = useGetUsers();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
+  const [openUserSelect, setOpenUserSelect] = useState(false);
+  const [message, setMessage] = useState("");
+  const [notify, setNotify] = useState(true);
+  const [edit, setEdit] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  const nodeRef2 = useRef(null);
+
+  const handleShare = async (e) => {
     e.preventDefault();
+    if (users.length === 0) {
+      return dispatch(setError("Select at least 1 user"));
+    }
     const res = await shareArticle({
       articleID: articleShare,
-      userName: userName,
-      editPermission: editOn,
+      users: users.map((user) => user._id),
+      editPermission: edit,
+      notify,
+      message,
     });
     if (res.ok) {
       dispatch(setSuccess(res.ok));
       setOpenShareModal(false);
-      updateSharings();
+      if (updateSharings) updateSharings();
     } else if (res.error) {
       dispatch(setError(res.error));
     }
   };
 
-  const filterResults = (term) => {
-    return users
-      ? users
-          .filter((user) => {
-            return user.userName.startsWith(term) && user._id !== me._id;
-          })
-          .sort((a, b) => a.userName.localeCompare(b.userName))
-      : null;
+  const addUser = () => {
+    setOpenUserSelect(true);
   };
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const res = await getUsers();
-      setUsers(res.data);
-    };
-    fetchUsers();
-    // eslint-disable-next-line
-  }, []);
+  const removeUser = (index) => {
+    setUsers((users) => users.filter((_, idx) => idx !== index));
+  };
 
-  useEffect(() => {
-    const results = filterResults(userName);
-    setSharedWith(results);
-    // eslint-disable-next-line
-  }, [userName, users]);
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleSelectUser = (user, query) => {
+    if (query === "add") {
+      setUsers((prev) => [...prev, user]);
+    } else {
+      setUsers((prev) => prev.filter((u) => u._id !== user._id));
+    }
+  };
 
   return (
     <div className={styles["overlay"]} ref={nodeRef}>
-      <div className={styles["shareModal"]}>
-        <form onSubmit={handleSubmit}>
-          <div
-            className={styles["cancelButton"]}
-            onClick={() => setOpenShareModal(false)}
-          >
-            X
-          </div>
-          <div className="flex-row" style={{ position: "relative" }}>
-            <span className={styles["pre"]}>@</span>
-            <input
-              type="userName"
-              onChange={(e) => setUserName(e.target.value.toLowerCase())}
-              value={userName}
-              placeholder={"userName"}
-              className={styles["shareInput"]}
-              required
+      <div className={styles["modal"]}>
+        <div className={styles["header"]}>
+          <div className="flex-row">
+            <div className={styles["heading"]}>Share</div>
+            <i
+              style={customStyles.barsIcon}
+              className="fa-solid fa-bars-staggered"
             />
-
-            {isPending ? (
-              <Loading action={"post"} />
-            ) : (
-              <Button
-                content={"Share"}
-                buttonStyle={{
-                  fontSize: "1.8rem",
-                  padding: "0.4rem 0.8rem",
-                }}
-                type="saveButton"
-                formAction="submit"
+          </div>
+          <div className={styles["users"]}>
+            {users.slice(0, 4).map((user, index) => (
+              <User
+                user={user}
+                key={user.userName}
+                index={index}
+                removeUser={removeUser}
+              />
+            ))}
+            {users?.length > 4 && (
+              <Tag
+                tag={{ value: `+ ${users.length - 4} more` }}
+                color={"transparent"}
+                tagStyles={{ borderRadius: "32px" }}
               />
             )}
+            <span onClick={addUser}>
+              <i
+                style={customStyles.plusIcon}
+                className="fa-solid fa-user-plus"
+              ></i>
+            </span>
           </div>
-          <div className={styles["toggle"]}>
-            <div>Edit Permission:</div>{" "}
-            <ToggleButton on={editOn} setOn={setEditOn} />
-          </div>
-        </form>
-        <div className={styles["sharedWith"]}>
-          {sharedWith &&
-            sharedWith.length > 0 &&
-            sharedWith.map((user, index) => (
-              <div
-                key={index}
-                className={styles["sharedWithUser"]}
-                onClick={() => setUserName(user.userName)}
-              >
-                {user.avatar ? (
-                  <img
-                    src={`data:image/jpeg;base64, ${user.avatar}`}
-                    alt="user-avatar"
-                    className={styles["user-avatar"]}
-                  />
-                ) : (
-                  <NameLogo
-                    logoStyle={{
-                      width: "1.7rem",
-                      height: "2.6rem",
-                      fontSize: "1.6rem",
-                    }}
-                    name={user.name}
-                  />
-                )}
-                <div>
-                  <div>{user.name} </div>{" "}
-                  <div className={styles["name"]}>@{user.userName} </div>
-                </div>
-              </div>
-            ))}
-          {usersPending && <Loading action={"users-loading"} />}
-          {usersError && (
-            <div className={styles["userErrors"]}>
-              <Alert message={usersError} type={"ERROR"} />
+          <CustomEditor value={message} onChange={handleChange} />
+          <div className={styles.btContainer}>
+            <div className={styles.toggle}>
+              <ToggleButton on={notify} setOn={setNotify} />
+              <span>Notify People</span>
             </div>
-          )}
-          {sharedWith && sharedWith.length === 0 && (
-            <div className={styles["not-found"]}>No UserName found</div>
+            <div className={styles.toggle}>
+              <ToggleButton on={edit} setOn={setEdit} />
+              <span>Edit</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles["footer"]}>
+          <Button
+            content={"Cancel"}
+            type={"customButton2"}
+            buttonStyle={customStyles.buttonStyle}
+            action={() => setOpenShareModal(false)}
+          />
+          {isPending ? (
+            <Loading action={"post"} />
+          ) : (
+            <Button
+              content={"Share"}
+              type={"customButton"}
+              buttonStyle={customStyles.buttonStyle}
+              action={handleShare}
+            />
           )}
         </div>
+        <form onSubmit={null}></form>
       </div>
+      <CSSTransition
+        in={openUserSelect}
+        timeout={300}
+        nodeRef={nodeRef2}
+        classNames="movein"
+        unmountOnExit
+      >
+        <SelectUser
+          setOpenUserSelect={setOpenUserSelect}
+          handleSelectUser={handleSelectUser}
+          selectedUsers={users}
+          ref={nodeRef2}
+        />
+      </CSSTransition>
     </div>
   );
 }
