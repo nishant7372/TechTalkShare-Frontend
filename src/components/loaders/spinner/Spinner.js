@@ -1,6 +1,6 @@
 import styles from "./Spinner.module.css";
 
-export default function Spinner() {
+export default function Spinner({ spinnerStyles }) {
   return (
     <div>
       <svg
@@ -9,6 +9,7 @@ export default function Spinner() {
         width="48"
         height="48"
         viewBox="0 0 48 48"
+        style={spinnerStyles}
       >
         <circle cx="24" cy="4" r="4" fill="#fff" />
         <circle cx="12.19" cy="7.86" r="3.7" fill="#fffbf2" />

@@ -13,17 +13,18 @@
 .pre {
   position: absolute;
   z-index: 2;
-  top: 0.2rem;
+  top: 0.8rem;
   left: 1rem;
   font-size: 2rem;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .userSearchBar {
-  font-size: 2rem;
-  padding: 0.2rem 0.8rem;
+  font-size: 2.2rem;
+  padding: 0.4rem 0.8rem;
   padding-left: 3.5rem;
   width: calc(100% - 3.8rem);
+  height: 4rem;
   outline: none;
   background-color: rgb(4, 3, 10);
   border: none;
@@ -43,13 +44,13 @@
   flex-direction: column;
   gap: 0rem;
   overflow-y: auto;
-  height: 95%;
+  flex: 1;
 }
 
 .user {
   font-size: 1.7rem;
   cursor: pointer;
-  padding: 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -114,6 +115,6 @@
     font-size: 1.5rem;
   }
   .user {
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
   }
 }

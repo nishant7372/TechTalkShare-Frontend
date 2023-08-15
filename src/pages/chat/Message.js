@@ -7,8 +7,8 @@ export default function Message({ message, type }) {
 
   return (
     <div className={styles[type]}>
-      <div className={styles["content"]}>{message.content}</div>
-      <div className={styles["time"]}>{formatTime(message.createdAt)}</div>
+      <p className={styles["content"]}>{message.content}</p>
+      <p className={styles["time"]}>{formatTime(message.createdAt)}</p>
     </div>
   );
 }

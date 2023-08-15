@@ -26,7 +26,6 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     const res = await logout();
-
     handleResponse(res);
   };
 

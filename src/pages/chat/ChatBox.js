@@ -19,6 +19,7 @@ import NameLogo from "../../components/avatar/NameAvatar";
 import Loading from "../../components/loaders/loading/Loading";
 import AnimatedButton from "../../components/buttons/AnimatedButton";
 import images from "../../constants/images";
+import Spinner from "../../components/loaders/spinner/Spinner";
 
 export default function ChatBox({
   onlineUsers,
@@ -174,19 +175,12 @@ export default function ChatBox({
               )}
             </div>
             <div className={styles["chatContainer"]} ref={scrollRef}>
-              {messages &&
+              {!isPending &&
+                !messagesLoading &&
+                messages &&
                 groupMessages(messages).map((grp, index) => (
                   <div key={index}>
-                    <div
-                      style={{
-                        margin: "2rem 0",
-                        width: "100%",
-                        display: "flex",
-                        zIndex: "5",
-                        position: "sticky",
-                        top: "0",
-                      }}
-                    >
+                    <div className={styles["dateContainer"]}>
                       <div className={styles["date"]}>
                         {formatChatDate(grp[0], "DD-MM-YYYY")}
                       </div>
@@ -275,7 +269,11 @@ export default function ChatBox({
           </div>
         </>
       ) : null}
-      {(isPending || messagesLoading) && <Loading action="mainRead" />}
+      {(isPending || messagesLoading) && (
+        <div className={styles.loading}>
+          <Spinner spinnerStyles={{ width: "4rem", height: "4rem" }} />
+        </div>
+      )}
       {showNotFound && <NotFound />}
     </div>
   );

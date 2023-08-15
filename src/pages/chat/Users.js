@@ -58,7 +58,9 @@ export default function Users({ onlineUsers, hideUserMenu }) {
         hideUserMenu ? styles["hidden"] : null
       }`}
     >
-      <div style={{ position: "relative" }}>
+      <div
+        style={{ position: "relative", height: "5rem", alignItems: "center" }}
+      >
         <span className={styles["pre"]}>@</span>
         <input
           type="text"
