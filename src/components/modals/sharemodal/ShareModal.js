@@ -2,7 +2,6 @@ import styles from "./ShareModal.module.css";
 
 import { useState } from "react";
 import Button from "../../buttons/Button";
-import CustomEditor from "../../editors/CustomEditor";
 import ToggleButton from "../../buttons/ToggleButton";
 import Tag from "../../tags/Tag";
 import SelectUser from "./SelectUser";
@@ -14,6 +13,7 @@ import Loading from "../../../components/loaders/loading/Loading";
 import { setError, setSuccess } from "../../../features/alertSlice";
 import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import MessageEditor from "../../editors/messageEditor/MessageEditor";
 
 const User = ({ user, index, removeUser }) => {
   return (
@@ -103,10 +103,6 @@ export default function ShareModal({
     setUsers((users) => users.filter((_, idx) => idx !== index));
   };
 
-  const handleChange = (e) => {
-    setMessage(e.target.value);
-  };
-
   const handleSelectUser = (user, query) => {
     if (query === "add") {
       setUsers((prev) => [...prev, user]);
@@ -149,7 +145,9 @@ export default function ShareModal({
               ></i>
             </span>
           </div>
-          <CustomEditor value={message} onChange={handleChange} />
+          <div style={{ overflow: "hidden", borderRadius: "6px" }}>
+            <MessageEditor value={message} onChange={setMessage} />
+          </div>
           <div className={styles.btContainer}>
             <div className={styles.toggle}>
               <ToggleButton on={notify} setOn={setNotify} />

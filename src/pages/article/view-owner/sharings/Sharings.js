@@ -37,10 +37,10 @@ export default function Sharings() {
 
   const fetchSharings = async () => {
     const res = await getSharings(id);
-    if (res.ok) setData(res.data.sharings);
-    else if (res.error) {
-      dispatch(setError(res.error.message));
-      if (res.error.status === 404) setShowNotFound(true);
+    if (res?.ok) setData(res?.data?.sharings);
+    else if (res?.error) {
+      dispatch(setError(res?.error?.message));
+      if (res?.error?.status === 404) setShowNotFound(true);
     }
   };
 
@@ -66,10 +66,8 @@ export default function Sharings() {
 
   useEffect(() => {
     if (searchTerm !== "") {
-      const filteredData = data.filter(
-        ({ sharedWith, sharedBy }) =>
-          sharedWith.userName.startsWith(searchTerm) ||
-          sharedBy.userName.startsWith(searchTerm)
+      const filteredData = data.filter(({ sharedWith }) =>
+        sharedWith?.userName?.startsWith(searchTerm)
       );
       applySortedData(filteredData);
     } else {
@@ -145,16 +143,15 @@ export default function Sharings() {
               </div>
             </div>
           </div>
-          {sharings &&
-            sharings.map((sharing) => (
-              <Sharing
-                key={sharing._id}
-                sharing={sharing}
-                updated={activeFilter === "Recently Updated"}
-                updateSharings={fetchSharings}
-              />
-            ))}
-          {sharings && sharings.length === 0 && (
+          {sharings?.map((sharing) => (
+            <Sharing
+              key={sharing._id}
+              sharing={sharing}
+              updated={activeFilter === "Recently Updated"}
+              updateSharings={fetchSharings}
+            />
+          ))}
+          {sharings?.length === 0 && (
             <div className={styles["no-sharings-found"]}>
               <img
                 className={styles["empty"]}

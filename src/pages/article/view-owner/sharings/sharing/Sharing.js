@@ -49,13 +49,13 @@ export default function Sharing({ sharing, updated, updateSharings }) {
     <div className={styles["sharing"]}>
       <div className={styles["top-container"]}>
         <div
-          className={styles["col1"]}
+          className={styles["col"]}
           data-tooltip-id="name2-tooltip"
           data-tooltip-content={sharing.sharedWith.name}
           data-tooltip-place="top"
           data-tooltip-variant="info"
         >
-          @ {sharing.sharedWith.userName}
+          @ {sharing?.sharedWith?.userName}
         </div>
         <Tooltip
           id="name1-tooltip"
@@ -73,11 +73,11 @@ export default function Sharing({ sharing, updated, updateSharings }) {
             padding: "0.4rem 0.8rem",
           }}
         />
-        <div className={styles["col2"]}>
+        <div className={styles["col"]}>
           <ToggleButton on={editPermission} setOn={handleEditStatus} />
         </div>
 
-        <div className={styles["col3"]}>
+        <div className={styles["col"]}>
           {!updated && (
             <div className={styles["h4"]}>
               {timeSince(sharing.createdAt)} ago
@@ -89,10 +89,10 @@ export default function Sharing({ sharing, updated, updateSharings }) {
             </div>
           )}
         </div>
-        <div className={styles["col4"]}>
+        <div className={styles["col"]}>
           {updatePending ? (
             <div className={styles["disabled"]}>
-              <Spinner />
+              <Spinner spinnerStyles={{ width: "2.3rem", height: "2.3rem" }} />
             </div>
           ) : (
             <div
@@ -127,10 +127,10 @@ export default function Sharing({ sharing, updated, updateSharings }) {
             }}
           />
         </div>
-        <div className={styles["col5"]}>
+        <div className={styles["col"]}>
           {deletePending ? (
             <div className={styles["disabled"]}>
-              <Spinner />
+              <Spinner spinnerStyles={{ width: "2.3rem", height: "2.3rem" }} />
             </div>
           ) : (
             <Button

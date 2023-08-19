@@ -3,9 +3,11 @@ import styles from "./TagSelect.module.css";
 import CreatableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
 import options from "./Options";
+import { useDispatch } from "react-redux";
 
 export default function TagSelect({ tags, setTags, search, small }) {
   const animatedComponents = makeAnimated();
+  const dispatch = useDispatch();
 
   const customStylesSm = {
     control: (provided, state) => ({
@@ -105,13 +107,17 @@ export default function TagSelect({ tags, setTags, search, small }) {
   };
 
   const handleSelectChange = (selectedOptions) => {
-    if (search && selectedOptions.length > 1) {
-      return;
+    if (search) {
+      if (selectedOptions.length > 1) {
+        return;
+      }
+      dispatch(setTags({ currPageNo: 0, tag: selectedOptions }));
+    } else {
+      if (!search && selectedOptions.length > 10) {
+        return;
+      }
+      setTags(selectedOptions);
     }
-    if (!search && selectedOptions.length > 10) {
-      return;
-    }
-    setTags(selectedOptions);
   };
 
   return (

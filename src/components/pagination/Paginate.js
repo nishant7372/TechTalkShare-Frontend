@@ -3,8 +3,8 @@ import styles from "./Paginate.module.css";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
 
-export default function Paginate({ handlePageChange, type }) {
-  const { articleCount, currPageNo } = useSelector((store) => store[type]);
+export default function Paginate({ handlePageChange, query }) {
+  const { articleCount, filters } = useSelector((store) => store[query]);
 
   const articlePerPage = 10;
 
@@ -19,7 +19,7 @@ export default function Paginate({ handlePageChange, type }) {
       nextLabel=">>"
       activeClassName={styles["active-page"]}
       onPageChange={handlePageChange}
-      forcePage={currPageNo}
+      forcePage={filters.currPageNo}
       className={styles["react-paginate"]}
     />
   );

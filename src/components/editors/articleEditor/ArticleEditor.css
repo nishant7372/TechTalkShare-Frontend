@@ -1,3 +1,10 @@
+.article-editor {
+  z-index: 4;
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+  height: calc(100% - 16rem);
+}
+
 .cm-editor {
   height: fit-content !important;
 }

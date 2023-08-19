@@ -34,12 +34,8 @@
   gap: 1rem;
 }
 
-.col1,
-.col2,
-.col3,
-.col4,
-.col5 {
-  width: 20%;
+.col {
+  flex: 1;
   align-items: center;
   display: flex;
   justify-content: center;

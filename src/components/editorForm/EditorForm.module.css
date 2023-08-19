@@ -1,4 +1,4 @@
-.create-article {
+.container {
   display: flex;
   margin: auto;
   width: 95%;
@@ -36,7 +36,7 @@
   -webkit-box-shadow: none;
   color: white;
   background-color: rgba(255, 255, 255, 0);
-  width: 75%;
+  flex: 1;
 }
 
 .s1-right {
@@ -55,19 +55,6 @@
   font-size: 1.8rem;
   height: 20rem;
   height: 4.5rem;
-}
-
-.section3 {
-  z-index: 6;
-  font-size: 1.5rem;
-  padding-bottom: 2rem;
-  height: calc(100% - 16rem);
-}
-
-@media screen and (min-width: 450px) and (max-width: 800px) {
-  .s1-left {
-    width: 60%;
-  }
 }
 
 @media screen and (max-width: 450px) {

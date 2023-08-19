@@ -1,4 +1,4 @@
-.article-container {
+.table-container {
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.article-header {
+.table-header {
   color: white;
   display: flex;
   align-items: center;
@@ -23,6 +23,7 @@
 }
 
 .filterButton {
+  all: unset;
   padding: 0rem 1rem;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.7);
@@ -34,6 +35,7 @@
 
 .active {
   color: white;
+  cursor: not-allowed;
 }
 
 .searchBar input {
@@ -93,7 +95,7 @@
   color: #999;
 }
 
-.no-article-found {
+.no-data-found {
   color: white;
   padding: 2rem;
   font-size: 2rem;
@@ -107,19 +109,19 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .article-header {
+  .table-header {
     flex-direction: column-reverse;
     padding: 1rem;
   }
 }
 
 @media only screen and (max-width: 450px) {
-  .article-container {
+  .table-container {
     width: 99%;
   }
 }
 
-.article-footer {
+.table-footer {
   font-size: 1.2rem;
   margin-top: auto;
   background-color: rgba(255, 255, 255, 0.1);

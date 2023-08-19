@@ -1,0 +1,34 @@
+.message-editor {
+  font-family: "Baloo Bhai 2", cursive, sans-serif;
+  height: 18rem;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  width: calc(100%);
+}
+
+/* .cm-editor {
+  height: fit-content !important;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding: 1rem;
+  background-color: #333;
+}
+
+.md-editor {
+  border-radius: 6px;
+  height: 99.9%;
+  background-color: #222;
+}
+
+.md-editor-preview {
+  display: none;
+} */
+
+.msg-editor-preview {
+  border: 2px solid red;
+  display: none;
+}
+
+.md-editor-preview {
+  padding: 0;
+}
