@@ -19,6 +19,7 @@ import TagSelect from "../../../../components/tags/TagSelect";
 import ShareModal from "../../../../components/modals/sharemodal/ShareModal";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 import images from "../../../../constants/images";
+import { enterPageFullScreen } from "../../../../hooks/utils/gobalFunctions";
 
 export default function Articles() {
   const { readArticles, isPending } = useReadArticles();
@@ -130,6 +131,7 @@ export default function Articles() {
 
             <AnimatedButton
               link={`/articles/create`}
+              action={enterPageFullScreen}
               content="+ Create"
               buttonStyle={{
                 fontSize: "1.6rem",

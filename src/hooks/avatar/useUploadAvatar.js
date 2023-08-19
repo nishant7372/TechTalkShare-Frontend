@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useUploadAvatar = () => {
   const [isPending, setIsPending] = useState(false);
 
   const uploadAvatar = async (avatarImage) => {
     setIsPending(true);
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const formData = new FormData();

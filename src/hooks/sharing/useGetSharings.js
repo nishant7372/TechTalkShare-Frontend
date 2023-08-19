@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useGetSharings = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,7 +8,7 @@ export const useGetSharings = () => {
   const getSharings = async (id) => {
     setIsPending(true);
 
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.get(`/sharings/${id}`, {

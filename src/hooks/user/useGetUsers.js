@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useGetUsers = () => {
   const [error, setError] = useState(null);
@@ -8,7 +9,7 @@ export const useGetUsers = () => {
   const getUsers = async () => {
     setError(null);
     setIsPending(true);
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.get(`/users/`, {

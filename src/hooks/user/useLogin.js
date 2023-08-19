@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
 import { setUser } from "../../features/authSlice";
+import { addItemtoLocalStorage } from "../utils/gobalFunctions";
 
 const bowser = require("bowser");
 
@@ -39,15 +40,15 @@ export const useLogin = () => {
       if (!res) {
         return { error: "Unable to LogIn" };
       } else {
-        localStorage.setItem("token", res.data.token); // save token in localStorage
-        dispatch(setUser(res.data.user)); // setting user on login action
+        addItemtoLocalStorage({ key: "token", value: res?.data?.token }); // save token in localStorage
+        dispatch(setUser(res?.data?.user)); // setting user on login action
         return { ok: "Login Successful" };
       }
     } catch (err) {
       let error = "";
-      if (err.response) {
+      if (err?.response) {
         error = err?.response?.data?.message || "An error occurred.";
-      } else if (err.request) {
+      } else if (err?.request) {
         error = "Network error. Please try again later.";
       } else {
         error = "An error occurred. Please try again later.";

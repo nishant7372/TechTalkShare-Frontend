@@ -18,6 +18,7 @@ import NotFound from "../../../error/NotFound";
 import Tag from "./../../../../components/tags/Tag";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
 import Confirm from "../../../../components/modals/confirmModal/Confirm";
+import { enterPageFullScreen } from "../../../../hooks/utils/gobalFunctions";
 
 export default function ArticlePreview() {
   const { id } = useParams();
@@ -135,6 +136,7 @@ export default function ArticlePreview() {
                 padding: "0.3rem 0.8rem",
                 textAlign: "center",
               }}
+              action={enterPageFullScreen}
               type="editBt"
             />
             {deletePending ? (

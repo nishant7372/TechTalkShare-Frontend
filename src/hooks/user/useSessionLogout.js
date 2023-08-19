@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
 import { setUser } from "../../features/authSlice";
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+} from "../utils/gobalFunctions";
 
 export const useSessionLogout = () => {
   const [isPending, setIsPending] = useState(false);
@@ -9,7 +13,7 @@ export const useSessionLogout = () => {
 
   const sessionLogout = async (id, active) => {
     setIsPending(true);
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       //session logout out by id
@@ -27,7 +31,7 @@ export const useSessionLogout = () => {
 
       if (res) {
         if (active) {
-          localStorage.setItem("token", null); // delete token from localStorage
+          removeItemFromLocalStorage("token"); // delete token from localStorage
           dispatch(setUser(null)); // setting user null on logout action
         }
         return { ok: "Logout Successful" };

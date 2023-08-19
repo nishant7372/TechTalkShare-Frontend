@@ -12,41 +12,38 @@ import Loading from "../../../components/loaders/loading/Loading";
 import Button from "../../../components/buttons/Button";
 
 import { setError, setSuccess } from "../../../features/alertSlice";
+import {
+  addItemstoLocalStorage,
+  exitPageFullScreen,
+  getItemsFromLocalStorage,
+  removeItemsFromLocalStorage,
+} from "../../../hooks/utils/gobalFunctions";
 
 export default function Create() {
   const { createArticle, isPending } = useCreateArticle();
   const dispatch = useDispatch();
 
-  let tp = JSON.parse(localStorage.getItem("topic"));
-  let tg = JSON.parse(localStorage.getItem("tags"));
-  let ct = JSON.parse(localStorage.getItem("content"));
+  const items = getItemsFromLocalStorage(["topic", "tags", "content"]);
 
-  const [topic, setTopic] = useState(tp ? tp : "");
-  const [tags, setTags] = useState(tg ? tg : []);
-  const [content, setContent] = useState(ct ? ct : "");
+  const [topic, setTopic] = useState(items[0] || "");
+  const [tags, setTags] = useState(items[1] || []);
+  const [content, setContent] = useState(items[2] || "");
   const [noChange, setNoChange] = useState(true);
 
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
-    clearLocalStorage();
-  };
-
-  const clearLocalStorage = () => {
-    localStorage.removeItem("topic");
-    localStorage.removeItem("tags");
-    localStorage.removeItem("content");
-  };
-
-  const addtoLocalStorage = () => {
-    localStorage.setItem("topic", JSON.stringify(topic));
-    localStorage.setItem("tags", JSON.stringify(tags));
-    localStorage.setItem("content", JSON.stringify(content));
+    exitPageFullScreen();
+    removeItemsFromLocalStorage(["topic", "tags", "content"]);
   };
 
   useEffect(() => {
-    addtoLocalStorage();
+    addItemstoLocalStorage([
+      { key: "topic", value: topic },
+      { key: "tags", value: tags },
+      { key: "content", value: content },
+    ]);
     setNoChange(topic === "" || content === "");
     // eslint-disable-next-line
   }, [topic, tags, content]);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "./../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useUpdateArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,7 +8,7 @@ export const useUpdateArticle = () => {
   const updateArticle = async (id, updates) => {
     setIsPending(true);
 
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.patch(`/article/${id}`, updates, {

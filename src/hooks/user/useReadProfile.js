@@ -3,19 +3,19 @@ import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
 import { setAuthIsReady, setServerError } from "../../features/authSlice";
 import { setError } from "../../features/alertSlice";
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+} from "../utils/gobalFunctions";
 
 export const useReadProfile = () => {
   const dispatch = useDispatch();
   const [isPending, setIsPending] = useState(false);
 
   const readProfile = async () => {
-    if (
-      localStorage.getItem("token") === "null" ||
-      localStorage.getItem("token") === null
-    )
-      return;
+    const token = getItemFromLocalStorage("token");
+    // if (!token) return;
     setIsPending(true);
-    const token = localStorage.getItem("token");
     try {
       const res = await axiosInstance.get("/users/me", {
         headers: {
@@ -33,7 +33,7 @@ export const useReadProfile = () => {
     } catch (error) {
       let err;
       if (error?.response?.status === 401) {
-        localStorage.setItem("token", null); //delete token from localStorage when not Authorized
+        removeItemFromLocalStorage("token"); //delete token from localStorage when not Authorized
         dispatch(setAuthIsReady(null));
         return dispatch(setError("You have been logged out!"));
       }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axiosInstance from "./../axios/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setArticles, setArticleCount } from "../../features/articleSlice";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useReadArticles = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export const useReadArticles = () => {
   const readArticles = async (params) => {
     setIsPending(true);
 
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.get(`/articles`, {

@@ -14,6 +14,7 @@ import NotFound from "../../../error/NotFound";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import Loading from "../../../../components/loaders/loading/Loading";
 import AnimatedButton from "../../../../components/buttons/AnimatedButton";
+import { enterPageFullScreen } from "../../../../hooks/utils/gobalFunctions";
 
 export default function SharedPreview() {
   const { id } = useParams();
@@ -86,6 +87,7 @@ export default function SharedPreview() {
               <AnimatedButton
                 icon={<i className="fa-regular fa-pen-to-square"></i>}
                 link={`/shared/update/${id}`}
+                action={enterPageFullScreen}
                 content=" &nbsp;Edit"
                 buttonStyle={{
                   fontSize: "1.8rem",

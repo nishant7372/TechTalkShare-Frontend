@@ -2,6 +2,7 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setArticles, setArticleCount } from "../../features/sharingSlice";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useGetSharedArticles = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export const useGetSharedArticles = () => {
   const getSharedArticles = async (params) => {
     setIsPending(true);
 
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.get("/shared", {

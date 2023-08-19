@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useDeleteAvatar = () => {
   const [isPending, setIsPending] = useState(false);
 
   const deleteAvatar = async () => {
     setIsPending(true);
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.delete("/users/me/avatar", {

@@ -1,12 +1,12 @@
 .create-article {
   display: flex;
   margin: auto;
-  width: 90%;
+  width: 95%;
   font-size: 2rem;
   color: white;
   height: calc(100vh - 50px);
   background-color: rgba(255, 255, 255, 0.04);
-  max-width: 130rem;
+  max-width: 160rem;
 }
 
 .article-form {

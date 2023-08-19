@@ -14,6 +14,7 @@ import Editor from "../../../components/editors/Editor";
 import TagSelect from "../../../components/tags/TagSelect";
 import Loading from "../../../components/loaders/loading/Loading";
 import Button from "../../../components/buttons/Button";
+import { exitPageFullScreen } from "../../../hooks/utils/gobalFunctions";
 
 export default function Update() {
   const { id } = useParams();
@@ -35,6 +36,7 @@ export default function Update() {
 
   const goBack = () => {
     navigate(-1);
+    exitPageFullScreen();
   };
 
   // Reading Article

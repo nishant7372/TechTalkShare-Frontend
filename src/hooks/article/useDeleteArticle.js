@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "./../axios/axiosInstance";
+import { getItemFromLocalStorage } from "../utils/gobalFunctions";
 
 export const useDeleteArticle = () => {
   const [isPending, setIsPending] = useState(false);
@@ -7,7 +8,7 @@ export const useDeleteArticle = () => {
   const deleteArticle = async (id) => {
     setIsPending(true);
 
-    const token = localStorage.getItem("token");
+    const token = getItemFromLocalStorage("token");
 
     try {
       const res = await axiosInstance.delete(`/article/${id}`, {
