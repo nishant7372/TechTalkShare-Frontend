@@ -79,7 +79,7 @@ export default function Row({
           <div className={styles["h4"]}>
             {query === "sharing" ? `Shared At` : `Created At`} :{" "}
             {timeSince(article.createdAt)} ago
-            {!article?.editPermission && (
+            {query === "sharing" && !article?.editPermission && (
               <span className={styles["readOnly"]}>Read Only</span>
             )}
           </div>
@@ -87,7 +87,7 @@ export default function Row({
         {updated && (
           <div className={styles["h4"]}>
             Updated At: {timeSince(article.updatedAt)} ago
-            {!article?.editPermission && (
+            {query === "sharing" && !article?.editPermission && (
               <span className={styles["readOnly"]}>Read Only</span>
             )}
           </div>
