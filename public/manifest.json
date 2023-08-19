@@ -4,17 +4,17 @@
   "icons": [
     {
       "src": "dev.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "128x128",
       "type": "image/x-icon"
     },
     {
-      "src": "img/dev.jpg",
+      "src": "img/dev.png",
       "type": "image/png",
-      "sizes": "360x360"
+      "sizes": "320x320"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#222222"
+  "background_color": "#000000"
 }
