@@ -1,4 +1,3 @@
-import "./store.css";
 import styles from "./Store.module.css";
 import LeftPanel from "../../components/leftPanel/LeftPanel";
 import RightPanel from "../../components/rightPanel/RightPanel";
@@ -6,60 +5,61 @@ import RightPanel from "../../components/rightPanel/RightPanel";
 export default function Store() {
   const files = [
     {
-      fileName: "Document1.pdf",
+      fileName:
+        "One Stop OOP Guide | Useful and Short topics for interviews | Object Oriented Programming (C++) LC.pdf",
       date: "2023-08-01",
-      isFavorite: true,
+      starred: true,
     },
     {
       fileName: "Presentation.pdf",
       date: "2023-08-02",
-      isFavorite: false,
+      starred: false,
     },
     {
       fileName: "Report.pdf",
       date: "2023-08-03",
-      isFavorite: true,
+      starred: true,
     },
     {
       fileName: "File.pdf",
       date: "2023-08-04",
-      isFavorite: false,
+      starred: false,
     },
     {
       fileName: "Sample.pdf",
       date: "2023-08-05",
-      isFavorite: true,
+      starred: true,
     },
     {
       fileName: "Document2.pdf",
       date: "2023-08-06",
-      isFavorite: false,
+      starred: false,
     },
     {
       fileName: "Presentation2.pdf",
       date: "2023-08-07",
-      isFavorite: true,
+      starred: true,
     },
     {
       fileName: "Report2.pdf",
       date: "2023-08-08",
-      isFavorite: false,
+      starred: false,
     },
     {
       fileName: "File2.pdf",
       date: "2023-08-09",
-      isFavorite: true,
+      starred: true,
     },
     {
       fileName: "Sample2.pdf",
       date: "2023-08-10",
-      isFavorite: false,
+      starred: false,
     },
   ];
 
   const folders = [
     {
-      folderName: "My Articles",
+      folderName: "My Articles ",
       color: "pink",
     },
     {
@@ -104,8 +104,8 @@ export default function Store() {
       <LeftPanel />
       <div className={styles["section2"]}>
         <div className={styles["header1"]}>
-            <div className={styles["heading"]}>My Files</div>
-         
+          <div className={styles["heading"]}>My Files</div>
+
           <div className={styles["searchBar"]}>
             <input
               type="search"
@@ -120,10 +120,18 @@ export default function Store() {
         </div>
         <div className={styles["mainBox"]}>
           <div className={styles["most-recent"]}>
+            <div className={styles["sub-heading"]}>Pinned</div>
+            <div className={styles["files"]}>
+              {files.map(({ fileName, date, starred }) => (
+                <File fileName={fileName} date={date} isPinned={true} />
+              ))}
+            </div>
+          </div>
+          <div className={styles["most-recent"]}>
             <div className={styles["sub-heading"]}>Most Recent</div>
             <div className={styles["files"]}>
-              {files.map(({ fileName, date, isFavorite }) => (
-                <File fileName={fileName} date={date} isFavorite={isFavorite} />
+              {files.map(({ fileName, date, starred }) => (
+                <File fileName={fileName} date={date} starred={starred} />
               ))}
             </div>
           </div>
@@ -136,16 +144,12 @@ export default function Store() {
             </div>
           </div>
           <div className={styles["most-recent"]}>
-            <div className={styles["sub-heading"]}>Favorites</div>
+            <div className={styles["sub-heading"]}>Starred</div>
             <div className={styles["files"]}>
               {files
-                .filter(({ isFavorite }) => isFavorite)
-                .map(({ fileName, date, isFavorite }) => (
-                  <File
-                    fileName={fileName}
-                    date={date}
-                    isFavorite={isFavorite}
-                  />
+                .filter(({ starred }) => starred)
+                .map(({ fileName, date, starred }) => (
+                  <File fileName={fileName} date={date} starred={starred} />
                 ))}
             </div>
           </div>
@@ -156,17 +160,22 @@ export default function Store() {
   );
 }
 
-const File = ({ fileName, date, isFavorite }) => {
+const File = ({ fileName, date, starred, isPinned }) => {
   return (
     <div className={styles["fileBox"]}>
-      <i
-        className={`fa-${isFavorite ? "solid" : "regular"} fa-star ${
-          styles.star
-        } ${isFavorite ? styles["fav"] : ""}`}
-      />
+      {!isPinned ? (
+        <i
+          className={`fa-${starred ? "solid" : "regular"} fa-star ${
+            styles.star
+          } ${starred ? styles["starred"] : ""}`}
+        />
+      ) : (
+        <i className={`fa-solid fa-thumbtack ${styles.pin}`} />
+      )}
+
       <div className={styles["innerFileBox"]}>
         <i className={`fa-solid fa-file-pdf ${styles.fileIcon}`}></i>
-        <span className={styles["fileName"]}>{fileName}</span>
+        <div className={styles["fileName"]}>{fileName}</div>
         <span className={styles["h4"]}>{date}</span>
       </div>
     </div>
@@ -177,7 +186,7 @@ const Folder = ({ folderName, color }) => {
   return (
     <div className={`${styles["folderBox"]} ${styles[color]}`}>
       <i className="fa-solid fa-folder-open"></i>
-      <span style={{ fontWeight: 600 }}>{folderName}</span>
+      <span className={styles.folderName}>{folderName}</span>
     </div>
   );
 };

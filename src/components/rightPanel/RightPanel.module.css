@@ -1,21 +1,12 @@
 .container {
-  width: 43rem;
+  width: 40rem;
   background-color: rgba(36, 37, 41, 1);
   position: relative;
 }
 
 .subContainer {
   position: fixed;
-  width: 43rem;
-}
-
-.logout-btn {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 2.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
+  width: 40rem;
 }
 
 .header1 {
@@ -34,15 +25,12 @@
   justify-content: space-between;
 }
 
-.logout-btn:hover {
-  color: white;
-}
-
 .icon {
   color: white;
-  font-size: 2.2rem;
-  padding: 0 3rem;
+  font-size: 2rem;
+  padding: 0.5rem 3rem;
   position: relative;
+  border-radius: 2px;
 }
 
 .dot {
@@ -51,7 +39,7 @@
   border-radius: 50%;
   position: absolute;
   right: 2rem;
-  top: -0.5rem;
+  top: 0.5rem;
 }
 .avatar {
   width: 3.5rem;
@@ -61,9 +49,9 @@
 }
 
 .cross-button {
-  font-size: 2.2rem;
+  font-size: 2rem;
   background-color: rgba(22, 24, 25, 1);
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.4rem;
   color: rgba(255, 255, 255, 0.4);
   margin-right: 4rem;
 }
@@ -74,7 +62,7 @@
 }
 
 .h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: white;
   margin-left: 4rem;
   font-weight: 500;

@@ -38,8 +38,8 @@
 }
 
 .searchBar {
-  width: 38rem;
-  height: 6rem;
+  width: 36rem;
+  height: 5.6rem;
   margin-right: 4rem;
   display: flex;
   align-items: center;
@@ -53,12 +53,12 @@
   background-color: transparent;
   padding: 2rem;
   color: white;
-  font-size: 2rem;
+  font-size: 1.8rem;
   height: 100%;
 }
 
 .searchInput::placeholder {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .searchIcon {
@@ -76,7 +76,7 @@
 }
 
 .h1 {
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: white;
   margin-left: 4rem;
   font-weight: 500;
@@ -99,11 +99,11 @@
 }
 
 .fileBox {
-  min-width: 19rem;
+  min-width: 18rem;
   background-color: rgba(36, 37, 41, 1);
-  width: 19rem;
+  width: 18rem;
   cursor: pointer;
-  height: 16rem;
+  height: 15rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -120,6 +120,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 90%;
   flex-direction: column;
   justify-content: center;
   top: 1.6rem;
@@ -131,12 +132,18 @@
 }
 
 .fileName {
+  overflow: hidden;
+  align-self: flex-start;
+  text-align: center;
+  width: 100%;
   color: white;
   font-size: 1.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .fileIcon {
-  font-size: 4rem;
+  font-size: 3.6rem;
   color: rgb(252, 61, 61);
   margin-bottom: 1rem;
 }
@@ -150,15 +157,32 @@
   /* color: yellow; */
 }
 
+.pin {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  /* color: yellow; */
+}
+
+.folderName {
+  font-weight: 500;
+  font-size: 1.8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .folderBox {
-  min-width: 16rem;
+  min-width: 17rem;
   background-color: rgba(36, 37, 41, 1);
-  width: 16rem;
-  padding: 1rem 1.5rem;
-  height: 4rem;
-  font-size: 2rem;
+  width: 17rem;
+  height: 6rem;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
+  padding-left: 1rem;
   gap: 1rem;
   cursor: pointer;
   border-radius: 2px;
@@ -222,6 +246,6 @@
   background-color: #0ebdf6;
 }
 
-.fav {
+.starred {
   color: #f8d15e;
 }

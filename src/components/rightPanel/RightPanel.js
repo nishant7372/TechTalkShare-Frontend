@@ -10,11 +10,15 @@ export default function RightPanel() {
       <div className={styles["subContainer"]}>
         <div className={styles["header1"]}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div className={styles["icon"]} style={customStyles.iconStyles}>
+            <div
+              className={styles["icon"]}
+              style={customStyles.iconStyles}
+              tabIndex={0}
+            >
               <div className={`${styles["dot"]} ${styles["yellow"]}`}></div>
               <i className="fa-solid fa-envelope"></i>
             </div>
-            <div className={styles["icon"]}>
+            <div className={styles["icon"]} tabIndex={0}>
               <div className={`${styles["dot"]} ${styles["skyblue"]}`}></div>
               <i className="fa-solid fa-bell"></i>
             </div>
@@ -31,17 +35,10 @@ export default function RightPanel() {
               <NameLogo logoStyle={customStyles.logoStyles} name={user.name} />
             )}
           </Link>
-          <div
-            className={styles["logout-btn"]}
-            //   onClick={isPending ? null : handleLogout}
-          >
-            <i className="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span>
-          </div>
         </div>
         <div className={styles["header2"]}>
           <div className={styles["h2"]}>Notifications</div>
-          <div className={styles["cross-button"]}>
+          <div tabIndex={0} className={styles["cross-button"]}>
             <i className="fa-solid fa-xmark"></i>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import "./LeftPanel.css";
 import { NavLink } from "react-router-dom";
 import styles from "./LeftPanel.module.css";
 import { Link } from "react-router-dom";
@@ -37,12 +38,12 @@ export default function LeftPanel() {
   return (
     <div className={styles["section1"]}>
       <div className={styles["section1-subContainer"]}>
-        <Link to="/">
+        <Link to="/" className={styles["appName"]}>
           <img
-            className={styles["appName"]}
+            className={styles["appNameLogo"]}
             src={images.devstoreLogo}
             alt="logo"
-          ></img>
+          />
         </Link>
 
         <div className={styles["link"]}>
@@ -50,6 +51,14 @@ export default function LeftPanel() {
             <Tile link={link} icon={icon} label={label} key={index} />
           ))}
           <div className={styles["seperator"]}></div>
+        </div>
+        <div
+          className={styles["logout-btn"]}
+          tabIndex={0}
+          //   onClick={isPending ? null : handleLogout}
+        >
+          <i className="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
         </div>
       </div>
     </div>

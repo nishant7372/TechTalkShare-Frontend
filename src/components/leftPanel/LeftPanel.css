@@ -1,6 +1,9 @@
 a.active {
-  color: white;
   border-left: 2px solid #f8d15e;
+}
+
+a.active span {
+  color: white;
 }
 
 a.active i {
