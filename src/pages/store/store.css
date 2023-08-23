@@ -1,0 +1,8 @@
+a.active {
+  color: white;
+  border-left: 2px solid #f8d15e;
+}
+
+a.active i {
+  color: #f8d15e; /* Icon color when active */
+}

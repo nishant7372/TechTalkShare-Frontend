@@ -31,6 +31,7 @@ import SharedArticles from "./pages/article/view-shared/sharedArticles/SharedArt
 import UpdateShared from "./pages/article/update/UpdateShared";
 
 import { useSelector } from "react-redux";
+import Store from "./pages/store/Store";
 
 function App() {
   useSocketConnection();
@@ -47,7 +48,7 @@ function App() {
       {!authIsReady && <Loading action="mainRead" />}
       {authIsReady && !serverSideError && (
         <Router>
-          <NavBar />
+          {/* <NavBar /> */}
           <Routes>
             <Route
               path="/login"
@@ -64,6 +65,10 @@ function App() {
             <Route
               path="/home"
               element={!user ? <Navigate to="/login" /> : <Home />}
+            />
+            <Route
+              path="/store"
+              element={!user ? <Navigate to="/login" /> : <Store />}
             />
             <Route
               path="/articles"

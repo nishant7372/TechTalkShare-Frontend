@@ -1,0 +1,46 @@
+.section1 {
+  width: 32rem;
+  background-color: rgba(36, 37, 41, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.section1-subContainer {
+  position: fixed;
+  width: 32rem;
+}
+
+.appName {
+  width: 14rem;
+  padding: 2rem 4rem;
+}
+
+.link {
+  display: flex;
+  font-size: 2rem;
+  text-decoration: none;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 0;
+}
+
+.seperator {
+  margin: 0 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.link a i {
+  width: 2rem;
+}
+.link a {
+  text-decoration: none;
+  padding: 2rem 4rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.link a:hover {
+  color: white;
+}
