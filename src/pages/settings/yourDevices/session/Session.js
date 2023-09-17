@@ -1,8 +1,10 @@
 import styles from "./Session.module.css";
 
 import { useFormatDate } from "../../../../hooks/utils/useFormatDate";
-import { useReadProfile } from "../../../../hooks/user/useReadProfile";
-import { useSessionLogout } from "../../../../hooks/user/useSessionLogout";
+import {
+  useReadProfile,
+  useSessionLogout,
+} from "../../../../hooks/user/userApis";
 
 import Alert from "../../../../components/alerts/Alert";
 import Button from "../../../../components/buttons/Button";

@@ -2,8 +2,7 @@ import styles from "./PersonalInfo.module.css";
 
 import { useState, useEffect } from "react";
 
-import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
-import { useReadProfile } from "../../../hooks/user/useReadProfile";
+import { useReadProfile, useUpdateUser } from "../../../hooks/user/userApis";
 
 import Spinner from "../../../components/loaders/spinner/Spinner";
 import Button from "../../../components/buttons/Button";

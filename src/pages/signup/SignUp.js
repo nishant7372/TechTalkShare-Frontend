@@ -2,30 +2,21 @@ import styles from "./SignUp.module.css";
 
 import { useState } from "react";
 
-import { useSignup } from "../../hooks/user/useSignup";
-
-import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../features/alertSlice";
+import { useSignup } from "../../hooks/user/userApis";
 
 import Spinner from "../../components/loaders/spinner/Spinner";
 import images from "../../constants/images";
 import Button from "../../components/buttons/Button";
+import { useHandleResponse } from "../../hooks/utils/useHandleResponse";
 
 export default function SignUp() {
-  const dispatch = useDispatch();
-
   const { signup, isPending } = useSignup();
+  const { handleResponse } = useHandleResponse();
 
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("eyePassword");
-
-  const parseError = (error) => {
-    return error.includes("duplicate key error")
-      ? "Username already taken!"
-      : error;
-  };
 
   const showPassword = () => {
     passwordType === "eyePassword"
@@ -36,11 +27,7 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup(userName, password, name);
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
-    } else if (res.error) {
-      dispatch(setError(parseError(res.error)));
-    }
+    handleResponse(res);
   };
 
   return (

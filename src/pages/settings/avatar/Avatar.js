@@ -3,7 +3,7 @@ import styles from "./Avatar.module.css";
 import { useState } from "react";
 
 import { useUploadAvatar } from "../../../hooks/avatar/useUploadAvatar";
-import { useReadProfile } from "../../../hooks/user/useReadProfile";
+import { useReadProfile } from "../../../hooks/user/userApis";
 import { useDeleteAvatar } from "../../../hooks/avatar/useDeleteAvatar";
 
 import { useSelector } from "react-redux";

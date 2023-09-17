@@ -3,7 +3,7 @@ import styles from "./SelectUser.module.css";
 import { useRef, useState, forwardRef, useEffect } from "react";
 
 import { useSelector } from "react-redux";
-import { useGetUsers } from "../../../hooks/user/useGetUsers";
+import { useGetUsers } from "../../../hooks/user/userApis";
 
 import Input from "../../input/Input";
 import Button from "../../buttons/Button";
@@ -69,7 +69,9 @@ const SelectUser = forwardRef(
     useEffect(() => {
       const fetchUsers = async () => {
         const res = await getUsers();
-        setData(res.data);
+        if (res?.ok) {
+          setData(res?.users);
+        }
       };
       fetchUsers();
       if (inputRef) {
