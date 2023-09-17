@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useUpdateSharedArticle } from "../../../hooks/sharing/useUpdateSharedArticle";
-import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle";
+import {
+  useUpdateSharedArticle,
+  useGetSharedArticle,
+} from "../../../hooks/sharing/sharingApis";
 
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
@@ -38,13 +40,13 @@ export default function UpdateShared() {
   useEffect(() => {
     const fetch = async () => {
       const res = await getSharedArticle(id);
-      if (res.ok && res?.data?.sharing?.editPermission) {
-        setArticle(res?.data?.article);
-        setData(res?.data?.article);
-      } else if (res.error) {
-        dispatch(setError(res.error.message));
+      if (res?.ok && res?.sharing?.editPermission) {
+        setArticle(res?.article);
+        setData(res?.article);
+      } else if (res?.error) {
+        dispatch(setError(res?.error?.message));
         if (res?.error?.status === 404) setShowNotFound(true);
-      } else if (!res.data.sharing.editPermission) {
+      } else if (!res?.sharing?.editPermission) {
         dispatch(setError("401 Unauthorized"));
         setShowNotFound(true);
       }
@@ -81,11 +83,11 @@ export default function UpdateShared() {
 
     const res = await updateSharedArticle(id, updates);
 
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
+    if (res?.ok) {
+      dispatch(setSuccess(res?.ok));
       goBack();
-    } else if (res.error) {
-      dispatch(setError(res.error));
+    } else if (res?.error) {
+      dispatch(setError(res?.error));
     }
   };
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useGetSharedArticles } from "../../../../hooks/sharing/useGetSharedArticles";
+import { useGetSharedArticles } from "../../../../hooks/sharing/sharingApis";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setError } from "../../../../features/alertSlice";
