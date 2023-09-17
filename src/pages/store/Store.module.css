@@ -99,6 +99,7 @@
 }
 
 .fileBox {
+  text-decoration: none;
   min-width: 18rem;
   background-color: rgba(36, 37, 41, 1);
   width: 18rem;

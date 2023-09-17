@@ -1,8 +1,18 @@
 import styles from "./Store.module.css";
 import LeftPanel from "../../components/leftPanel/LeftPanel";
 import RightPanel from "../../components/rightPanel/RightPanel";
+import { useEffect } from "react";
+import { useGetRecents } from "../../hooks/store/useGetRecents";
+import { useState } from "react";
+import { useFormatDate } from "../../hooks/utils/useFormatDate";
+import { Link } from "react-router-dom";
 
 export default function Store() {
+  const { getRecents, isPending } = useGetRecents();
+
+  const [recentItems, setRecentItems] = useState(null);
+
+  const { timeSince } = useFormatDate();
   const files = [
     {
       fileName:
@@ -99,6 +109,17 @@ export default function Store() {
       color: "pink",
     },
   ];
+
+  const fetch = async () => {
+    const res = await getRecents({ limit: 20 });
+    console.log(res);
+    setRecentItems(res?.data?.recents);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <div className={styles.main}>
       <LeftPanel />
@@ -122,16 +143,27 @@ export default function Store() {
           <div className={styles["most-recent"]}>
             <div className={styles["sub-heading"]}>Pinned</div>
             <div className={styles["files"]}>
-              {files.map(({ fileName, date, starred }) => (
-                <File fileName={fileName} date={date} isPinned={true} />
+              {files.map(({ fileName, date, starred }, index) => (
+                <File
+                  fileName={fileName}
+                  date={date}
+                  isPinned={true}
+                  key={index}
+                />
               ))}
             </div>
           </div>
           <div className={styles["most-recent"]}>
             <div className={styles["sub-heading"]}>Most Recent</div>
             <div className={styles["files"]}>
-              {files.map(({ fileName, date, starred }) => (
-                <File fileName={fileName} date={date} starred={starred} />
+              {recentItems?.map(({ article, updatedAt, isShared }, index) => (
+                <File
+                  fileName={article?.topic}
+                  date={`${timeSince(updatedAt)} ago`}
+                  starred={false}
+                  key={index}
+                  url={`/articles/${article._id}`}
+                />
               ))}
             </div>
           </div>
@@ -148,8 +180,13 @@ export default function Store() {
             <div className={styles["files"]}>
               {files
                 .filter(({ starred }) => starred)
-                .map(({ fileName, date, starred }) => (
-                  <File fileName={fileName} date={date} starred={starred} />
+                .map(({ fileName, date, starred }, index) => (
+                  <File
+                    fileName={fileName}
+                    date={date}
+                    starred={starred}
+                    key={index}
+                  />
                 ))}
             </div>
           </div>
@@ -160,9 +197,9 @@ export default function Store() {
   );
 }
 
-const File = ({ fileName, date, starred, isPinned }) => {
+const File = ({ fileName, date, starred, isPinned, url, showIcon }) => {
   return (
-    <div className={styles["fileBox"]}>
+    <Link to={url} className={styles["fileBox"]}>
       {!isPinned ? (
         <i
           className={`fa-${starred ? "solid" : "regular"} fa-star ${
@@ -178,7 +215,7 @@ const File = ({ fileName, date, starred, isPinned }) => {
         <div className={styles["fileName"]}>{fileName}</div>
         <span className={styles["h4"]}>{date}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
