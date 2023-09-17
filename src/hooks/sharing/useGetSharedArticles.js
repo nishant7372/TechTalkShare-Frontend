@@ -2,7 +2,7 @@ import { useState } from "react";
 import axiosInstance from "../axios/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setArticles, setArticleCount } from "../../features/sharingSlice";
-import { getItemFromLocalStorage } from "../utils/gobalFunctions";
+import { getItemFromLocalStorage } from "../utils/globalFunctions";
 
 export const useGetSharedArticles = () => {
   const dispatch = useDispatch();

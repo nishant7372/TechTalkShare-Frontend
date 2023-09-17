@@ -8,7 +8,7 @@ import Paginate from "../pagination/Paginate";
 import AnimatedButton from "../buttons/AnimatedButton";
 import ShareModal from "../modals/sharemodal/ShareModal";
 
-import { enterPageFullScreen } from "../../hooks/utils/gobalFunctions";
+import { enterPageFullScreen } from "../../hooks/utils/globalFunctions";
 import { CSSTransition } from "react-transition-group";
 
 import { useDispatch, useSelector } from "react-redux";

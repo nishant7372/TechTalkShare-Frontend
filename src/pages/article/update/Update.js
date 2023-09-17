@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useReadArticle } from "../../../hooks/article/useReadArticle";
-import { useUpdateArticle } from "../../../hooks/article/useUpdateArticle";
+import {
+  useReadArticle,
+  useUpdateArticle,
+} from "../../../hooks/article/articleApis";
 
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
-import { exitPageFullScreen } from "../../../hooks/utils/gobalFunctions";
+import { exitPageFullScreen } from "../../../hooks/utils/globalFunctions";
 
 import EditorForm from "../../../components/editorForm/EditorForm";
 import Loading from "../../../components/loaders/loading/Loading";
@@ -44,8 +46,8 @@ export default function Update() {
       const res = await readArticle(id);
 
       if (res?.ok) {
-        setArticle(res?.data);
-        setData(res?.data);
+        setArticle(res?.article);
+        setData(res?.article);
       } else if (res?.error) {
         dispatch(setError(res?.error?.message));
         if (res?.error?.status === 404) setShowNotFound(true);
@@ -83,11 +85,11 @@ export default function Update() {
 
     const res = await updateArticle(id, updates);
 
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
+    if (res?.ok) {
+      dispatch(setSuccess(res?.ok));
       goBack();
-    } else if (res.error) {
-      dispatch(setError(res.error));
+    } else if (res?.error) {
+      dispatch(setError(res?.error));
     }
   };
 

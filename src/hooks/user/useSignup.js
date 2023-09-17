@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../axios/axiosInstance";
 import { setUser } from "../../features/authSlice";
-import { addItemtoLocalStorage } from "../utils/gobalFunctions";
+import { addItemtoLocalStorage } from "../utils/globalFunctions";
 
 const bowser = require("bowser");
 

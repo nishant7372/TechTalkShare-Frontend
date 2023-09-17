@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "./../axios/axiosInstance";
-import { getItemFromLocalStorage } from "../utils/gobalFunctions";
+import { getItemFromLocalStorage } from "../utils/globalFunctions";
 
 export const useUpdateSharing = () => {
   const [isPending, setIsPending] = useState(false);

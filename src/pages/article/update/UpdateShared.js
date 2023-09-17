@@ -6,7 +6,7 @@ import { useGetSharedArticle } from "../../../hooks/sharing/useGetSharedArticle"
 
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../features/alertSlice";
-import { exitPageFullScreen } from "../../../hooks/utils/gobalFunctions";
+import { exitPageFullScreen } from "../../../hooks/utils/globalFunctions";
 
 import EditorForm from "../../../components/editorForm/EditorForm";
 import Loading from "../../../components/loaders/loading/Loading";

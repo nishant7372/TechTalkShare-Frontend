@@ -6,7 +6,7 @@ import { setError } from "../../features/alertSlice";
 import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
-} from "../utils/gobalFunctions";
+} from "../utils/globalFunctions";
 
 export const useReadProfile = () => {
   const dispatch = useDispatch();

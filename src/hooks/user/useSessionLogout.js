@@ -5,7 +5,7 @@ import { setUser } from "../../features/authSlice";
 import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
-} from "../utils/gobalFunctions";
+} from "../utils/globalFunctions";
 
 export const useSessionLogout = () => {
   const [isPending, setIsPending] = useState(false);
