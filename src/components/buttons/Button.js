@@ -20,6 +20,7 @@ export default function Button({
   formAction,
   divType,
   disabled,
+  tabIndex,
 }) {
   return link ? (
     <Link
@@ -38,6 +39,7 @@ export default function Button({
       style={buttonStyle}
       onClick={disabled ? null : action}
       type={formAction}
+      tabIndex={tabIndex}
     >
       {icon ? icon : ""}
       {content}

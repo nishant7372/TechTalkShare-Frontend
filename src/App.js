@@ -32,6 +32,7 @@ import SharedArticles from "./pages/article/view-shared/sharedArticles/SharedArt
 
 import { useSelector } from "react-redux";
 import Store from "./pages/store/Store";
+import FolderContents from "./pages/folderContents/FolderContents";
 
 function App() {
   useSocketConnection();
@@ -117,6 +118,10 @@ function App() {
             <Route
               path="/shared/update/:id"
               element={!user ? <Navigate to="/login" /> : <UpdateShared />}
+            />
+            <Route
+              path="/store/folder/:id"
+              element={!user ? <Navigate to="/login" /> : <FolderContents />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

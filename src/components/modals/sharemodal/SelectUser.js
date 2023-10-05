@@ -139,7 +139,7 @@ const SelectUser = forwardRef(
 );
 
 const User = ({ user, handleSelectUser }) => {
-  const [checked, setChecked] = useState(user.checked);
+  const [checked, setChecked] = useState(user?.checked);
 
   const handleChange = (check) => {
     setChecked(check);

@@ -12,6 +12,10 @@ const Input = forwardRef(
       required,
       autoFous,
       inputStyle,
+      maxLength,
+      minLength,
+      max,
+      min,
     },
     ref
   ) => {
@@ -27,6 +31,10 @@ const Input = forwardRef(
         autoFocus={autoFous}
         style={inputStyle}
         ref={ref}
+        maxLength={maxLength}
+        minLength={minLength}
+        max={max}
+        min={min}
       />
     );
   }
