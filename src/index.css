@@ -52,6 +52,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Baloo Bhai 2", cursive, sans-serif;
+  overscroll-behavior-y: none;
   background-color: rgba(33, 33, 33, 1);
   position: relative;
 }
