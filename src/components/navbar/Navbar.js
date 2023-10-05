@@ -80,7 +80,7 @@ export default function NavBar() {
             </>
           )}
           <Link to="/" className={styles["app-name"]}>
-            <img src={images.devstoreLogo} alt="logo"></img>
+            <img src={images.techtalkshareLogo} alt="logo"></img>
           </Link>
         </div>
 

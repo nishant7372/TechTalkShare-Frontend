@@ -23,25 +23,28 @@
 
 .nav-left {
   display: flex;
+  flex: 1;
+  padding-left: 4rem;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
   font-size: 2.3rem;
-  padding-left: 4rem;
+  /* border: 2px solid red; */
 }
 
 .nav-left a,
 .nav-left img {
-  height: 3.5rem;
-  width: 11rem;
+  height: 32px;
 }
 
 .nav-middle {
   font-size: 1.6rem;
-  padding-left: 1.5rem;
   padding-top: 0.3rem;
   display: flex;
   gap: 3rem;
+  flex: 5;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -50,17 +53,17 @@
   font-size: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex: 1;
+  justify-content: flex-end;
+  padding-right: 4rem;
 }
 
 .nav-right-auth {
   gap: 3rem;
-  padding-right: 4rem;
 }
 
 .nav-right-noauth {
   gap: 4rem;
-  padding-right: 4rem;
 }
 
 .nav-middle a,
@@ -118,14 +121,14 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .nav-middle {
     visibility: hidden;
     display: none;
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 750px) {
   .links {
     display: none;
   }

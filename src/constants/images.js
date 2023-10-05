@@ -12,6 +12,7 @@ const images = {
   eyeText: `${PUBLIC_URL}/img/eye-text.png`,
   empty: `${PUBLIC_URL}/img/empty.png`,
   noResultsFound: `${PUBLIC_URL}/img/search-empty.png`,
+  techtalkshareLogo: `${PUBLIC_URL}/img/techtalkshare.png`,
 };
 
 export default images;
