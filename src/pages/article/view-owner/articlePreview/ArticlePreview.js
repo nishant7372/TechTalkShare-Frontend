@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useReadArticle } from "../../../../hooks/article/useReadArticle";
-import { useDeleteArticle } from "../../../../hooks/article/useDeleteArticle";
+import {
+  useReadArticle,
+  useDeleteArticle,
+} from "../../../../hooks/article/articleApis";
 
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../../../features/alertSlice";
@@ -31,7 +33,7 @@ export default function ArticlePreview() {
       const res = await readArticle(id);
 
       if (res?.ok) {
-        setArticle(res?.data);
+        setArticle(res?.article);
       } else if (res?.error) {
         dispatch(setError(res?.error?.message));
         if (res?.error?.status === 404) setShowNotFound(true);

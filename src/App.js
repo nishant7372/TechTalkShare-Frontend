@@ -9,28 +9,30 @@ import {
 import useOnRefresh from "./hooks/useOnRefresh";
 import { useSocketConnection } from "./hooks/socket/socketConnection";
 
-import LogIn from "./pages/login/LogIn";
-import Chats from "./pages/chat/Chats";
-import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
+import Chats from "./pages/chat/Chats";
+import LogIn from "./pages/login/LogIn";
+import SignUp from "./pages/signup/SignUp";
 import NotFound from "./pages/error/NotFound";
 import NavBar from "./components/navbar/Navbar";
+import Settings from "./pages/settings/Settings";
 import Create from "./pages/article/create/Create";
 import Update from "./pages/article/update/Update";
-import Settings from "./pages/settings/Settings";
 import ServerError from "./pages/error/ServerError";
-import Scrape from "./pages/article/download/scrape/Scrape";
-import Sharings from "./pages/article/view-owner/sharings/Sharings";
-import Downloads from "./pages/article/download/downloads/Downloads";
-import Articles from "./pages/article/view-owner/articles/Articles";
-import MessageContainer from "./components/alerts/AlertContainer";
 import Loading from "./components/loaders/loading/Loading";
+import Scrape from "./pages/article/download/scrape/Scrape";
+import UpdateShared from "./pages/article/update/UpdateShared";
+import MessageContainer from "./components/alerts/AlertContainer";
+import Sharings from "./pages/article/view-owner/sharings/Sharings";
+import Articles from "./pages/article/view-owner/articles/Articles";
+import Downloads from "./pages/article/download/downloads/Downloads";
 import SharedPreview from "./pages/article/view-shared/sharedPreview/SharedPreview";
 import ArticlePreview from "./pages/article/view-owner/articlePreview/ArticlePreview";
 import SharedArticles from "./pages/article/view-shared/sharedArticles/SharedArticles";
-import UpdateShared from "./pages/article/update/UpdateShared";
 
 import { useSelector } from "react-redux";
+import Store from "./pages/store/Store";
+import FolderContents from "./pages/folderContents/FolderContents";
 
 function App() {
   useSocketConnection();
@@ -64,6 +66,10 @@ function App() {
             <Route
               path="/home"
               element={!user ? <Navigate to="/login" /> : <Home />}
+            />
+            <Route
+              path="/store"
+              element={!user ? <Navigate to="/login" /> : <Store />}
             />
             <Route
               path="/articles"
@@ -112,6 +118,10 @@ function App() {
             <Route
               path="/shared/update/:id"
               element={!user ? <Navigate to="/login" /> : <UpdateShared />}
+            />
+            <Route
+              path="/store/folder/:id"
+              element={!user ? <Navigate to="/login" /> : <FolderContents />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

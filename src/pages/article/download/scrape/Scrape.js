@@ -3,7 +3,7 @@ import styles from "./Scrape.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useLeetcodeScrape } from "../../../../hooks/download/useLeetcodeScrape";
+import { useWebScrape } from "../../../../hooks/download/downloadApis";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setError } from "../../../../features/alertSlice";
@@ -16,7 +16,7 @@ import images from "../../../../constants/images";
 export default function Scrape() {
   const [URL, setURL] = useState("");
 
-  const { leetcodeScrape } = useLeetcodeScrape();
+  const { webScrape } = useWebScrape();
 
   const { socketId, user } = useSelector((store) => store.auth);
   const { activeDownloads } = useSelector((store) => store.download);
@@ -34,8 +34,8 @@ export default function Scrape() {
   const handleDownload = async () => {
     let url = URL;
     setURL("");
-    const res = await leetcodeScrape({ url, socketId });
-    if (res.error) {
+    const res = await webScrape({ url, socketId });
+    if (res?.error) {
       dispatch(setError(res.error));
     }
   };

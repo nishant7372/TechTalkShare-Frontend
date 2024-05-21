@@ -7,7 +7,7 @@ import Loading from "../../components/loaders/loading/Loading";
 import Alert from "../../components/alerts/Alert";
 import NameLogo from "../../components/avatar/NameAvatar";
 
-import { useGetUsers } from "../../hooks/user/useGetUsers";
+import { useGetUsers } from "../../hooks/user/userApis";
 import { useSelector } from "react-redux";
 
 export default function Users({ onlineUsers, hideUserMenu }) {
@@ -40,7 +40,7 @@ export default function Users({ onlineUsers, hideUserMenu }) {
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await getUsers();
-      setUsers(filterUsers(res.data));
+      if (res?.ok) setUsers(filterUsers(res?.users));
     };
     fetchUsers();
     // eslint-disable-next-line

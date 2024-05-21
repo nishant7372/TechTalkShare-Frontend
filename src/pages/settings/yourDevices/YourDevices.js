@@ -2,8 +2,10 @@ import styles from "./YourDevices.module.css";
 
 import { useEffect, useMemo } from "react";
 
-import { useReadProfile } from "../../../hooks/user/useReadProfile";
-import { useLogoutAllOther } from "../../../hooks/user/useLogoutAllOther";
+import {
+  useReadProfile,
+  useLogoutAllOther,
+} from "../../../hooks/user/userApis";
 import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 import { useSelector } from "react-redux";

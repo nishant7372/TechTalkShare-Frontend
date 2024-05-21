@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useGetSharedArticle } from "../../../../hooks/sharing/useGetSharedArticle";
+import { useGetSharedArticle } from "../../../../hooks/sharing/sharingApis";
 
 import { useDispatch } from "react-redux";
 import { setError } from "../../../../features/alertSlice";
@@ -25,8 +25,8 @@ export default function SharedPreview() {
     const fetch = async () => {
       const res = await getSharedArticle(id);
       if (res?.ok) {
-        setArticle(res?.data?.article);
-        setSharing(res?.data?.sharing);
+        setArticle(res?.article);
+        setSharing(res?.sharing);
       } else if (res?.error) {
         dispatch(setError(res?.error?.message));
         if (res?.error?.status === 404) setShowNotFound(true);

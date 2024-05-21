@@ -5,7 +5,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useGetMessages } from "../../hooks/messages/useGetMessages";
+import { useGetMessages } from "../../hooks/messages/messageApis";
 import { setError } from "../../features/alertSlice";
 
 import ChatBox from "./ChatBox";
@@ -47,10 +47,10 @@ export default function Chats() {
   useEffect(() => {
     const fetchMessages = async () => {
       const res = await getMessages(reciever.userName);
-      if (res.ok) {
-        setMessages(res.data);
-      } else if (res.error) {
-        dispatch(setError(res.error.message));
+      if (res?.ok) {
+        setMessages(res?.messages);
+      } else if (res?.error) {
+        dispatch(setError(res?.error?.message));
       }
     };
     if (reciever) fetchMessages();

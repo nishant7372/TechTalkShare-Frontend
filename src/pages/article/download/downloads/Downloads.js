@@ -2,7 +2,7 @@ import styles from "./../scrape/Scrape.module.css";
 
 import { useState, useEffect } from "react";
 
-import { useGetDownloads } from "../../../../hooks/download/useGetDownloads";
+import { useGetDownloads } from "../../../../hooks/download/downloadApis";
 
 import { useDispatch } from "react-redux";
 import { setError } from "../../../../features/alertSlice";
@@ -17,17 +17,17 @@ export default function Downloads() {
   const [downloads, setDownloads] = useState(null);
 
   const sort = (downloads) => {
-    downloads.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    downloads.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
     return downloads;
   };
 
   useEffect(() => {
     const fetch = async () => {
       const res = await getDownloads();
-      if (res.error) {
-        dispatch(setError(res.error));
-      } else if (res.data) {
-        setDownloads(res.data);
+      if (res?.ok) {
+        setDownloads(res?.downloads);
+      } else if (res?.error) {
+        dispatch(setError(res?.error));
       }
     };
     fetch();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useCreateArticle } from "../../../hooks/article/useCreateArticle";
+import { useCreateArticle } from "../../../hooks/article/articleApis";
 import { useDispatch } from "react-redux";
 
 import { setError, setSuccess } from "../../../features/alertSlice";
@@ -10,7 +10,7 @@ import {
   exitPageFullScreen,
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
-} from "../../../hooks/utils/gobalFunctions";
+} from "../../../hooks/utils/globalFunctions";
 import EditorForm from "../../../components/editorForm/EditorForm";
 
 export default function Create() {
@@ -37,7 +37,7 @@ export default function Create() {
   };
 
   const isEmptyData = () =>
-    data.topic === "" || data.content === "" || data.tags?.length === 0;
+    data?.topic === "" || data?.content === "" || data?.tags?.length === 0;
 
   useEffect(() => {
     addItemtoLocalStorage({ key: "newFormData", value: data });
@@ -48,12 +48,11 @@ export default function Create() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await createArticle(data);
-
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
+    if (res?.ok) {
+      dispatch(setSuccess(res?.ok));
       goBack();
-    } else if (res.error) {
-      dispatch(setError(res.error));
+    } else if (res?.error) {
+      dispatch(setError(res?.error));
     }
   };
 

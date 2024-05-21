@@ -5,7 +5,7 @@ import Tag from "../tags/Tag";
 import AnimatedButton from "../buttons/AnimatedButton";
 import Loading from "../loaders/loading/Loading";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { enterPageFullScreen } from "../../hooks/utils/gobalFunctions";
+import { enterPageFullScreen } from "../../hooks/utils/globalFunctions";
 import Confirm from "../modals/confirmModal/Confirm";
 import { CSSTransition } from "react-transition-group";
 import { useFormatDate } from "../../hooks/utils/useFormatDate";

@@ -2,19 +2,21 @@ import styles from "./Security.module.css";
 
 import { useState } from "react";
 
-import { useUpdateUser } from "../../../hooks/user/useUpdateUser";
+import { useUpdateUser } from "../../../hooks/user/userApis";
 
 import { useDispatch } from "react-redux";
-import { setError, setSuccess } from "../../../features/alertSlice";
+import { setError } from "../../../features/alertSlice";
 
 import Button from "../../../components/buttons/Button";
 import Spinner from "../../../components/loaders/spinner/Spinner";
 import images from "../../../constants/images";
+import { useHandleResponse } from "../../../hooks/utils/useHandleResponse";
 
 export default function Security() {
   const dispatch = useDispatch();
 
   const { updateUser, isPending } = useUpdateUser();
+  const { handleResponse } = useHandleResponse();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,11 +29,7 @@ export default function Security() {
     e.preventDefault();
     if (newPassword === confirmPassword) {
       const res = await updateUser({ password: newPassword });
-      if (res.ok) {
-        dispatch(setSuccess(res.ok));
-      } else if (res.error) {
-        dispatch(setError(res.error));
-      }
+      handleResponse(res);
       setNewPassword("");
       setConfirmPassword("");
     } else {

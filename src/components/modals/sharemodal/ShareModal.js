@@ -6,7 +6,7 @@ import ToggleButton from "../../buttons/ToggleButton";
 import Tag from "../../tags/Tag";
 import SelectUser from "./SelectUser";
 
-import { useShareArticle } from "../../../hooks/sharing/useShareArticle";
+import { useShareArticle } from "../../../hooks/sharing/sharingApis";
 import { useDispatch } from "react-redux";
 
 import Loading from "../../../components/loaders/loading/Loading";
@@ -86,12 +86,12 @@ export default function ShareModal({
       notify,
       message,
     });
-    if (res.ok) {
-      dispatch(setSuccess(res.ok));
+    if (res?.ok) {
+      dispatch(setSuccess(res?.ok));
       setOpenShareModal(false);
       if (updateSharings) updateSharings();
-    } else if (res.error) {
-      dispatch(setError(res.error));
+    } else if (res?.error) {
+      dispatch(setError(res?.error));
     }
   };
 
