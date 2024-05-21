@@ -2,13 +2,10 @@ import axios from "axios";
 import apiConstants from "../../constants/apiConstants";
 import { getItemFromLocalStorage } from "../utils/globalFunctions";
 
-const token = getItemFromLocalStorage("token");
-
 const axiosInstance = axios.create({
   baseURL: apiConstants.BASE_URL,
   timeout: 60000, // 60 sec timeout
   headers: {
-    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json; charset=UTF-8",
   },
 });
@@ -17,6 +14,12 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     console.log("REQUEST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", config);
+    const token = getItemFromLocalStorage("token");
+
+    // Set the token in the request headers
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   function (error) {

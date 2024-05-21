@@ -7,7 +7,7 @@ import { useFormatDate } from "../../hooks/utils/useFormatDate";
 import styles from "./FolderContents.module.css";
 import { useHandleResponse } from "../../hooks/utils/useHandleResponse";
 import { CSSTransition } from "react-transition-group";
-import RenameModal from "../../components/modals/renameModal/RenameModal";
+import FolderModal from "../../components/modals/folderModal/FolderModal";
 import { useDispatch } from "react-redux";
 import { setError, setSuccess } from "../../features/alertSlice";
 
@@ -90,12 +90,14 @@ export default function FolderContents() {
         classNames="movein"
         unmountOnExit
       >
-        <RenameModal
+        <FolderModal
+          label={"Rename"}
           nodeRef={nodeRef}
-          setOpenRenameModal={setOpenRenameModal}
-          handleRename={handleRename}
-          isPending={renamePending}
+          setOpenModal={setOpenRenameModal}
+          action={handleRename}
+          isActionPending={renamePending}
           name={folder?.name}
+          buttonLabel={"Rename"}
         />
       </CSSTransition>
     </ContentBox>

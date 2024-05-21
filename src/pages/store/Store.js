@@ -1,18 +1,22 @@
 import styles from "./Store.module.css";
 
 import {
+  useCreateFolder,
   useGetFolders,
   useGetPinned,
   useGetRecents,
   useGetStarred,
 } from "../../hooks/store/storeApis";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFormatDate } from "../../hooks/utils/useFormatDate";
-import { setError } from "../../features/alertSlice";
+import { setError, setSuccess } from "../../features/alertSlice";
 import { useDispatch } from "react-redux";
 import File from "../../components/file/File";
 import Folder from "../../components/folder/Folder";
 import ContentBox from "../../components/contentBox/ContentBox";
+import Button from "../../components/buttons/Button";
+import { CSSTransition } from "react-transition-group";
+import FolderModal from "../../components/modals/folderModal/FolderModal";
 export default function Store() {
   const dispatch = useDispatch();
   const { getRecents, isPending: recentPending } = useGetRecents();
@@ -89,7 +93,11 @@ export default function Store() {
           showPinned={false}
           showStarred={false}
         />
-        <RowFolder folders={folders} isPending={foldersPending} />
+        <RowFolder
+          folders={folders}
+          isPending={foldersPending}
+          fetchFolders={fetchFolders}
+        />
         <Row
           heading={"Starred"}
           isStarred={true}
@@ -137,11 +145,45 @@ const Row = ({
   );
 };
 
-const RowFolder = ({ folders, isPending }) => {
+const RowFolder = ({ folders, isPending, fetchFolders }) => {
   const colors = ["yellow", "skyblue", "pink"];
+  const { createFolder, isPending: createPending } = useCreateFolder();
+  const [openCreateModal, setOpenCreateModal] = useState(false);
+
+  const dispatch = useDispatch();
+  const nodeRef = useRef();
+
+  const createNewFolder = async (name) => {
+    const res = await createFolder({ name });
+    if (res?.ok) {
+      dispatch(setSuccess(res?.ok));
+      fetchFolders();
+      setOpenCreateModal(false);
+    } else if (res?.error) {
+      dispatch(setError(res?.error));
+    }
+  };
+
   return (
     <div className={styles["folder"]}>
-      <div className={styles["sub-heading"]}>Folders</div>
+      <div className="flex-row">
+        <div className={styles["sub-heading"]}>Folders</div>
+        <Button
+          icon={
+            <i
+              className="fa-solid fa-plus"
+              style={{ color: "white", fontSize: "1.2rem" }}
+            />
+          }
+          type={"customButton2"}
+          content={" New"}
+          buttonStyle={{
+            fontSize: "1.6rem",
+            padding: "0.4rem 1.6rem",
+          }}
+          action={() => setOpenCreateModal(true)}
+        />
+      </div>
       <div className={styles["folders"]}>
         <Folder
           folderName={"My Articles"}
@@ -159,6 +201,22 @@ const RowFolder = ({ folders, isPending }) => {
           />
         ))}
       </div>
+      <CSSTransition
+        in={openCreateModal}
+        timeout={300}
+        nodeRef={nodeRef}
+        classNames="movein"
+        unmountOnExit
+      >
+        <FolderModal
+          label={"New Folder"}
+          nodeRef={nodeRef}
+          setOpenModal={setOpenCreateModal}
+          action={createNewFolder}
+          isActionPending={createPending}
+          buttonLabel={"Create"}
+        />
+      </CSSTransition>
     </div>
   );
 };

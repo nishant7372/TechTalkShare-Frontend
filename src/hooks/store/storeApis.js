@@ -181,7 +181,26 @@ export const useGetFolder = () => {
   return { getFolder, isPending };
 };
 
-export const useRenameFolder = (body) => {
+export const useCreateFolder = () => {
+  const [isPending, setIsPending] = useState(false);
+
+  const createFolder = async (body) => {
+    setIsPending(true);
+
+    try {
+      const res = await axiosInstance.post(`/folder`, body);
+      return res?.data;
+    } catch (err) {
+      return { error: formatError(err) };
+    } finally {
+      setIsPending(false);
+    }
+  };
+
+  return { createFolder, isPending };
+};
+
+export const useRenameFolder = () => {
   const [isPending, setIsPending] = useState(false);
 
   const renameFolder = async (body) => {
@@ -198,4 +217,23 @@ export const useRenameFolder = (body) => {
   };
 
   return { renameFolder, isPending };
+};
+
+export const useDeleteFolder = () => {
+  const [isPending, setIsPending] = useState(false);
+
+  const deleteFolder = async (id) => {
+    setIsPending(true);
+
+    try {
+      const res = await axiosInstance.delete(`/folder/${id}`);
+      return res?.data;
+    } catch (err) {
+      return { error: formatError(err) };
+    } finally {
+      setIsPending(false);
+    }
+  };
+
+  return { deleteFolder, isPending };
 };
