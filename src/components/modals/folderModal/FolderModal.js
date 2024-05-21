@@ -1,7 +1,7 @@
-import styles from "./RenameModal.module.css";
+import styles from "./FolderModal.module.css";
 
 import Button from "../../buttons/Button";
-import Loading from "../../../components/loaders/loading/Loading";
+import Loading from "../../loaders/loading/Loading";
 import Input from "../../input/Input";
 import { useEffect, useRef, useState } from "react";
 
@@ -29,12 +29,14 @@ const customStyles = {
   buttonStyle: { padding: "0.8rem 1.6rem" },
 };
 
-export default function RenameModal({
+export default function FolderModal({
+  label,
   nodeRef,
-  isPending,
-  handleRename,
-  setOpenRenameModal,
+  isActionPending,
+  action,
+  setOpenModal,
   name,
+  buttonLabel,
 }) {
   const [folderName, setFolderName] = useState(name);
 
@@ -47,17 +49,18 @@ export default function RenameModal({
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
-      handleRename(folderName);
+      action(folderName);
     } else if (event.keyCode === 27) {
-      setOpenRenameModal(false);
+      setOpenModal(false);
     }
   };
+
   return (
     <div className={styles["overlay"]} ref={nodeRef} onKeyDown={handleKeyDown}>
       <div className={styles["modal"]}>
         <div className={styles["header"]}>
           <div className="flex-row">
-            <div className={styles["heading"]}>Rename</div>
+            <div className={styles["heading"]}>{label}</div>
             <i
               style={customStyles.barsIcon}
               className="fa-solid fa-bars-staggered"
@@ -79,16 +82,16 @@ export default function RenameModal({
             content={"Cancel"}
             type={"customButton2"}
             buttonStyle={customStyles.buttonStyle}
-            action={() => setOpenRenameModal(false)}
+            action={() => setOpenModal(false)}
           />
-          {isPending ? (
+          {isActionPending ? (
             <Loading action={"post"} />
           ) : (
             <Button
-              content={"Rename"}
+              content={buttonLabel}
               type={"customButton"}
               buttonStyle={customStyles.buttonStyle}
-              action={() => handleRename(folderName)}
+              action={() => action(folderName)}
               tabIndex={0}
               formAction={"submit"}
             />
