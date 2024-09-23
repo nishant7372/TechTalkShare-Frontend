@@ -17,7 +17,7 @@ export default function ArticleEditor({ content, setContent }) {
               position: "absolute",
               top: "50px",
               left: 0,
-              height: "calc(100vh - 50px)",
+              height: "100vh",
               width: "100%",
               padding: 0,
             }

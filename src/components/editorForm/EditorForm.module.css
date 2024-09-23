@@ -4,7 +4,7 @@
   width: 95%;
   font-size: 2rem;
   color: white;
-  height: calc(100vh - 50px);
+  height: 100vh;
   background-color: rgba(255, 255, 255, 0.04);
   max-width: 160rem;
 }
