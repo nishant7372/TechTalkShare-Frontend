@@ -64,14 +64,6 @@ export default function NavBar() {
                     <i className="fa-solid fa-share-from-square"></i>{" "}
                     &nbsp;Shared with me
                   </NavLink>
-                  <NavLink to="/download">
-                    <i className="fa-solid fa-cloud-arrow-down"></i>{" "}
-                    &nbsp;Download
-                  </NavLink>
-                  <NavLink to="/downloads">
-                    <i className="fa-solid fa-clock-rotate-left"></i>{" "}
-                    &nbsp;Download History
-                  </NavLink>
                   <NavLink to="/chat">
                     <i className="fa-brands fa-rocketchat"></i> &nbsp;Chat
                   </NavLink>
@@ -93,9 +85,6 @@ export default function NavBar() {
               <NavLink to="/shared">
                 <i className="fa-solid fa-share-from-square"></i> &nbsp;Shared
                 with me
-              </NavLink>
-              <NavLink to="/download">
-                <i className="fa-solid fa-cloud-arrow-down"></i> &nbsp;Download
               </NavLink>
               <NavLink to="/chat">
                 <i className="fa-brands fa-rocketchat"></i> &nbsp; Chat

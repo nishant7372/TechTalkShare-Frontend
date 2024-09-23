@@ -24,7 +24,7 @@ export default function Row({
     <div className={styles["row"]}>
       <div className={styles["icon"]}>
         <img src={images.note} alt="note" className={styles["icon-img"]} />
-        {query !== "sharing" && article.downloaded && (
+        {query !== "sharing" && article?.downloaded && (
           <>
             <div
               style={{

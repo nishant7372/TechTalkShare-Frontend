@@ -22,16 +22,6 @@ export default function LeftPanel() {
       icon: "fa-solid fa-share-from-square",
       label: "Shared with Me",
     },
-    {
-      link: "/download",
-      icon: "fa-solid fa-cloud-arrow-down",
-      label: "Download",
-    },
-    {
-      link: "/downloads",
-      icon: "fa-solid fa-clock-rotate-left",
-      label: "Download History",
-    },
     { link: "/chat", icon: "fa-brands fa-rocketchat", label: "Conversation" },
   ];
 

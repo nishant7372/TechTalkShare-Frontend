@@ -20,12 +20,10 @@ import Create from "./pages/article/create/Create";
 import Update from "./pages/article/update/Update";
 import ServerError from "./pages/error/ServerError";
 import Loading from "./components/loaders/loading/Loading";
-import Scrape from "./pages/article/download/scrape/Scrape";
 import UpdateShared from "./pages/article/update/UpdateShared";
 import MessageContainer from "./components/alerts/AlertContainer";
 import Sharings from "./pages/article/view-owner/sharings/Sharings";
 import Articles from "./pages/article/view-owner/articles/Articles";
-import Downloads from "./pages/article/download/downloads/Downloads";
 import SharedPreview from "./pages/article/view-shared/sharedPreview/SharedPreview";
 import ArticlePreview from "./pages/article/view-owner/articlePreview/ArticlePreview";
 import SharedArticles from "./pages/article/view-shared/sharedArticles/SharedArticles";
@@ -94,14 +92,6 @@ function App() {
             <Route
               path="/settings"
               element={!user ? <Navigate to="/login" /> : <Settings />}
-            />
-            <Route
-              path="/download"
-              element={!user ? <Navigate to="/login" /> : <Scrape />}
-            />
-            <Route
-              path="/downloads"
-              element={!user ? <Navigate to="/login" /> : <Downloads />}
             />
             <Route
               path="/chat/*"

@@ -23,17 +23,8 @@ export default function Home() {
         <Link to="/shared" className={`${styles["tile"]} ${styles["tile2"]}`}>
           <i className="fa-solid fa-share-from-square"></i> Shared With Me
         </Link>
-        <Link to="/download" className={`${styles["tile"]} ${styles["tile3"]}`}>
-          <i className="fa-solid fa-cloud-arrow-down"></i> Download
-        </Link>
         <Link to="/chat" className={`${styles["tile"]} ${styles["tile4"]}`}>
           <i className="fa-brands fa-rocketchat"></i> Chat
-        </Link>
-        <Link
-          to="/downloads"
-          className={`${styles["tile"]} ${styles["tile1"]}`}
-        >
-          <i className="fa-solid fa-clock-rotate-left"></i> Download History
         </Link>
         <Link to="/settings" className={`${styles["tile"]} ${styles["tile2"]}`}>
           <i className="fa-solid fa-gear"></i> Settings

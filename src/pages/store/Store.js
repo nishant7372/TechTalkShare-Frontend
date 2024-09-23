@@ -191,7 +191,6 @@ const RowFolder = ({ folders, isPending, fetchFolders }) => {
           url={`/articles`}
         />
         <Folder folderName={"Shared"} color={colors[1]} url={`/shared`} />
-        <Folder folderName={"Downloads"} color={colors[2]} url={`/downloads`} />
         {folders?.map(({ name, _id }, index) => (
           <Folder
             folderName={name}
