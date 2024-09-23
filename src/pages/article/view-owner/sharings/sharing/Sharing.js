@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import { Tooltip } from "react-tooltip";
 
 import { useFormatDate } from "../../../../../hooks/utils/useFormatDate";
-import { useUpdateSharing } from "../../../../../hooks/sharing/useUpdateSharing";
-import { useDeleteSharing } from "../../../../../hooks/sharing/useDeleteSharing";
+import {
+  useUpdateSharing,
+  useDeleteSharing,
+} from "../../../../../hooks/sharing/sharingApis";
 
 import ToggleButton from "../../../../../components/buttons/ToggleButton";
 import Button from "../../../../../components/buttons/Button";

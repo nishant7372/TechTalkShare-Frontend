@@ -1,0 +1,86 @@
+.most-recent,
+.folder {
+  padding: 4rem 4rem 0 4rem;
+  flex: 1;
+}
+
+.h1 {
+  font-size: 2.8rem;
+  color: white;
+  margin-left: 4rem;
+  font-weight: 500;
+}
+
+.sub-heading {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.files,
+.folders {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
+  /* border: 2px solid red; */
+}
+
+.h4 {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.2rem;
+}
+
+.fileName {
+  overflow: hidden;
+  align-self: flex-start;
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: 1.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mainBox {
+  flex: 1;
+}
+
+.folders::-webkit-scrollbar,
+.files::-webkit-scrollbar {
+  height: 1px;
+  width: 1px;
+}
+
+.folders::-webkit-scrollbar-track,
+.files::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+.folders:hover::-webkit-scrollbar-track,
+.files:hover::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.folders::-webkit-scrollbar-thumb,
+.files::-webkit-scrollbar-thumb {
+  background-color: gray;
+  outline: 0;
+  visibility: hidden;
+}
+
+.folders:hover::-webkit-scrollbar-thumb,
+.files:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}

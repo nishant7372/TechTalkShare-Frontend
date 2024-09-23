@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
-import { useLogout } from "../../hooks/user/useLogout";
+import { useLogout } from "../../hooks/user/userApis";
 
 import { useSelector } from "react-redux";
 import { useHandleResponse } from "../../hooks/utils/useHandleResponse";
@@ -80,7 +80,7 @@ export default function NavBar() {
             </>
           )}
           <Link to="/" className={styles["app-name"]}>
-            <img src={images.devstoreLogo} alt="logo"></img>
+            <img src={images.techtalkshareLogo} alt="logo"></img>
           </Link>
         </div>
 

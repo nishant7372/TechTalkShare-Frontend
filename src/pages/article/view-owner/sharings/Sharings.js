@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 
-import { useGetSharings } from "../../../../hooks/sharing/useGetSharings";
+import { useGetSharings } from "../../../../hooks/sharing/sharingApis";
 
 import { useDispatch } from "react-redux";
 import { setError } from "../../../../features/alertSlice";
@@ -37,7 +37,7 @@ export default function Sharings() {
 
   const fetchSharings = async () => {
     const res = await getSharings(id);
-    if (res?.ok) setData(res?.data?.sharings);
+    if (res?.ok) setData(res?.sharings);
     else if (res?.error) {
       dispatch(setError(res?.error?.message));
       if (res?.error?.status === 404) setShowNotFound(true);

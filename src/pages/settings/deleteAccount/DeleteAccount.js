@@ -3,7 +3,7 @@ import styles from "./DeleteAccount.module.css";
 import { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import { useDeleteAccount } from "../../../hooks/user/useDeleteAccount";
+import { useDeleteAccount } from "../../../hooks/user/userApis";
 
 import Confirm from "../../../components/modals/confirmModal/Confirm";
 import Button from "../../../components/buttons/Button";

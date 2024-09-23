@@ -1,16 +1,16 @@
 {
-  "short_name": "DevStore",
-  "name": "Developer's Store",
+  "short_name": "TechTalkShare",
+  "name": "TechTalkShare",
   "icons": [
     {
-      "src": "dev.ico",
+      "src": "applogo.ico",
       "sizes": "16x16 32x32 64x64",
       "type": "image/x-icon"
     },
     {
-      "src": "img/dev.png",
+      "src": "img/logo.png",
       "type": "image/png",
-      "sizes": "320x320"
+      "sizes": "256x256"
     }
   ],
   "start_url": ".",

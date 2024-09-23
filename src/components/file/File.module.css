@@ -1,0 +1,118 @@
+.fileBox {
+  text-decoration: none;
+  min-width: 18rem;
+  background-color: rgba(36, 37, 41, 1);
+  width: 18rem;
+  cursor: pointer;
+  height: 15rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.fileBox:hover {
+  background-color: rgb(45, 46, 52);
+}
+
+.checkBox {
+  width: 1.8rem;
+  height: 1.8rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.checkBox:hover {
+  transform: scale(1.4);
+  transition: all 0.3s ease;
+}
+
+.innerFileBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  flex-direction: column;
+  justify-content: center;
+  top: 1.6rem;
+}
+
+.fileIcon {
+  font-size: 3.6rem;
+  color: rgb(252, 61, 61);
+  margin-bottom: 1rem;
+}
+
+.fileName {
+  overflow: hidden;
+  align-self: flex-start;
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: 1.8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.2rem;
+}
+
+.star {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.pin {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.pin-noselect {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.7);
+}
+
+.starred {
+  color: #f8d15e;
+}
+
+.pinned {
+  color: #0cafe6;
+}
+
+.star:hover,
+.pin:hover {
+  transform: scale(2);
+  transition: all 0.3s ease;
+}
+
+.recent {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fe8e8e;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}

@@ -6,7 +6,7 @@ import axiosInstance from "./axios/axiosInstance";
 import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
-} from "./utils/gobalFunctions";
+} from "./utils/globalFunctions";
 
 const useOnRefresh = () => {
   const dispatch = useDispatch();

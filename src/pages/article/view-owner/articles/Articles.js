@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useReadArticles } from "../../../../hooks/article/useReadArticles";
+import { useReadArticles } from "../../../../hooks/article/articleApis";
 
 import { useSelector, useDispatch } from "react-redux";
 import { setError } from "../../../../features/alertSlice";

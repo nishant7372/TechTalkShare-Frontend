@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-import { useGetUser } from "../../hooks/user/useGetUser";
+import { useGetUser } from "../../hooks/user/userApis";
 import { useFormatDate } from "../../hooks/utils/useFormatDate";
 
 import { setError } from "../../features/alertSlice";
@@ -16,7 +16,6 @@ import Message from "./Message";
 import NotFound from "../error/NotFound";
 import EmojiPicker from "emoji-picker-react";
 import NameLogo from "../../components/avatar/NameAvatar";
-import Loading from "../../components/loaders/loading/Loading";
 import AnimatedButton from "../../components/buttons/AnimatedButton";
 import images from "../../constants/images";
 import Spinner from "../../components/loaders/spinner/Spinner";
@@ -107,12 +106,12 @@ export default function ChatBox({
   useEffect(() => {
     const fetchReciever = async () => {
       const res = await getUser(userName);
-      if (res.ok) {
-        setReciever(res.user);
-        handleSetReciever(res.user);
-      } else if (res.error) {
-        dispatch(setError(res.error.message));
-        if (res.error.status === 404) {
+      if (res?.ok) {
+        setReciever(res?.user);
+        handleSetReciever(res?.user);
+      } else if (res?.error) {
+        dispatch(setError(res?.error?.message));
+        if (res?.error?.status === 404) {
           setShowNotFound(true);
         }
       }
