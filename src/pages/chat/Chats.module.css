@@ -1,7 +1,7 @@
 .chat-page {
   display: flex;
   width: 100%;
-  height: calc(100vh - 50px);
+  height: 100vh;
   max-width: 1600px;
   margin: auto;
   background-color: rgb(20, 19, 49);

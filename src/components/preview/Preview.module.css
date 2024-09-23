@@ -8,7 +8,7 @@
   max-width: 1300px;
   align-items: center;
   border-radius: 10px;
-  min-height: calc(100vh - 50px - 8rem);
+  min-height: calc(100vh - 8rem);
 }
 
 .preview-container {

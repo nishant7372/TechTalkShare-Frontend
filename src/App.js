@@ -9,12 +9,10 @@ import {
 import useOnRefresh from "./hooks/useOnRefresh";
 import { useSocketConnection } from "./hooks/socket/socketConnection";
 
-import Home from "./pages/home/Home";
 import Chats from "./pages/chat/Chats";
 import LogIn from "./pages/login/LogIn";
 import SignUp from "./pages/signup/SignUp";
 import NotFound from "./pages/error/NotFound";
-import NavBar from "./components/navbar/Navbar";
 import Settings from "./pages/settings/Settings";
 import Create from "./pages/article/create/Create";
 import Update from "./pages/article/update/Update";
@@ -47,7 +45,6 @@ function App() {
       {!authIsReady && <Loading action="mainRead" />}
       {authIsReady && !serverSideError && (
         <Router>
-          <NavBar />
           <Routes>
             <Route
               path="/login"
@@ -59,11 +56,11 @@ function App() {
             />
             <Route
               path="/"
-              element={!user ? <Navigate to="/login" /> : <Home />}
+              element={!user ? <Navigate to="/login" /> : <Store />}
             />
             <Route
               path="/home"
-              element={!user ? <Navigate to="/login" /> : <Home />}
+              element={!user ? <Navigate to="/login" /> : <Store />}
             />
             <Route
               path="/store"
