@@ -66,7 +66,7 @@ export default function Sharings() {
 
   useEffect(() => {
     if (searchTerm !== "") {
-      const filteredData = data.filter(({ sharedWith }) =>
+      const filteredData = data?.filter(({ sharedWith }) =>
         sharedWith?.userName?.startsWith(searchTerm)
       );
       applySortedData(filteredData);

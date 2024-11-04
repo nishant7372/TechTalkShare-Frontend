@@ -21,19 +21,19 @@ export default function Users({ onlineUsers, hideUserMenu }) {
   const [users, setUsers] = useState(null);
   const [availableUsers, setAvailableUsers] = useState([]);
 
-  const { user: me } = useSelector((store) => store.auth);
+  const { user: me } = useSelector((store) => store?.auth);
 
   const filterUsers = (users) => {
-    return users.filter((user) => user._id !== me._id);
+    return users?.filter((user) => user?._id !== me?._id);
   };
 
   const filterResults = (term) => {
     return users
       ? users
-          .filter((user) => {
-            return user.userName.startsWith(term);
+          ?.filter((user) => {
+            return user?.userName?.startsWith(term);
           })
-          .sort((a, b) => a.userName.localeCompare(b.userName))
+          ?.sort((a, b) => a?.userName?.localeCompare(b?.userName))
       : null;
   };
 

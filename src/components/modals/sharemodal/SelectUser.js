@@ -41,7 +41,7 @@ const SelectUser = forwardRef(
 
     const inputRef = useRef(null);
 
-    const { user: me } = useSelector((store) => store.auth);
+    const { user: me } = useSelector((store) => store?.auth);
     const {
       getUsers,
       error: usersError,
@@ -50,18 +50,18 @@ const SelectUser = forwardRef(
 
     const filterResults = (term) => {
       const res = data
-        .filter((user) => {
-          return user.userName.startsWith(term) && user._id !== me._id;
+        ?.filter((user) => {
+          return user?.userName?.startsWith(term) && user?._id !== me?._id;
         })
-        .sort((a, b) => a.userName.localeCompare(b.userName));
+        .sort((a, b) => a?.userName?.localeCompare(b?.userName));
       return addChecked(res);
     };
 
     const addChecked = (users) => {
-      return users.map((user) => {
+      return users?.map((user) => {
         return {
           ...user,
-          checked: selectedUsers?.some((u) => u._id === user._id) || false,
+          checked: selectedUsers?.some((u) => u?._id === user?._id) || false,
         };
       });
     };
